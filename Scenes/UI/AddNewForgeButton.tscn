@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5ro5bvmki6ax"]
+
+[ext_resource type="Texture2D" uid="uid://bv5oofe8c31ex" path="res://Assets/Forge/Add New Forge Button.png" id="1_lw1ut"]
+
+[node name="AddNewForgeButton" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+size_flags_horizontal = 6
+size_flags_vertical = 2
+tooltip_text = "TR_ADD_NEW_FORGE"
+theme_override_constants/icon_max_width = 36
+icon = ExtResource("1_lw1ut")
+flat = true
+icon_alignment = 1
+expand_icon = true

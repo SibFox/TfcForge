@@ -1,0 +1,13 @@
+root = true
+
+[*]
+charset = utf-8
+
+# CA1050: Declare types in namespaces
+dotnet_diagnostic.CA1050.severity = none
+
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = none
+
+# CS0168: Variable is declared but never used
+dotnet_diagnostic.CS0168.severity = none

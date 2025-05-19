@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MoltenMetall" load_steps=3 format=3 uid="uid://n4mgun1ah2it"]
+
+[ext_resource type="Texture2D" uid="uid://dcqpelox40tlw" path="res://Assets/Sprites/ingot/steel.png" id="1_5i42j"]
+[ext_resource type="Script" uid="uid://c8jkaup7ucixb" path="res://Resources/MoltenMetal.cs" id="1_tcx0s"]
+
+[resource]
+script = ExtResource("1_tcx0s")
+Icon = ExtResource("1_5i42j")
+Name = "TR_STEEL"
+AlloyIngredients = null
+metadata/_custom_type_script = "uid://dfqiolgy8regv"

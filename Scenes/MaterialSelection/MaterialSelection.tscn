@@ -1,0 +1,108 @@
+[gd_scene load_steps=12 format=3 uid="uid://cmwcjg52dsr31"]
+
+[ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_4pqdt"]
+[ext_resource type="Texture2D" uid="uid://dkkqegafwgu7j" path="res://Assets/Sprites/ingot/copper.png" id="2_4pqdt"]
+[ext_resource type="Script" uid="uid://ogbhxathn1ia" path="res://Scenes/MaterialSelection/MaterialSelection.cs" id="2_hs1ow"]
+[ext_resource type="Texture2D" uid="uid://t0gjyb606wq5" path="res://Assets/Sprites/ingot/bronze.png" id="3_hs1ow"]
+[ext_resource type="Texture2D" uid="uid://d18bckjwmn6u2" path="res://Assets/Sprites/ingot/tin.png" id="4_breow"]
+[ext_resource type="Texture2D" uid="uid://cpmobnvmqxnu3" path="res://Assets/Sprites/ingot/bismuth_bronze.png" id="4_fyyo6"]
+[ext_resource type="Texture2D" uid="uid://d11ffbslb3x3o" path="res://Assets/Sprites/ingot/black_bronze.png" id="5_breow"]
+[ext_resource type="Texture2D" uid="uid://dj7w5q527f6av" path="res://Assets/Sprites/ingot/brass.png" id="6_vm0do"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fyyo6"]
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sc762"]
+bg_color = Color(0.344076, 0.344076, 0.344076, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_hs1ow"]
+
+[node name="MaterialSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4pqdt")
+script = ExtResource("2_hs1ow")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="WorkMethodLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.5
+text = "TR_CHOOSE_MATERIAL"
+label_settings = SubResource("LabelSettings_fyyo6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaterialList" type="ItemList" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_margin = 24
+theme_override_constants/h_separation = 24
+theme_override_font_sizes/font_size = 24
+theme_override_styles/panel = SubResource("StyleBoxFlat_sc762")
+item_count = 6
+max_columns = 3
+same_column_width = true
+fixed_column_width = 500
+icon_scale = 3.0
+item_0/text = "TR_COPPER"
+item_0/icon = ExtResource("2_4pqdt")
+item_1/text = "TR_TIN"
+item_1/icon = ExtResource("4_breow")
+item_2/text = "TR_BRONZE"
+item_2/icon = ExtResource("3_hs1ow")
+item_3/text = "TR_BISMUTH_BRONZE"
+item_3/icon = ExtResource("4_fyyo6")
+item_4/text = "TR_BLACK_BRONZE"
+item_4/icon = ExtResource("5_breow")
+item_5/text = "TR_BRASS"
+item_5/icon = ExtResource("6_vm0do")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 504.0
+offset_right = 1280.0
+offset_bottom = 65.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="InspectButton" type="CheckButton" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+button_pressed = true
+button_group = SubResource("ButtonGroup_hs1ow")
+text = "TR_WORK_INSPECT"
+
+[node name="RedactButton" type="CheckButton" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+button_group = SubResource("ButtonGroup_hs1ow")
+text = "TR_WORK_REDACT"
+
+[connection signal="item_activated" from="VBoxContainer/MaterialList" to="." method="OnMaterialActivate"]

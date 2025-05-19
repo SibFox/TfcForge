@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwu0lxtqdnhyp"]
+
+[ext_resource type="Script" uid="uid://cbqu7w0af48xr" path="res://Scenes/Main/Main.cs" id="1_o8wgc"]
+[ext_resource type="PackedScene" uid="uid://c2ldy4uvet4or" path="res://Scenes/Forge/Forge.tscn" id="1_p8rbg"]
+[ext_resource type="PackedScene" uid="uid://cmwcjg52dsr31" path="res://Scenes/MaterialSelection/MaterialSelection.tscn" id="1_qtv3y"]
+[ext_resource type="PackedScene" uid="uid://bddg8koxurtv" path="res://Scenes/InspectItem/InspectItem.tscn" id="4_aw1lf"]
+[ext_resource type="Texture2D" uid="uid://byssh5l1c2gdd" path="res://Assets/Forge/Green Forge Button.png" id="4_w20t6"]
+[ext_resource type="Texture2D" uid="uid://rr23tat7ru2g" path="res://Assets/Forge/Red Forge Button.png" id="5_aw1lf"]
+[ext_resource type="PackedScene" uid="uid://di8gtu5jjib4c" path="res://Scenes/ItemSelection/ItemSelection.tscn" id="6_w20t6"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_o8wgc")
+
+[node name="MaterialSelection" parent="." instance=ExtResource("1_qtv3y")]
+
+[node name="ItemSelection" parent="." instance=ExtResource("6_w20t6")]
+visible = false
+
+[node name="InspectItem" parent="." instance=ExtResource("4_aw1lf")]
+visible = false
+
+[node name="Forge" parent="." instance=ExtResource("1_p8rbg")]
+visible = false
+
+[node name="ChangeLanguage" type="TextureButton" parent="."]
+offset_left = 1237.0
+offset_top = 678.0
+offset_right = 1277.0
+offset_bottom = 718.0
+texture_normal = ExtResource("4_w20t6")
+texture_pressed = ExtResource("5_aw1lf")
+texture_hover = ExtResource("4_w20t6")
+texture_disabled = ExtResource("4_w20t6")
+texture_focused = ExtResource("4_w20t6")
+stretch_mode = 0
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[connection signal="pressed" from="ChangeLanguage" to="." method="OnChangeLanguageButtonPressed"]

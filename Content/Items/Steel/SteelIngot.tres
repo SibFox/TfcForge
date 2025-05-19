@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://dunrrshr4ev5n"]
+
+[ext_resource type="Texture2D" uid="uid://dcqpelox40tlw" path="res://Assets/Sprites/ingot/steel.png" id="1_glt11"]
+[ext_resource type="Resource" uid="uid://n4mgun1ah2it" path="res://Content/MoltenMetals/Steel.tres" id="2_fypo8"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="2_pg21p"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="3_q4shf"]
+
+[sub_resource type="Resource" id="Resource_33tqg"]
+script = ExtResource("3_q4shf")
+MeltsInto = ExtResource("2_fypo8")
+Millibuckets = 0
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("2_pg21p")
+Icon = ExtResource("1_glt11")
+Name = "TR_STELL_INGOT"
+Category = 1
+MeltsInto = SubResource("Resource_33tqg")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://dx0bswkeu0dyt"]
+
+[ext_resource type="Texture2D" uid="uid://v61e4nueo85c" path="res://Assets/Sprites/sheet/brass.png" id="1_24gv0"]
+[ext_resource type="Script" uid="uid://bevv7ssh4mjgi" path="res://Resources/LastForgeActions.cs" id="1_jtfcu"]
+[ext_resource type="Script" uid="uid://df3b2dyh7h4bi" path="res://Resources/ForgeRecipe.cs" id="1_wkxhm"]
+[ext_resource type="Resource" uid="uid://o2hgx0vqec83" path="res://Content/Last Shown Forge Actions/LastSheetActions.tres" id="3_jtfcu"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="6_pj7f4"]
+
+[sub_resource type="Resource" id="Resource_l5560"]
+script = ExtResource("1_jtfcu")
+FirstAction = -3
+SecondAction = -3
+ThirdAction = -6
+metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
+
+[sub_resource type="Resource" id="Resource_mkrkd"]
+script = ExtResource("1_wkxhm")
+RequiredWork = 0
+Shrink = 0
+Crimp = 0
+Bend = 0
+Stamp = 0
+WeakHit = 0
+MediumHit = 0
+StrongHit = 0
+Pull = 0
+LastActions = SubResource("Resource_l5560")
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[resource]
+script = ExtResource("6_pj7f4")
+Icon = ExtResource("1_24gv0")
+Name = "TR_BRASS_SHEET"
+Category = 2
+LastForgeActions = ExtResource("3_jtfcu")
+ForgeRecipe = SubResource("Resource_mkrkd")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

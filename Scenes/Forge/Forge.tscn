@@ -1,0 +1,320 @@
+[gd_scene load_steps=15 format=3 uid="uid://c2ldy4uvet4or"]
+
+[ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_as2me"]
+[ext_resource type="Script" uid="uid://gwlt7f3j5dlo" path="res://Scenes/Forge/Forge.cs" id="1_j7md3"]
+[ext_resource type="Texture2D" uid="uid://rr23tat7ru2g" path="res://Assets/Forge/Red Forge Button.png" id="3_mm0nf"]
+[ext_resource type="Texture2D" uid="uid://d1iooklb8w6xu" path="res://Assets/Forge/Weak Hit.png" id="4_rql2q"]
+[ext_resource type="Texture2D" uid="uid://bjj5ac8umun6m" path="res://Assets/Forge/Medium Hit.png" id="5_602a4"]
+[ext_resource type="Texture2D" uid="uid://dymoiertdf1j" path="res://Assets/Forge/Strong Hit.png" id="6_k3vwi"]
+[ext_resource type="Texture2D" uid="uid://slgaoe3r2nyy" path="res://Assets/Forge/Pull.png" id="7_nom56"]
+[ext_resource type="Texture2D" uid="uid://byssh5l1c2gdd" path="res://Assets/Forge/Green Forge Button.png" id="8_p6at6"]
+[ext_resource type="Texture2D" uid="uid://jrdtj32wks7a" path="res://Assets/Forge/Stamp.png" id="9_3pq3t"]
+[ext_resource type="Texture2D" uid="uid://q3ws6f6lvp3k" path="res://Assets/Forge/Bend.png" id="10_ntixs"]
+[ext_resource type="Texture2D" uid="uid://5k4euglcifki" path="res://Assets/Forge/Crimp.png" id="11_cfajf"]
+[ext_resource type="Texture2D" uid="uid://bftthcmose80j" path="res://Assets/Forge/Shrink.png" id="12_uo6um"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_id1gd"]
+bg_color = Color(0.907526, 0.366381, 0.536794, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ki8b"]
+font_size = 8
+
+[node name="Forge" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_as2me")
+script = ExtResource("1_j7md3")
+
+[node name="ForgeBG" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_id1gd")
+
+[node name="ActionHBoxContainer" type="HBoxContainer" parent="ForgeBG"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+
+[node name="ActionVBoxContainer" type="VBoxContainer" parent="ForgeBG/ActionHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MinusActionHBoxContainer" type="HBoxContainer" parent="ForgeBG/ActionHBoxContainer/ActionVBoxContainer"]
+layout_mode = 2
+
+[node name="WeakHit" type="Button" parent="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+action_mode = 0
+icon = ExtResource("3_mm0nf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer/WeakHit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rql2q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MediumHit" type="Button" parent="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+action_mode = 0
+icon = ExtResource("3_mm0nf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer/MediumHit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_602a4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MinusActionHBoxContainer2" type="HBoxContainer" parent="ForgeBG/ActionHBoxContainer/ActionVBoxContainer"]
+layout_mode = 2
+
+[node name="StrongHit" type="Button" parent="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+action_mode = 0
+icon = ExtResource("3_mm0nf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer2/StrongHit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_k3vwi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Pull" type="Button" parent="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+action_mode = 0
+icon = ExtResource("3_mm0nf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer2/Pull"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_nom56")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CurrentForgeProgressVBoxContainer" type="VBoxContainer" parent="ForgeBG/ActionHBoxContainer"]
+layout_mode = 2
+
+[node name="CurrentProgressLabel" type="Label" parent="ForgeBG/ActionHBoxContainer/CurrentForgeProgressVBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 10
+text = "TR_CURRENT_PROGRESS"
+label_settings = SubResource("LabelSettings_1ki8b")
+horizontal_alignment = 1
+
+[node name="CurrentProgressNumbers" type="Label" parent="ForgeBG/ActionHBoxContainer/CurrentForgeProgressVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+text = "000"
+label_settings = SubResource("LabelSettings_1ki8b")
+horizontal_alignment = 1
+
+[node name="PositiveActionVBoxContainer" type="VBoxContainer" parent="ForgeBG/ActionHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PositiveActionHBoxContainer" type="HBoxContainer" parent="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer"]
+layout_mode = 2
+
+[node name="Stamp" type="Button" parent="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+action_mode = 0
+icon = ExtResource("8_p6at6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer/Stamp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_3pq3t")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bend" type="Button" parent="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+action_mode = 0
+icon = ExtResource("8_p6at6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer/Bend"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_ntixs")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PositiveActionHBoxContainer2" type="HBoxContainer" parent="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer"]
+layout_mode = 2
+
+[node name="Crimp" type="Button" parent="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+action_mode = 0
+icon = ExtResource("8_p6at6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer2/Crimp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_cfajf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shrink" type="Button" parent="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+action_mode = 0
+icon = ExtResource("8_p6at6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer2/Shrink"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_uo6um")
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="pressed" from="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer/WeakHit" to="." method="OnWeakHitPressed"]
+[connection signal="pressed" from="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer/MediumHit" to="." method="OnMediumHitPressed"]
+[connection signal="pressed" from="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer2/StrongHit" to="." method="OnStrongHitPressed"]
+[connection signal="pressed" from="ForgeBG/ActionHBoxContainer/ActionVBoxContainer/MinusActionHBoxContainer2/Pull" to="." method="OnPullPressed"]
+[connection signal="pressed" from="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer/Stamp" to="." method="OnStampPressed"]
+[connection signal="pressed" from="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer/Bend" to="." method="OnBendPressed"]
+[connection signal="pressed" from="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer2/Crimp" to="." method="OnCrimpPressed"]
+[connection signal="pressed" from="ForgeBG/ActionHBoxContainer/PositiveActionVBoxContainer/PositiveActionHBoxContainer2/Shrink" to="." method="OnShrinkPressed"]

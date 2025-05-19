@@ -1,0 +1,387 @@
+[gd_scene load_steps=16 format=3 uid="uid://bddg8koxurtv"]
+
+[ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_41x0h"]
+[ext_resource type="Script" uid="uid://b1vdmhy7e88b6" path="res://Scenes/InspectItem/InspectItem.cs" id="1_sdwbh"]
+[ext_resource type="Texture2D" uid="uid://dt2mnimuccw03" path="res://Assets/Forge/Action Border.png" id="2_41x0h"]
+[ext_resource type="Texture2D" uid="uid://b86aqb78xiw33" path="res://Assets/Sprites/ingot/bismuth.png" id="3_dubhn"]
+[ext_resource type="PackedScene" uid="uid://bap1xbjcnw27t" path="res://Scenes/UI/BorderedIcon.tscn" id="3_w7sf6"]
+[ext_resource type="Texture2D" uid="uid://dnf4gxjq5cbnr" path="res://Assets/Forge/Button Back.png" id="4_w7sf6"]
+[ext_resource type="Texture2D" uid="uid://bvn5phejsme2c" path="res://Assets/Forge/Button Back Hover Press.png" id="5_1nxv0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r4s8k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dubhn"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_w7sf6"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_1nxv0"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_u6yjh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wyupq"]
+line_spacing = -123.48
+font_size = 136
+
+[sub_resource type="LabelSettings" id="LabelSettings_jacx8"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_u845h"]
+font_size = 12
+
+[node name="InspectItem" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_41x0h")
+script = ExtResource("1_sdwbh")
+
+[node name="MainVBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemInfoHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.6
+
+[node name="ItemBorderedIcon" parent="MainVBoxContainer/ItemInfoHBoxContainer" instance=ExtResource("3_w7sf6")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemIconBorder" type="TextureRect" parent="MainVBoxContainer/ItemInfoHBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_41x0h")
+stretch_mode = 5
+
+[node name="ItemIcon" type="TextureRect" parent="MainVBoxContainer/ItemInfoHBoxContainer/ItemIconBorder"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38
+anchor_right = 0.62
+anchor_bottom = 1.0
+offset_left = -2.62
+offset_top = 10.0
+offset_right = 2.62
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_dubhn")
+stretch_mode = 5
+
+[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/ItemInfoHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 3.0
+text = "ItemName"
+label_settings = SubResource("LabelSettings_r4s8k")
+vertical_alignment = 1
+
+[node name="CategoryLabel" type="Label" parent="MainVBoxContainer/ItemInfoHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+text = "Category"
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="MainVBoxContainer/ItemInfoHBoxContainer"]
+custom_minimum_size = Vector2(42, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+texture_normal = ExtResource("4_w7sf6")
+texture_pressed = ExtResource("5_1nxv0")
+texture_hover = ExtResource("5_1nxv0")
+texture_disabled = ExtResource("4_w7sf6")
+texture_focused = ExtResource("4_w7sf6")
+stretch_mode = 5
+
+[node name="InspectTabVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
+
+[node name="ForgeRecipeVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LabelHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer"]
+layout_mode = 2
+
+[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/LabelHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+text = "TR_FORGE_RECIPE"
+horizontal_alignment = 1
+
+[node name="ExpectedLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/LabelHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+text = "TR_FORGE_EXPECTED"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/LabelHBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="ForgeWorkResultLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/LabelHBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.0
+text = "ForgeWorkResult"
+vertical_alignment = 1
+
+[node name="ActionWeightMarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 0
+
+[node name="ActionWeightLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/ActionWeightMarginContainer"]
+layout_mode = 2
+text = "ActionWeight"
+label_settings = SubResource("LabelSettings_dubhn")
+
+[node name="MathMarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 0
+
+[node name="MathLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/MathMarginContainer"]
+layout_mode = 2
+text = "Math"
+label_settings = SubResource("LabelSettings_w7sf6")
+
+[node name="ActionsMarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 0
+
+[node name="ActionsLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/ActionsMarginContainer"]
+layout_mode = 2
+text = "Actions"
+label_settings = SubResource("LabelSettings_1nxv0")
+
+[node name="WeldRecipeVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+text = "TR_WELD_RECIPE"
+horizontal_alignment = 1
+
+[node name="WeldIngredientsHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FirstItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer/FirstItemHBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.3
+text = "FirstItemName"
+label_settings = SubResource("LabelSettings_u6yjh")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer/FirstItemHBoxContainer" instance=ExtResource("3_w7sf6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlusMark" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "
++"
+label_settings = SubResource("LabelSettings_wyupq")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SecondItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer/SecondItemHBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.3
+text = "SecondItemName"
+label_settings = SubResource("LabelSettings_u6yjh")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer/SecondItemHBoxContainer" instance=ExtResource("3_w7sf6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AdditionalInfoSplitContainer" type="SplitContainer" parent="MainVBoxContainer/InspectTabVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+collapsed = true
+dragging_enabled = false
+dragger_visibility = 2
+drag_area_highlight_in_editor = true
+
+[node name="MadeFromVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.2
+text = "TR_INSPECT_MADE_FROM"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="NotSpecifiedLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+text = "TR_NOT_SPECIFIED"
+label_settings = SubResource("LabelSettings_jacx8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemsHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OriginalItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/OriginalItemHBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.4
+text = "FirstItemName"
+label_settings = SubResource("LabelSettings_u845h")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/OriginalItemHBoxContainer" instance=ExtResource("3_w7sf6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/OriginalItemHBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+label_settings = SubResource("LabelSettings_u845h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AdditionalItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/AdditionalItemHBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.4
+text = "FirstItemName"
+label_settings = SubResource("LabelSettings_u845h")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/AdditionalItemHBoxContainer" instance=ExtResource("3_w7sf6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/AdditionalItemHBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+label_settings = SubResource("LabelSettings_u845h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MeltsIntoVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.2
+text = "TR_INSPECT_MELTS_INTO"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="NotSpecifiedLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+text = "TR_NOT_SPECIFIED"
+label_settings = SubResource("LabelSettings_jacx8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoltenMetalHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="MetalNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.4
+text = "MoltenMetalName"
+label_settings = SubResource("LabelSettings_u845h")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer" instance=ExtResource("3_w7sf6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MillibucketsLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+text = "Millibuckets"
+label_settings = SubResource("LabelSettings_u845h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MainVBoxContainer/ItemInfoHBoxContainer/BackButton" to="." method="OnBackPressed"]

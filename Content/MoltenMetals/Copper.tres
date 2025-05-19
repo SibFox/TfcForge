@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MoltenMetall" load_steps=3 format=3 uid="uid://clbrmnw8ht10m"]
+
+[ext_resource type="Texture2D" uid="uid://dkkqegafwgu7j" path="res://Assets/Sprites/ingot/copper.png" id="1_6tgos"]
+[ext_resource type="Script" uid="uid://c8jkaup7ucixb" path="res://Resources/MoltenMetal.cs" id="1_p3uxo"]
+
+[resource]
+script = ExtResource("1_p3uxo")
+Icon = ExtResource("1_6tgos")
+Name = "TR_COPPER"
+AlloyIngredients = null
+metadata/_custom_type_script = "uid://dfqiolgy8regv"

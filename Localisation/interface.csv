@@ -1,0 +1,16 @@
+﻿code;en;ru
+TR_CHOOSE_MATERIAL;Choose material;Выберите материал
+TR_CHOOSE_WORK_METHOD;Choose work method;Выберите метод работы
+TR_WORK_REDACT;Redact;Редактировать
+TR_WORK_INSPECT;Inspect;Просмотреть
+TR_CURRENT_PROGRESS;Progress;Прогресс
+TR_FORGE_BROKE;Broke!;Сломалось!
+TR_PICK_ITEM;Pick an Item to Inspect or Redact;Выберите предмет для просмотра или редактирования
+TR_ADD_NEW_FORGE;Add new forge;Добавить новую ковку
+TR_SPECIFY_CATEGORY;Specify category;Выберите категорию
+TR_FORGE_RECIPE;Forge Recipe;Кузнечное создание
+TR_FORGE_EXPECTED;Expected work:;Ожидаемая работа:
+TR_WELD_RECIPE;Weld Recipe;Создание сваркой
+TR_INSPECT_MADE_FROM;Made From;Делается из
+TR_INSPECT_MELTS_INTO;Melts Into;Плавится в
+TR_NOT_SPECIFIED;Not Specified;Не указано

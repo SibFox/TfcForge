@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://76ff670rfsqu"
+
+[deps]
+
+files=["res://Localisation/forge_actions.en.translation", "res://Localisation/forge_actions.ru.translation"]
+
+source_file="res://Localisation/forge_actions.csv"
+dest_files=["res://Localisation/forge_actions.en.translation", "res://Localisation/forge_actions.ru.translation"]
+
+[params]
+
+compress=true
+delimiter=1

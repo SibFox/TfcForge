@@ -1,0 +1,121 @@
+[gd_scene load_steps=10 format=3 uid="uid://bchdyey5s8mjv"]
+
+[ext_resource type="Texture2D" uid="uid://dt2mnimuccw03" path="res://Assets/Forge/Action Border.png" id="1_jvs6o"]
+[ext_resource type="Script" uid="uid://bm0t1h4tr2360" path="res://Scenes/UI/ItemOptionsButton.cs" id="1_tk5pb"]
+[ext_resource type="PackedScene" uid="uid://bap1xbjcnw27t" path="res://Scenes/UI/BorderedIcon.tscn" id="2_rd4m0"]
+[ext_resource type="Texture2D" uid="uid://bomgmy3dvxybr" path="res://Assets/Forge/Inspect Button.png" id="3_dtclv"]
+[ext_resource type="Texture2D" uid="uid://dmocywatfae5y" path="res://Assets/Sprites/double_ingot/bismuth.png" id="3_v28u4"]
+[ext_resource type="Texture2D" uid="uid://b2qmx0ynogeli" path="res://Assets/Forge/Inspect Button Hovered.png" id="4_tk5pb"]
+[ext_resource type="Texture2D" uid="uid://bt5q3wyoku3go" path="res://Assets/Forge/Redact Button.png" id="4_v28u4"]
+[ext_resource type="Texture2D" uid="uid://be0dcptfwom8p" path="res://Assets/Forge/Redact Button Hovered.png" id="6_dtclv"]
+[ext_resource type="Texture2D" uid="uid://c4d7qix85r5f3" path="res://Assets/Forge/Inspect Button Disabled.png" id="8_mn00e"]
+
+[node name="ItemOptionsButton" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 32.0
+offset_bottom = 40.0
+script = ExtResource("1_tk5pb")
+
+[node name="BorderedIcon" parent="." instance=ExtResource("2_rd4m0")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -24.0
+offset_right = 24.0
+offset_bottom = 48.0
+grow_vertical = 1
+
+[node name="Border" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_right = 24.0
+offset_bottom = 48.0
+grow_horizontal = 2
+texture = ExtResource("1_jvs6o")
+stretch_mode = 5
+
+[node name="ItemIcon" type="TextureRect" parent="Border"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_v28u4")
+stretch_mode = 5
+
+[node name="ButtonControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RedactButton" type="TextureButton" parent="ButtonControl"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.95
+anchor_top = 1.0
+anchor_right = 0.95
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.2
+tooltip_text = "TR_WORK_REDACT"
+texture_normal = ExtResource("4_v28u4")
+texture_pressed = ExtResource("6_dtclv")
+texture_hover = ExtResource("6_dtclv")
+texture_disabled = ExtResource("4_v28u4")
+texture_focused = ExtResource("6_dtclv")
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="InspectButton" type="TextureButton" parent="ButtonControl"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.05
+anchor_bottom = 1.0
+offset_top = -12.0
+offset_right = 12.0
+grow_vertical = 0
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.2
+tooltip_text = "TR_WORK_INSPECT"
+texture_normal = ExtResource("3_dtclv")
+texture_pressed = ExtResource("4_tk5pb")
+texture_hover = ExtResource("4_tk5pb")
+texture_disabled = ExtResource("8_mn00e")
+texture_focused = ExtResource("4_tk5pb")
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="ButtonControl/RedactButton" to="." method="OnRedactPressed"]
+[connection signal="pressed" from="ButtonControl/InspectButton" to="." method="OnInspectPressed"]

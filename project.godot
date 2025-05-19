@@ -1,0 +1,66 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="TFC Forge"
+config/tags=PackedStringArray("c#")
+run/main_scene="uid://dwu0lxtqdnhyp"
+config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+ItemDatabase="*res://Common/Databases/ItemDatabase.cs"
+ForgeDatabase="*res://Common/Databases/ForgeDatabase.cs"
+Global="*res://Global.cs"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
+
+[dotnet]
+
+project/assembly_name="TFC Forge"
+
+[file_customization]
+
+folder_colors={
+"res://Assets/Sprites/double_ingot/": "red",
+"res://Assets/Sprites/double_sheet/": "red",
+"res://Assets/Sprites/ingot/": "red",
+"res://Assets/Sprites/sheet/": "red",
+"res://Content/Items/": "green",
+"res://Content/Last Shown Forge Actions/": "gray",
+"res://Content/MoltenMetals/": "red"
+}
+
+[gui]
+
+timers/tooltip_delay_sec=0.2
+timers/tooltip_delay_sec.editor_hint=0.2
+theme/custom="uid://brghljnyk4hhb"
+theme/default_font_antialiasing=0
+theme/default_font_hinting=2
+theme/default_font_subpixel_positioning=0
+
+[internationalization]
+
+locale/translation_remaps={}
+locale/translations=PackedStringArray("res://Localisation/basic_metals.en.translation", "res://Localisation/basic_metals.ru.translation", "res://Localisation/interface.en.translation", "res://Localisation/interface.ru.translation", "res://Localisation/forge_actions.en.translation", "res://Localisation/forge_actions.ru.translation", "res://Localisation/categories.en.translation", "res://Localisation/categories.ru.translation")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

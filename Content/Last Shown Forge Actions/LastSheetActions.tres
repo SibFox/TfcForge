@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LastShowForgeActions" load_steps=2 format=3 uid="uid://o2hgx0vqec83"]
+
+[ext_resource type="Script" uid="uid://dis1ha2sv07iq" path="res://Resources/LastShowForgeActions.cs" id="1_0ls6v"]
+
+[resource]
+script = ExtResource("1_0ls6v")
+FirstAction = 1
+SecondAction = 1
+ThirdAction = 1
+metadata/_custom_type_script = "uid://dis1ha2sv07iq"

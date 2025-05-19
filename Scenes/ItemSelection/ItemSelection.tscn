@@ -1,0 +1,171 @@
+[gd_scene load_steps=14 format=3 uid="uid://di8gtu5jjib4c"]
+
+[ext_resource type="Script" uid="uid://bvx501g8au6ym" path="res://Scenes/ItemSelection/ItemSelection.cs" id="1_adm1k"]
+[ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_iwsp6"]
+[ext_resource type="Texture2D" uid="uid://b86aqb78xiw33" path="res://Assets/Sprites/ingot/bismuth.png" id="3_11ya8"]
+[ext_resource type="PackedScene" uid="uid://bap1xbjcnw27t" path="res://Scenes/UI/BorderedIcon.tscn" id="3_js31o"]
+[ext_resource type="Texture2D" uid="uid://dt2mnimuccw03" path="res://Assets/Forge/Action Border.png" id="3_vgaxw"]
+[ext_resource type="PackedScene" uid="uid://bchdyey5s8mjv" path="res://Scenes/UI/ItemOptionsButton.tscn" id="4_11ya8"]
+[ext_resource type="Texture2D" uid="uid://dnf4gxjq5cbnr" path="res://Assets/Forge/Button Back.png" id="5_vxrm3"]
+[ext_resource type="Texture2D" uid="uid://bvn5phejsme2c" path="res://Assets/Forge/Button Back Hover Press.png" id="6_js31o"]
+[ext_resource type="PackedScene" uid="uid://b5ro5bvmki6ax" path="res://Scenes/UI/AddNewForgeButton.tscn" id="6_vgaxw"]
+[ext_resource type="Resource" uid="uid://b1gl26ewxrfh" path="res://Content/Items/Copper/CopperIngot.tres" id="6_x45ta"]
+[ext_resource type="Resource" uid="uid://vfa3drlabq4b" path="res://Content/Items/Steel/SteelDoubleIngot.tres" id="7_sq86s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ucxy1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vgaxw"]
+
+[node name="ItemSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_iwsp6")
+script = ExtResource("1_adm1k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MetalInfoHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="MetalBorderedIcon" parent="VBoxContainer/MetalInfoHBoxContainer" instance=ExtResource("3_js31o")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="MetalIconBorder" type="TextureRect" parent="VBoxContainer/MetalInfoHBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+texture = ExtResource("3_vgaxw")
+stretch_mode = 5
+
+[node name="MetalIcon" type="TextureRect" parent="VBoxContainer/MetalInfoHBoxContainer/MetalIconBorder"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38
+anchor_right = 0.62
+anchor_bottom = 1.0
+offset_left = -4.46
+offset_top = 12.0
+offset_right = 4.46
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_11ya8")
+stretch_mode = 5
+
+[node name="MetalNameLabel" type="Label" parent="VBoxContainer/MetalInfoHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 3.0
+text = "MetalName"
+label_settings = SubResource("LabelSettings_ucxy1")
+vertical_alignment = 1
+
+[node name="CategoriesVBoxContainer" type="VBoxContainer" parent="VBoxContainer/MetalInfoHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Label" type="Label" parent="VBoxContainer/MetalInfoHBoxContainer/CategoriesVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TR_SPECIFY_CATEGORY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CategoriesSelect" type="OptionButton" parent="VBoxContainer/MetalInfoHBoxContainer/CategoriesVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
+flat = true
+selected = 0
+item_count = 7
+popup/item_0/text = "TR_CATEGORY_ALL"
+popup/item_0/id = 0
+popup/item_1/text = "TR_CATEGORY_COMPONENT"
+popup/item_1/id = 2
+popup/item_2/text = "TR_CATEGORY_INSTRUMENT"
+popup/item_2/id = 3
+popup/item_3/text = "TR_CATEGORY_WEAPON"
+popup/item_3/id = 4
+popup/item_4/text = "TR_CATEGORY_EQUIPMENT"
+popup/item_4/id = 5
+popup/item_5/text = "TR_CATEGORY_DECOR"
+popup/item_5/id = 6
+popup/item_6/text = "TR_CATEGORY_MISC"
+popup/item_6/id = 7
+
+[node name="BackButton" type="TextureButton" parent="VBoxContainer/MetalInfoHBoxContainer"]
+custom_minimum_size = Vector2(42, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+texture_normal = ExtResource("5_vxrm3")
+texture_pressed = ExtResource("6_js31o")
+texture_hover = ExtResource("6_js31o")
+texture_disabled = ExtResource("5_vxrm3")
+texture_focused = ExtResource("5_vxrm3")
+stretch_mode = 5
+
+[node name="PickItemLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+text = "TR_PICK_ITEM"
+label_settings = SubResource("LabelSettings_vgaxw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemsControl" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
+
+[node name="ItemsGridContainer" type="GridContainer" parent="VBoxContainer/ItemsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+columns = 5
+
+[node name="ItemOptionsButton" parent="VBoxContainer/ItemsControl/ItemsGridContainer" instance=ExtResource("4_11ya8")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+Item = ExtResource("6_x45ta")
+
+[node name="ItemOptionsButton2" parent="VBoxContainer/ItemsControl/ItemsGridContainer" instance=ExtResource("4_11ya8")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+Item = ExtResource("7_sq86s")
+
+[node name="AddNewForgeButton" parent="VBoxContainer/ItemsControl/ItemsGridContainer" instance=ExtResource("6_vgaxw")]
+visible = false
+layout_mode = 2
+
+[connection signal="item_selected" from="VBoxContainer/MetalInfoHBoxContainer/CategoriesVBoxContainer/CategoriesSelect" to="." method="LoadItems"]
+[connection signal="pressed" from="VBoxContainer/MetalInfoHBoxContainer/BackButton" to="." method="OnBackPressed"]

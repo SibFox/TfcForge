@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://h3irjmxpoadb"
+
+[deps]
+
+files=["res://Localisation/basic_metals.en.translation", "res://Localisation/basic_metals.ru.translation"]
+
+source_file="res://Localisation/basic_metals.csv"
+dest_files=["res://Localisation/basic_metals.en.translation", "res://Localisation/basic_metals.ru.translation"]
+
+[params]
+
+compress=true
+delimiter=1

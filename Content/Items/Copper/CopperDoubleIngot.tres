@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="Item" load_steps=11 format=3 uid="uid://vfh3fd50re6x"]
+
+[ext_resource type="Texture2D" uid="uid://do1nad5nk6o1m" path="res://Assets/Sprites/double_ingot/copper.png" id="1_mmqqf"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="2_rro47"]
+[ext_resource type="Resource" uid="uid://b1gl26ewxrfh" path="res://Content/Items/Copper/CopperIngot.tres" id="2_tmjos"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="3_aayyk"]
+[ext_resource type="Script" uid="uid://cqec8q7oihjq3" path="res://Resources/WeldRecipe.cs" id="3_m2lxp"]
+[ext_resource type="Resource" uid="uid://clbrmnw8ht10m" path="res://Content/MoltenMetals/Copper.tres" id="3_unuot"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="4_aayyk"]
+
+[sub_resource type="Resource" id="Resource_1lvra"]
+script = ExtResource("3_aayyk")
+AdditionalItem = ExtResource("2_tmjos")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_jb756"]
+script = ExtResource("4_aayyk")
+MeltsInto = ExtResource("3_unuot")
+Millibuckets = 200
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[sub_resource type="Resource" id="Resource_m2lxp"]
+script = ExtResource("3_m2lxp")
+FirstItem = ExtResource("2_tmjos")
+SecondItem = ExtResource("2_tmjos")
+metadata/_custom_type_script = "uid://cqec8q7oihjq3"
+
+[resource]
+script = ExtResource("2_rro47")
+Icon = ExtResource("1_mmqqf")
+Name = "TR_COPPER_DOUBLE_INGOT"
+Category = 2
+MadeFrom = SubResource("Resource_1lvra")
+MeltsInto = SubResource("Resource_jb756")
+WeldRecipe = SubResource("Resource_m2lxp")
+metadata/_custom_type_script = "uid://bit6oprricfpl"
