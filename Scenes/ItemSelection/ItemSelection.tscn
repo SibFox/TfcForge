@@ -1,16 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://di8gtu5jjib4c"]
+[gd_scene load_steps=10 format=3 uid="uid://di8gtu5jjib4c"]
 
 [ext_resource type="Script" uid="uid://bvx501g8au6ym" path="res://Scenes/ItemSelection/ItemSelection.cs" id="1_adm1k"]
 [ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_iwsp6"]
 [ext_resource type="Texture2D" uid="uid://b86aqb78xiw33" path="res://Assets/Sprites/ingot/bismuth.png" id="3_11ya8"]
 [ext_resource type="PackedScene" uid="uid://bap1xbjcnw27t" path="res://Scenes/UI/BorderedIcon.tscn" id="3_js31o"]
 [ext_resource type="Texture2D" uid="uid://dt2mnimuccw03" path="res://Assets/Forge/Action Border.png" id="3_vgaxw"]
-[ext_resource type="PackedScene" uid="uid://bchdyey5s8mjv" path="res://Scenes/UI/ItemOptionsButton.tscn" id="4_11ya8"]
 [ext_resource type="Texture2D" uid="uid://dnf4gxjq5cbnr" path="res://Assets/Forge/Button Back.png" id="5_vxrm3"]
 [ext_resource type="Texture2D" uid="uid://bvn5phejsme2c" path="res://Assets/Forge/Button Back Hover Press.png" id="6_js31o"]
-[ext_resource type="PackedScene" uid="uid://b5ro5bvmki6ax" path="res://Scenes/UI/AddNewForgeButton.tscn" id="6_vgaxw"]
-[ext_resource type="Resource" uid="uid://b1gl26ewxrfh" path="res://Content/Items/Copper/CopperIngot.tres" id="6_x45ta"]
-[ext_resource type="Resource" uid="uid://vfa3drlabq4b" path="res://Content/Items/Steel/SteelDoubleIngot.tres" id="7_sq86s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ucxy1"]
 
@@ -148,24 +144,6 @@ grow_vertical = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 columns = 5
-
-[node name="ItemOptionsButton" parent="VBoxContainer/ItemsControl/ItemsGridContainer" instance=ExtResource("4_11ya8")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 2
-Item = ExtResource("6_x45ta")
-
-[node name="ItemOptionsButton2" parent="VBoxContainer/ItemsControl/ItemsGridContainer" instance=ExtResource("4_11ya8")]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 2
-Item = ExtResource("7_sq86s")
-
-[node name="AddNewForgeButton" parent="VBoxContainer/ItemsControl/ItemsGridContainer" instance=ExtResource("6_vgaxw")]
-visible = false
-layout_mode = 2
 
 [connection signal="item_selected" from="VBoxContainer/MetalInfoHBoxContainer/CategoriesVBoxContainer/CategoriesSelect" to="." method="LoadItems"]
 [connection signal="pressed" from="VBoxContainer/MetalInfoHBoxContainer/BackButton" to="." method="OnBackPressed"]

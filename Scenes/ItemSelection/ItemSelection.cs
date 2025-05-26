@@ -51,16 +51,15 @@ public partial class ItemSelection : Control
 			// GD.Print($"[ItemSelection] File name: {itemFile}");
 			fileNames.Append(itemFile);
 
-			// GD.Load
-			Item item = ResourceLoader.Load($"res://Content/Items/{selectedMetalNameForSearch}/{itemFile}", nameof(Item)) as Item;
+            // GD.Load
 
-			if (item == null)
-			{
-				fileNames.Append("(Skipped); ");
-				continue;
-			}
+            if (ResourceLoader.Load($"res://Content/Items/{selectedMetalNameForSearch}/{itemFile}") is not Item item)
+            {
+                fileNames.Append("(Skipped); ");
+                continue;
+            }
 
-			if (CategorySelectButton.GetSelectedId() == (int)ItemDatabase.ItemCategory.All || CategorySelectButton.GetSelectedId() == (int)item.Category)
+            if (CategorySelectButton.GetSelectedId() == (int)ItemDatabase.ItemCategory.All || CategorySelectButton.GetSelectedId() == (int)item.Category)
 			{
 				ItemOptionsButton newOptionButton = GD.Load<PackedScene>("res://Scenes/UI/ItemOptionsButton.tscn").Instantiate<ItemOptionsButton>();
 				newOptionButton.Item = item;
