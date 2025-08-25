@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c2ldy4uvet4or"]
+[gd_scene load_steps=36 format=3 uid="uid://c2ldy4uvet4or"]
 
 [ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_as2me"]
 [ext_resource type="Script" uid="uid://gwlt7f3j5dlo" path="res://Scenes/Forge/Forge.cs" id="1_j7md3"]
@@ -51,6 +51,15 @@ font_size = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_602a4"]
 font_size = 10
+
+[sub_resource type="GDScript" id="GDScript_ve6p6"]
+script/source = "extends FileDialog
+
+func _process(delta: float) -> void:
+	ok_button_text = \"ui.open\"
+	cancel_button_text = \"ui.cancel\"
+	title = \"ui.pick_sprite\"
+"
 
 [node name="Forge" type="Control"]
 layout_mode = 3
@@ -834,13 +843,14 @@ vertical_alignment = 1
 
 [node name="IconSelect" type="FileDialog" parent="."]
 unique_name_in_owner = true
-title = "ui.pick_sprite"
+title = "Open a File"
 initial_position = 1
-ok_button_text = "ui.open"
+ok_button_text = "Open"
 cancel_button_text = "ui.cancel"
 file_mode = 0
 root_subfolder = "res://Assets/Sprites/"
 filters = PackedStringArray("*.png")
+script = SubResource("GDScript_ve6p6")
 
 [connection signal="gui_input" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/MarginContainer/ItemVBoxContainer/ItemInfoHBoxContainer/ItemIcon" to="." method="OnItemIconClick"]
 [connection signal="value_changed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/MarginContainer/ItemVBoxContainer/SpecifyHBoxContainer/ForgeGoal" to="." method="ForgeGoalValueChanged"]
