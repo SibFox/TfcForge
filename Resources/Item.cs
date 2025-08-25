@@ -11,6 +11,11 @@ public partial class Item : Resource
     public string Name;
     [Export]
     public ItemDatabase.ItemCategory Category;
+    [Export]
+    public string MetalName;
+
+    [Export]
+    public bool ShowInSelection { get; private set; } = true;
 
     // Is set, if has an ancestor (i.e. double ingot)
     [Export]

@@ -21,5 +21,5 @@ metadata/_custom_type_script = "uid://cdbnbe14vxfum"
 [resource]
 script = ExtResource("1_yg7o6")
 Icon = ExtResource("4_65w2m")
-Name = "TR_BRASS"
+Name = "metal.brass"
 AlloyIngredients = Array[Object]([SubResource("Resource_1w4xy"), SubResource("Resource_rn0ql")])

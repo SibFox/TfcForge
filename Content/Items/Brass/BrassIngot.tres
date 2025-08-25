@@ -14,7 +14,8 @@ metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
 [resource]
 script = ExtResource("1_t153i")
 Icon = ExtResource("1_f6jqd")
-Name = "TR_BRASS_INGOT"
+Name = "metal.brass"
 Category = 1
+ShowInSelection = false
 MeltsInto = SubResource("Resource_efyd1")
 metadata/_custom_type_script = "uid://bit6oprricfpl"

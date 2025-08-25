@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Item" load_steps=14 format=3 uid="uid://c1a7q5n4rf7sw"]
+
+[ext_resource type="Script" uid="uid://bevv7ssh4mjgi" path="res://Resources/LastForgeActions.cs" id="1_vw18g"]
+[ext_resource type="Resource" uid="uid://26cf8kwhe6hd" path="res://Content/MoltenMetals/CastIron.tres" id="2_coexs"]
+[ext_resource type="Script" uid="uid://df3b2dyh7h4bi" path="res://Resources/ForgeRecipe.cs" id="2_wdtrk"]
+[ext_resource type="Texture2D" uid="uid://cuilt5523u7f0" path="res://Assets/Sprites/bloom/refined.png" id="3_5oym2"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="3_m5ato"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="4_0w7ev"]
+[ext_resource type="Resource" uid="uid://bb4whlfynfblg" path="res://Content/Last Shown Forge Actions/LastBloomActions.tres" id="4_ia7sp"]
+[ext_resource type="Resource" uid="uid://bqcs2r3pqbb7t" path="res://Content/Items/WroughtIron/RawIronBloom.tres" id="5_3od87"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="6_3x26u"]
+
+[sub_resource type="Resource" id="Resource_ee1k4"]
+script = ExtResource("1_vw18g")
+FirstAction = -3
+SecondAction = -3
+ThirdAction = -6
+metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
+
+[sub_resource type="Resource" id="Resource_kn4s7"]
+script = ExtResource("2_wdtrk")
+RequiredWork = 73
+Shrink = 4
+Upset = 0
+Bend = 3
+Punch = 0
+WeakHit = 0
+MediumHit = 0
+StrongHit = 0
+Draw = 0
+LastActions = SubResource("Resource_ee1k4")
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[sub_resource type="Resource" id="Resource_vw18g"]
+script = ExtResource("6_3x26u")
+OriginalItem = ExtResource("5_3od87")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("3_m5ato")
+MeltsInto = ExtResource("2_coexs")
+Millibuckets = 100
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("4_0w7ev")
+Icon = ExtResource("3_5oym2")
+Name = "item.metal.refined_iron_bloom"
+Category = 1
+MetalName = "metal.wrought_iron"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_vw18g")
+MeltsInto = SubResource("Resource_efyd1")
+LastForgeActions = ExtResource("4_ia7sp")
+ForgeRecipe = SubResource("Resource_kn4s7")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

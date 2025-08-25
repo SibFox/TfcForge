@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="Item" load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://Resources/LastForgeActions.cs" id="1_u1xtc"]
+[ext_resource type="Script" path="res://Resources/ForgeRecipe.cs" id="2_svlet"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/scythe/bronze.png" id="3_u1xtc"]
+[ext_resource type="Script" path="res://Resources/LastShowForgeActions.cs" id="4_u1xtc"]
+[ext_resource type="Resource" path="res://Content/Items/Bronze/BronzeIngot.tres" id="5_ou1js"]
+[ext_resource type="Script" path="res://Resources/ItemMadeFrom.cs" id="6_6cqp3"]
+[ext_resource type="Resource" path="res://Content/MoltenMetals/Bronze.tres" id="7_8l48y"]
+[ext_resource type="Script" path="res://Resources/MeltingRecipe.cs" id="8_6rmqt"]
+[ext_resource type="Script" path="res://Resources/Item.cs" id="9_ctpbf"]
+
+[sub_resource type="Resource" id="Resource_mpejl"]
+script = ExtResource("1_u1xtc")
+FirstAction = -15
+SecondAction = 7
+ThirdAction = 2
+metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
+
+[sub_resource type="Resource" id="Resource_u1xtc"]
+script = ExtResource("2_svlet")
+RequiredWork = 67
+Shrink = 4
+Upset = 0
+Bend = 1
+Punch = 1
+WeakHit = 0
+MediumHit = 0
+StrongHit = 0
+Draw = 0
+LastActions = SubResource("Resource_mpejl")
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[sub_resource type="Resource" id="Resource_svlet"]
+script = ExtResource("4_u1xtc")
+FirstAction = 0
+SecondAction = 3
+ThirdAction = 2
+metadata/_custom_type_script = "uid://dis1ha2sv07iq"
+
+[sub_resource type="Resource" id="Resource_7obnn"]
+script = ExtResource("6_6cqp3")
+OriginalItem = ExtResource("5_ou1js")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("8_6rmqt")
+MeltsInto = ExtResource("7_8l48y")
+Millibuckets = 100
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("9_ctpbf")
+Icon = ExtResource("3_u1xtc")
+Name = "item.tool.scythe"
+Category = 3
+MetalName = "metal.bronze"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_7obnn")
+MeltsInto = SubResource("Resource_efyd1")
+LastForgeActions = SubResource("Resource_svlet")
+ForgeRecipe = SubResource("Resource_u1xtc")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

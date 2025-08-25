@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MoltenMetal" load_steps=3 format=3 uid="uid://26cf8kwhe6hd"]
+
+[ext_resource type="Texture2D" uid="uid://ck72tjso0gn8k" path="res://Assets/Sprites/ingot/cast_iron.png" id="1_mh83k"]
+[ext_resource type="Script" uid="uid://c8jkaup7ucixb" path="res://Resources/MoltenMetal.cs" id="2_6hbmc"]
+
+[resource]
+script = ExtResource("2_6hbmc")
+Icon = ExtResource("1_mh83k")
+Name = "metal.cast_iron"
+AlloyIngredients = Array[Object]([])

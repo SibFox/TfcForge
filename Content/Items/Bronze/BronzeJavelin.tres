@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Item" load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://Resources/ForgeRecipe.cs" id="1_g3xmf"]
+[ext_resource type="Script" path="res://Resources/LastForgeActions.cs" id="1_lrkms"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/javelin/bronze.png" id="2_lrkms"]
+[ext_resource type="Resource" path="res://Content/Last Shown Forge Actions/LastJavelinActions.tres" id="4_lrkms"]
+[ext_resource type="Resource" path="res://Content/Items/Bronze/BronzeIngot.tres" id="4_owbla"]
+[ext_resource type="Script" path="res://Resources/ItemMadeFrom.cs" id="5_2mux3"]
+[ext_resource type="Resource" path="res://Content/MoltenMetals/Bronze.tres" id="6_gn5gf"]
+[ext_resource type="Script" path="res://Resources/MeltingRecipe.cs" id="7_1qja2"]
+[ext_resource type="Script" path="res://Resources/Item.cs" id="8_ecyxb"]
+
+[sub_resource type="Resource" id="Resource_emfev"]
+script = ExtResource("1_lrkms")
+FirstAction = -15
+SecondAction = -3
+ThirdAction = -3
+metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
+
+[sub_resource type="Resource" id="Resource_owbla"]
+script = ExtResource("1_g3xmf")
+RequiredWork = 67
+Shrink = 6
+Upset = 0
+Bend = 0
+Punch = 2
+WeakHit = 0
+MediumHit = 0
+StrongHit = 0
+Draw = 0
+LastActions = SubResource("Resource_emfev")
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[sub_resource type="Resource" id="Resource_7obnn"]
+script = ExtResource("5_2mux3")
+OriginalItem = ExtResource("4_owbla")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("7_1qja2")
+MeltsInto = ExtResource("6_gn5gf")
+Millibuckets = 100
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("8_ecyxb")
+Icon = ExtResource("2_lrkms")
+Name = "item.weapon.javelin"
+Category = 4
+MetalName = "metal.bronze"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_7obnn")
+MeltsInto = SubResource("Resource_efyd1")
+LastForgeActions = ExtResource("4_lrkms")
+ForgeRecipe = SubResource("Resource_owbla")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

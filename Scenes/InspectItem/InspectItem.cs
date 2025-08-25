@@ -129,20 +129,20 @@ public partial class InspectItem : Control
             else
             {
                 actionWeightString.Append(" + " + (int)ForgeDatabase.Action.Shrink);
-                mathString.Append(" -> " + currentForgeWork);
+                mathString.Append(" > " + currentForgeWork);
             }
         }
 
         // Crimp / Обжать
-        for (int i = 0; i < recipe.Crimp; i++)
+        for (int i = 0; i < recipe.Upset; i++)
         {
-            currentForgeWork += (int)ForgeDatabase.Action.Crimp;
+            currentForgeWork += (int)ForgeDatabase.Action.Upset;
 
             if (i == 0)
-                actionsString.Append(" + " + Translate(ForgeDatabase.ActionTRCodes[ForgeDatabase.Action.Crimp]) + " x" + recipe.Crimp);
+                actionsString.Append(" + " + Translate(ForgeDatabase.ActionTRCodes[ForgeDatabase.Action.Upset]) + " x" + recipe.Upset);
 
-            actionWeightString.Append(" + " + (int)ForgeDatabase.Action.Crimp);
-            mathString.Append(" -> " + currentForgeWork);
+            actionWeightString.Append(" + " + (int)ForgeDatabase.Action.Upset);
+            mathString.Append(" > " + currentForgeWork);
         }
 
         // Bend / Изогнуть
@@ -154,19 +154,19 @@ public partial class InspectItem : Control
                 actionsString.Append(" + " + Translate(ForgeDatabase.ActionTRCodes[ForgeDatabase.Action.Bend]) + " x" + recipe.Bend);
 
             actionWeightString.Append(" + " + (int)ForgeDatabase.Action.Bend);
-            mathString.Append(" -> " + currentForgeWork);
+            mathString.Append(" > " + currentForgeWork);
         }
 
         // Stamp / Штамп
-        for (int i = 0; i < recipe.Stamp; i++)
+        for (int i = 0; i < recipe.Punch; i++)
         {
-            currentForgeWork += (int)ForgeDatabase.Action.Stamp;
+            currentForgeWork += (int)ForgeDatabase.Action.Punch;
 
             if (i == 0)
-                actionsString.Append(" + " + Translate(ForgeDatabase.ActionTRCodes[ForgeDatabase.Action.Stamp]) + " x" + recipe.Stamp);
+                actionsString.Append(" + " + Translate(ForgeDatabase.ActionTRCodes[ForgeDatabase.Action.Punch]) + " x" + recipe.Punch);
 
-            actionWeightString.Append(" + " + (int)ForgeDatabase.Action.Stamp);
-            mathString.Append(" -> " + currentForgeWork);
+            actionWeightString.Append(" + " + (int)ForgeDatabase.Action.Punch);
+            mathString.Append(" > " + currentForgeWork);
         }
 
         // Weak hit / Слабый удар
@@ -177,8 +177,8 @@ public partial class InspectItem : Control
             if (i == 0)
                 actionsString.Append(" - " + Translate(ForgeDatabase.ActionTRCodes[ForgeDatabase.Action.WeakHit]) + " x" + recipe.WeakHit);
 
-            actionWeightString.Append(" - " + (int)ForgeDatabase.Action.WeakHit);
-            mathString.Append(" -> " + currentForgeWork);
+            actionWeightString.Append(" - " + Math.Abs((int)ForgeDatabase.Action.WeakHit));
+            mathString.Append(" > " + currentForgeWork);
         }
 
 
@@ -190,8 +190,8 @@ public partial class InspectItem : Control
             if (i == 0)
                 actionsString.Append(" - " + Translate(ForgeDatabase.ActionTRCodes[ForgeDatabase.Action.MediumHit]) + " x" + recipe.MediumHit);
 
-            actionWeightString.Append(" - " + (int)ForgeDatabase.Action.MediumHit);
-            mathString.Append(" -> " + currentForgeWork);
+            actionWeightString.Append(" - " + Math.Abs((int)ForgeDatabase.Action.MediumHit));
+            mathString.Append(" > " + currentForgeWork);
         }
 
         // Strong hit / Сильный удар
@@ -202,39 +202,46 @@ public partial class InspectItem : Control
             if (i == 0)
                 actionsString.Append(" - " + Translate(ForgeDatabase.ActionTRCodes[ForgeDatabase.Action.StrongHit]) + " x" + recipe.StrongHit);
 
-            actionWeightString.Append(" - " + (int)ForgeDatabase.Action.StrongHit);
-            mathString.Append(" -> " + currentForgeWork);
+            actionWeightString.Append(" - " + Math.Abs((int)ForgeDatabase.Action.StrongHit));
+            mathString.Append(" > " + currentForgeWork);
         }
 
         // Pull / Протянуть
-        for (int i = 0; i < recipe.Pull; i++)
+        for (int i = 0; i < recipe.Draw; i++)
         {
-            currentForgeWork += (int)ForgeDatabase.Action.Pull;
+            currentForgeWork += (int)ForgeDatabase.Action.Draw;
 
             if (i == 0)
-                actionsString.Append(" - " + Translate(ForgeDatabase.ActionTRCodes[ForgeDatabase.Action.Pull]) + " x" + recipe.Pull);
+                actionsString.Append(" - " + Translate(ForgeDatabase.ActionTRCodes[ForgeDatabase.Action.Draw]) + " x" + recipe.Draw);
 
-            actionWeightString.Append(" - " + (int)ForgeDatabase.Action.Pull);
-            mathString.Append(" -> " + currentForgeWork);
+            actionWeightString.Append(" - " + Math.Abs((int)ForgeDatabase.Action.Draw));
+            mathString.Append(" > " + currentForgeWork);
         }
 
-        mathString.Append(" _");
-        actionWeightString.Append(" _");
-        actionsString.Append(" _");
+        mathString.Append(" >>");
+        actionWeightString.Append(" >>");
+        actionsString.Append(" >>");
 
-        for (int i = 1; i <= 3; i++)
+        ushort actionAmount = 3;
+        if (recipe.LastActions.SecondAction == ForgeDatabase.Action.None)
+            actionAmount--;
+        if (recipe.LastActions.ThirdAction == ForgeDatabase.Action.None)
+            actionAmount--;
+        for (int i = 1; i <= actionAmount; i++)
         {
-            ForgeDatabase.Action action = ForgeDatabase.Action.Pull;
+            ForgeDatabase.Action action = ForgeDatabase.Action.Draw;
             switch (i)
             {
                 case 1:
                     action = recipe.LastActions.FirstAction;
                     break;
                 case 2:
-                    action = recipe.LastActions.SecondAction;
+                    if (recipe.LastActions.SecondAction != ForgeDatabase.Action.None)
+                        action = recipe.LastActions.SecondAction;
                     break;
                 case 3:
-                    action = recipe.LastActions.ThirdAction;
+                    if (recipe.LastActions.ThirdAction != ForgeDatabase.Action.None)
+                        action = recipe.LastActions.ThirdAction;
                     break;
             }
 

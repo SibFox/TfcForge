@@ -5,37 +5,40 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class ForgeDatabase : Node
 {
-    public enum Action
-    {
-        Pull = -15, //Протянуть
-        StrongHit = -9,
-        MediumHit = -6,
-        WeakHit = -3,
-        Stamp = 2,
-        Bend = 7,
-        Crimp = 13, //Обжать
-        Shrink = 16 //Усадить
-    }
+	public enum Action
+	{
+		None = 0,
+		Draw = -15, //Протянуть
+		StrongHit = -9,
+		MediumHit = -6,
+		WeakHit = -3,
+		Punch = 2,
+		Bend = 7,
+		Upset = 13, //Обжать
+		Shrink = 16 //Усадить
+	}
 
-    public enum ShownAction
-    {
-        Pull, //Протянуть
-        Hit,
-        Stamp,
-        Bend,
-        Crimp, //Обжать
-        Shrink //Усадить
-    }
+	public enum ShownAction
+	{
+		None = -1,
+		Draw, //Протянуть
+		Hit,
+		Punch,
+		Bend,
+		Upset, //Обжать
+		Shrink //Усадить
+	}
 
-    public static Dictionary<Action, string> ActionTRCodes = new()
-    {
-        { Action.Pull, "TR_PULL" },
-        { Action.StrongHit, "TR_STRONGHIT" },
-        { Action.MediumHit, "TR_MEDIUMHIT" },
-        { Action.WeakHit, "TR_WEAKHIT" },
-        { Action.Stamp, "TR_STAMP" },
-        { Action.Bend, "TR_BEND" },
-        { Action.Crimp, "TR_CRIMP" },
-        { Action.Shrink, "TR_SHRINK" }
-    };
+	public static Dictionary<Action, string> ActionTRCodes = new()
+	{
+		{ Action.None, "" },
+		{ Action.Draw, "action.draw" },
+		{ Action.StrongHit, "action.stronghit" },
+		{ Action.MediumHit, "action.mediumhit" },
+		{ Action.WeakHit, "action.weakhit" },
+		{ Action.Punch, "action.punch" },
+		{ Action.Bend, "action.bend" },
+		{ Action.Upset, "action.upset" },
+		{ Action.Shrink, "action.shrink" }
+	};
 }

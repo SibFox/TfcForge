@@ -1,32 +1,30 @@
 ﻿code;en;ru
-TR_COPPER;Copper;Медь
-TR_BRONZE;Bronze;Бронза
-TR_BLACK_BRONZE;Black Bronze;Чёрная Бронза
-TR_BISMUTH_BRONZE;Bismuth Bronze;Висмутовая Бронза
-TR_BRASS;Brass;Латунь
-TR_TIN;Tin;Олово
-TR_ZINC;Zinc;Цинк
-TR_GOLD;Gold;Золото
-TR_SILVER;Silver;Серебро
-TR_ROSE_GOLD;Rose Gold;Розовое Золото
-TR_STERLING_SILVER;Sterling Silver;Стерлинговое Серебро
-TR_NICKEL;Nickel;Никель
-TR_LEAD;Lead;Свинец
-TR_CAST_IRON;Cast Iron;Чугун
-TR_WROUGHT_IRON;Wrought Iron;Кованное Железо
-TR_PIG_IRON;Pig Iron;Свинное Железо
-TR_STEEL;Steel;Сталь
-TR_BLACK_STEEL;Black Steel;Чёрная Сталь
-TR_RED_STEEL;Red Steel;Красная Сталь
-TR_BLUE_STEEL;Blue Steel;Синяя Сталь
+metal.copper;Copper;Медь
+metal.bronze;Bronze;Бронза
+metal.black_bronze;Black Bronze;Чёрная Бронза
+metal.bismuth_bronze;Bismuth Bronze;Висмутовая Бронза
+metal.brass;Brass;Латунь
+metal.tin;Tin;Олово
+metal.zinc;Zinc;Цинк
+metal.gold;Gold;Золото
+metal.silver;Silver;Серебро
+metal.rose_gold;Rose Gold;Розовое Золото
+metal.sterling_silver;Sterling Silver;Стерлинговое Серебро
+metal.nickel;Nickel;Никель
+metal.lead;Lead;Свинец
+metal.cast_iron;Cast Iron;Чугун
+metal.wrought_iron;Wrought Iron;Кованое Железо
+metal.pig_iron;Pig Iron;Белый чугун
+metal.steel;Steel;Сталь
+metal.black_steel;Black Steel;Чёрная Сталь
+metal.red_steel;Red Steel;Красная Сталь
+metal.blue_steel;Blue Steel;Синяя Сталь
 --------;;
-TR_GREY_CAST_IRON;Grey Cast Iron;Серый Чугун
-TR_WHITE_CAST_IRON;White Cast Iron;Белый Чугун
-TR_HIGH_CARBON_STEEL;High Carbon Steel;Высокоуглеродная Сталь
-TR_WEAK_STEEL;Weak Steel;
-TR_HIGH_CARBON_BLACK_STEEL;High Carbon Black Steel;Высокоуглеродная Чёрная Сталь
-TR_WEAK_BLACK_STEEL;Weak Black Steel;
-TR_HIGH_CARBON_RED_STEEL;High Carbon Red Steel;Высокоуглеродная Красная Сталь
-TR_WEAK_RED_STEEL;Weak Red Steel;
-TR_HIGH_CARBON_BLUE_STEEL;High Carbon Blue Steel;Высокоуглеродная Синяя Сталь
-TR_WEAK_BLUE_STEEL;Weak Blue Steel;
+metal.high_carbon_steel;High Carbon Steel;Высокоуглеродная Сталь
+metal.weak_steel;Weak Steel;
+metal.high_carbon_black_steel;High Carbon Black Steel;Высокоуглеродная Чёрная Сталь
+metal.weak_black_steel;Weak Black Steel;
+metal.high_carbon_red_steel;High Carbon Red Steel;Высокоуглеродная Красная Сталь
+metal.weak_red_steel;Weak Red Steel;
+metal.high_carbon_blue_steel;High Carbon Blue Steel;Высокоуглеродная Синяя Сталь
+metal.weak_blue_steel;Weak Blue Steel;

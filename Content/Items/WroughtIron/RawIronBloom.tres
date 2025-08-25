@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://bqcs2r3pqbb7t"]
+
+[ext_resource type="Texture2D" uid="uid://ckqlhcn7mj5qh" path="res://Assets/Sprites/bloom/unrefined.png" id="1_evb13"]
+[ext_resource type="Resource" uid="uid://26cf8kwhe6hd" path="res://Content/MoltenMetals/CastIron.tres" id="2_w40rg"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="3_2acl6"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="4_0ceny"]
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("3_2acl6")
+MeltsInto = ExtResource("2_w40rg")
+Millibuckets = 0
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("4_0ceny")
+Icon = ExtResource("1_evb13")
+Name = "item.metal.raw_iron_bloom"
+Category = 1
+MetalName = "metal.wrought_iron"
+ShowInSelection = false
+MeltsInto = SubResource("Resource_efyd1")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

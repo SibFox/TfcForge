@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Item" load_steps=11 format=3 uid="uid://cdceadlsjv01s"]
+
+[ext_resource type="Texture2D" uid="uid://c1hp81te23j3w" path="res://Assets/Sprites/double_sheet/wrought_iron.png" id="1_fdmn5"]
+[ext_resource type="Resource" uid="uid://bgssgc1tvb6si" path="res://Content/Items/WroughtIron/WroughtIronSheet.tres" id="2_giltq"]
+[ext_resource type="Script" uid="uid://cqec8q7oihjq3" path="res://Resources/WeldRecipe.cs" id="6_adbfa"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="6_xnmy5"]
+[ext_resource type="Resource" uid="uid://26cf8kwhe6hd" path="res://Content/MoltenMetals/CastIron.tres" id="7_3q7op"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="8_0kfcp"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="9_pk6sd"]
+
+[sub_resource type="Resource" id="Resource_l46bp"]
+script = ExtResource("6_xnmy5")
+OriginalItem = ExtResource("2_giltq")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_gopr0"]
+script = ExtResource("8_0kfcp")
+MeltsInto = ExtResource("7_3q7op")
+Millibuckets = 200
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[sub_resource type="Resource" id="Resource_fbw5p"]
+script = ExtResource("6_adbfa")
+FirstItem = ExtResource("2_giltq")
+SecondItem = ExtResource("2_giltq")
+metadata/_custom_type_script = "uid://cqec8q7oihjq3"
+
+[resource]
+script = ExtResource("9_pk6sd")
+Icon = ExtResource("1_fdmn5")
+Name = "item.metal.double_sheet"
+Category = 1
+MetalName = "metal.wrought_iron"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_l46bp")
+MeltsInto = SubResource("Resource_gopr0")
+WeldRecipe = SubResource("Resource_fbw5p")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

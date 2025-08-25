@@ -11,10 +11,10 @@
 [sub_resource type="LabelSettings" id="LabelSettings_r4s8k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dubhn"]
-font_size = 10
+font_size = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_w7sf6"]
-font_size = 10
+font_size = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_1nxv0"]
 font_size = 12
@@ -128,7 +128,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
-text = "TR_FORGE_RECIPE"
+text = "ui.inspect.forge_recipe"
 horizontal_alignment = 1
 
 [node name="ExpectedLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/LabelHBoxContainer"]
@@ -186,6 +186,7 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 text = "Actions"
 label_settings = SubResource("LabelSettings_1nxv0")
+autowrap_mode = 3
 
 [node name="WeldRecipeVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer"]
 visible = false
@@ -196,7 +197,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
-text = "TR_WELD_RECIPE"
+text = "ui.inspect.weld_recipe"
 horizontal_alignment = 1
 
 [node name="WeldIngredientsHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer"]
@@ -205,13 +206,13 @@ size_flags_vertical = 3
 
 [node name="FirstItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer/FirstItemHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.0
 text = "FirstItemName"
 label_settings = SubResource("LabelSettings_u6yjh")
 horizontal_alignment = 1
@@ -234,13 +235,13 @@ vertical_alignment = 2
 
 [node name="SecondItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer/SecondItemHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.0
 text = "SecondItemName"
 label_settings = SubResource("LabelSettings_u6yjh")
 horizontal_alignment = 1
@@ -266,7 +267,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 0.2
-text = "TR_INSPECT_MADE_FROM"
+text = "ui.inspect.made_from"
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -285,13 +286,14 @@ size_flags_vertical = 3
 
 [node name="OriginalItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
 
 [node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/OriginalItemHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-size_flags_stretch_ratio = 0.4
+size_flags_stretch_ratio = 0.0
 text = "FirstItemName"
 label_settings = SubResource("LabelSettings_u845h")
 horizontal_alignment = 1
@@ -310,15 +312,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AdditionalItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer"]
-visible = false
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
 
 [node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/AdditionalItemHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-size_flags_stretch_ratio = 0.4
+size_flags_stretch_ratio = 0.0
 text = "FirstItemName"
 label_settings = SubResource("LabelSettings_u845h")
 horizontal_alignment = 1
@@ -344,7 +346,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 0.2
-text = "TR_INSPECT_MELTS_INTO"
+text = "ui.inspect.melts_into"
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -359,13 +361,12 @@ vertical_alignment = 1
 
 [node name="MoltenMetalHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
 size_flags_vertical = 3
 
 [node name="MetalNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-size_flags_stretch_ratio = 0.4
+size_flags_stretch_ratio = 0.0
 text = "MoltenMetalName"
 label_settings = SubResource("LabelSettings_u845h")
 horizontal_alignment = 1
@@ -378,7 +379,7 @@ size_flags_vertical = 3
 [node name="MillibucketsLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.0
 text = "Millibuckets"
 label_settings = SubResource("LabelSettings_u845h")
 horizontal_alignment = 1

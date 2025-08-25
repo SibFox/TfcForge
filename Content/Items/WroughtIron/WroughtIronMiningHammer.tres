@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Item" load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://Resources/LastForgeActions.cs" id="1_e5lcw"]
+[ext_resource type="Script" path="res://Resources/ForgeRecipe.cs" id="2_dhfjy"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/mining_hammer/mining_hammer_head.png" id="3_dhfjy"]
+[ext_resource type="Script" path="res://Resources/ItemMadeFrom.cs" id="3_e5lcw"]
+[ext_resource type="Resource" path="res://Content/MoltenMetals/CastIron.tres" id="4_dhfjy"]
+[ext_resource type="Resource" path="res://Content/Last Shown Forge Actions/LastMiningHammerActions.tres" id="4_e5lcw"]
+[ext_resource type="Script" path="res://Resources/MeltingRecipe.cs" id="5_585l7"]
+[ext_resource type="Resource" path="res://Content/Items/WroughtIron/WroughtIronDoubleIngot.tres" id="5_qm7n7"]
+[ext_resource type="Script" path="res://Resources/Item.cs" id="7_r8lm7"]
+
+[sub_resource type="Resource" id="Resource_r8lm7"]
+script = ExtResource("1_e5lcw")
+FirstAction = 16
+SecondAction = 2
+ThirdAction = 0
+metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
+
+[sub_resource type="Resource" id="Resource_dhfjy"]
+script = ExtResource("2_dhfjy")
+RequiredWork = 107
+Shrink = 5
+Upset = 0
+Bend = 1
+Punch = 1
+WeakHit = 0
+MediumHit = 0
+StrongHit = 0
+Draw = 0
+LastActions = SubResource("Resource_r8lm7")
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[sub_resource type="Resource" id="Resource_l46bp"]
+script = ExtResource("3_e5lcw")
+OriginalItem = ExtResource("5_qm7n7")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_gopr0"]
+script = ExtResource("5_585l7")
+MeltsInto = ExtResource("4_dhfjy")
+Millibuckets = 200
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("7_r8lm7")
+Icon = ExtResource("3_dhfjy")
+Name = "item.tool.mining_hammer"
+Category = 3
+MetalName = "metal.wrought_iron"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_l46bp")
+MeltsInto = SubResource("Resource_gopr0")
+LastForgeActions = ExtResource("4_e5lcw")
+ForgeRecipe = SubResource("Resource_dhfjy")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

@@ -38,6 +38,6 @@ public partial class ItemOptionsButton : Control
 
 	void OnRedactPressed()
 	{
-		
+		Global.OpenForgeScene(_item.MetalName, _item.Name);
 	}
 }

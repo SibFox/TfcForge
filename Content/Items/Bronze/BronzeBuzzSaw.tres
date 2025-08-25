@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="Item" load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://Resources/LastForgeActions.cs" id="1_5bfhk"]
+[ext_resource type="Script" path="res://Resources/ForgeRecipe.cs" id="2_x7orb"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/buzz_saw/tool_head_buzz_saw.png" id="3_5bfhk"]
+[ext_resource type="Script" path="res://Resources/LastShowForgeActions.cs" id="4_5bfhk"]
+[ext_resource type="Resource" path="res://Content/Items/Bronze/BronzeIngot.tres" id="5_qw7fk"]
+[ext_resource type="Script" path="res://Resources/ItemMadeFrom.cs" id="6_c7nbg"]
+[ext_resource type="Resource" path="res://Content/MoltenMetals/Bronze.tres" id="7_a8u2m"]
+[ext_resource type="Script" path="res://Resources/MeltingRecipe.cs" id="8_7t4i0"]
+[ext_resource type="Script" path="res://Resources/Item.cs" id="9_owja4"]
+
+[sub_resource type="Resource" id="Resource_krkru"]
+script = ExtResource("1_5bfhk")
+FirstAction = -15
+SecondAction = -6
+ThirdAction = 7
+metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
+
+[sub_resource type="Resource" id="Resource_x7orb"]
+script = ExtResource("2_x7orb")
+RequiredWork = 97
+Shrink = 6
+Upset = 1
+Bend = 0
+Punch = 1
+WeakHit = 0
+MediumHit = 0
+StrongHit = 0
+Draw = 0
+LastActions = SubResource("Resource_krkru")
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[sub_resource type="Resource" id="Resource_mrolj"]
+script = ExtResource("4_5bfhk")
+FirstAction = 0
+SecondAction = 1
+ThirdAction = 3
+metadata/_custom_type_script = "uid://dis1ha2sv07iq"
+
+[sub_resource type="Resource" id="Resource_7obnn"]
+script = ExtResource("6_c7nbg")
+OriginalItem = ExtResource("5_qw7fk")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("8_7t4i0")
+MeltsInto = ExtResource("7_a8u2m")
+Millibuckets = 200
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("9_owja4")
+Icon = ExtResource("3_5bfhk")
+Name = "item.component.buzz_saw"
+Category = 2
+MetalName = "metal.bronze"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_7obnn")
+MeltsInto = SubResource("Resource_efyd1")
+LastForgeActions = SubResource("Resource_mrolj")
+ForgeRecipe = SubResource("Resource_x7orb")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

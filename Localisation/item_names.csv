@@ -1,0 +1,10 @@
+﻿code;en;ru
+item.metal.sheet;Sheet;Лист
+item.metal.double_sheet;Dobule Sheet;Двойной лист
+item.metal.ingot;Ingot;Слиток
+item.metal.double_ingot;Double Ingot;Двойной слиток
+
+
+item.tool.pickaxe;Pickaxe;Кирка
+item.tool.axe;Axe;Топор
+item.tool.mining_hammer;Mining Hammer;Шахтёрский молот

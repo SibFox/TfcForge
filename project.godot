@@ -36,10 +36,11 @@ project/assembly_name="TFC Forge"
 [file_customization]
 
 folder_colors={
-"res://Assets/Sprites/double_ingot/": "red",
-"res://Assets/Sprites/double_sheet/": "red",
-"res://Assets/Sprites/ingot/": "red",
-"res://Assets/Sprites/sheet/": "red",
+"res://Assets/Sprites/": "pink",
+"res://Assets/Sprites/double_ingot/": "yellow",
+"res://Assets/Sprites/double_sheet/": "yellow",
+"res://Assets/Sprites/ingot/": "yellow",
+"res://Assets/Sprites/sheet/": "yellow",
 "res://Content/Items/": "green",
 "res://Content/Last Shown Forge Actions/": "gray",
 "res://Content/MoltenMetals/": "red"
@@ -57,7 +58,7 @@ theme/default_font_subpixel_positioning=0
 [internationalization]
 
 locale/translation_remaps={}
-locale/translations=PackedStringArray("res://Localisation/basic_metals.en.translation", "res://Localisation/basic_metals.ru.translation", "res://Localisation/interface.en.translation", "res://Localisation/interface.ru.translation", "res://Localisation/forge_actions.en.translation", "res://Localisation/forge_actions.ru.translation", "res://Localisation/categories.en.translation", "res://Localisation/categories.ru.translation")
+locale/translations=PackedStringArray("res://Localisation/basic_metals.en.translation", "res://Localisation/basic_metals.ru.translation", "res://Localisation/interface.en.translation", "res://Localisation/interface.ru.translation", "res://Localisation/forge_actions.en.translation", "res://Localisation/forge_actions.ru.translation", "res://Localisation/categories.en.translation", "res://Localisation/categories.ru.translation", "res://Localisation/item_names.en.translation", "res://Localisation/item_names.ru.translation")
 
 [rendering]
 

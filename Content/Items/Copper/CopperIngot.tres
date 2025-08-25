@@ -14,7 +14,8 @@ metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
 [resource]
 script = ExtResource("1_n5a4t")
 Icon = ExtResource("1_s33lk")
-Name = "TR_COPPER_INGOT"
+Name = "metal.copper"
 Category = 1
+ShowInSelection = false
 MeltsInto = SubResource("Resource_5tduu")
 metadata/_custom_type_script = "uid://bit6oprricfpl"

@@ -12,11 +12,11 @@ public partial class ForgeRecipe : Resource
     [Export(PropertyHint.Range, "0,10,1")]
     public int Shrink;
     [Export(PropertyHint.Range, "0,10,1")]
-    public int Crimp;
+    public int Upset;
     [Export(PropertyHint.Range, "0,10,1")]
     public int Bend;
     [Export(PropertyHint.Range, "0,10,1")]
-    public int Stamp;
+    public int Punch;
     [Export(PropertyHint.Range, "0,10,1")]
     public int WeakHit;
     [Export(PropertyHint.Range, "0,10,1")]
@@ -24,7 +24,7 @@ public partial class ForgeRecipe : Resource
     [Export(PropertyHint.Range, "0,10,1")]
     public int StrongHit;
     [Export(PropertyHint.Range, "0,10,1")]
-    public int Pull;
+    public int Draw;
 
     [ExportCategory("Last actions")]
     [Export]

@@ -37,10 +37,10 @@ public partial class Global : Node
 
 		Item metalItem = ResourceLoader.Load<Item>($"res://Content/Items/{metalName}/{metalName}Ingot.tres");
 
-		GD.Print("[Global] Metal name from resource: " + metalItem.Name.GetNameFromTransltaionCode());
+		GD.Print("[Global] Metal name from resource: " + metalName/*metalItem.Name.GetNameFromTransltaionCode()*/);
 		GD.Print("[Global] Resource id: " + metalItem);
 
-		main.ItemSelection.SetMetal(metalItem);
+		main.ItemSelection.SetMetal(metalItem, metalName);
 
 
 		float zoom = (float)ProjectSettings.GetSetting("display/window/size/viewport_height") / 360;
@@ -58,7 +58,7 @@ public partial class Global : Node
 		GD.Print("[Global] Item TR code: " + itemNameTransltaionCode);
 		string itemName = itemNameTransltaionCode.GetNameFromTransltaionCode();
 
-		Item selectedItem = ResourceLoader.Load<Item>($"res://Content/Items/{metalName}/{itemName}.tres");
+		Item selectedItem = ResourceLoader.Load<Item>($"res://Content/Items/{metalName}/{metalName}{itemName}.tres");
 
 		GD.Print("[Global] Item name from resource: " + selectedItem.Name.GetNameFromTransltaionCode());
 		GD.Print("[Global] Resource id: " + selectedItem);

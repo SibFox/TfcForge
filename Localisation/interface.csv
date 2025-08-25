@@ -3,14 +3,22 @@ TR_CHOOSE_MATERIAL;Choose material;Выберите материал
 TR_CHOOSE_WORK_METHOD;Choose work method;Выберите метод работы
 TR_WORK_REDACT;Redact;Редактировать
 TR_WORK_INSPECT;Inspect;Просмотреть
-TR_CURRENT_PROGRESS;Progress;Прогресс
-TR_FORGE_BROKE;Broke!;Сломалось!
 TR_PICK_ITEM;Pick an Item to Inspect or Redact;Выберите предмет для просмотра или редактирования
 TR_ADD_NEW_FORGE;Add new forge;Добавить новую ковку
 TR_SPECIFY_CATEGORY;Specify category;Выберите категорию
-TR_FORGE_RECIPE;Forge Recipe;Кузнечное создание
 TR_FORGE_EXPECTED;Expected work:;Ожидаемая работа:
-TR_WELD_RECIPE;Weld Recipe;Создание сваркой
-TR_INSPECT_MADE_FROM;Made From;Делается из
-TR_INSPECT_MELTS_INTO;Melts Into;Плавится в
+ui.inspect.forge_recipe;Forge Recipe;Создание на кузне
+ui.inspect.weld_recipe;Weld Recipe;Создание сваркой
+ui.inspect.made_from;Made From;Делается из
+ui.inspect.melts_into;Melts Into;Плавится в
 TR_NOT_SPECIFIED;Not Specified;Не указано
+ui.save;Save;Сохранить
+ui.cancel;Cancel;Отмена
+ui.forge.last_actions;Last Actions;Последние действия
+ui.forge.progress;Progress;Прогресс
+ui.forge.goal;Goal;Цель
+ui.forge.broke;Broke!;Сломалось!
+ui.forge.set_goal;Set Goal;Укажите цель
+ui.forge.add_new_last_actions;Add new Last Actions;Добавить ''Последние действия''
+ui.open;Open;Открыть
+ui.pick_sprite;Pick a Sprite;Выберите иконку

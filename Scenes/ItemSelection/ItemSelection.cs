@@ -19,20 +19,20 @@ public partial class ItemSelection : Control
 	private Item selectedMetal;
 	private string selectedMetalNameForSearch;
 
-	public void SetMetal(Item _selectedMetal)
+	public void SetMetal(Item _selectedMetal, string _metalName)
 	{
 		selectedMetal = _selectedMetal;
-		selectedMetalNameForSearch = selectedMetal.Name.Replace("_INGOT", "").GetNameFromTransltaionCode();
+		selectedMetalNameForSearch = _metalName;
 		GD.Print($"[ItemSelection] Selected name for search: {selectedMetalNameForSearch}");
 
 		MetalIcon.Icon = selectedMetal.Icon;
 		// MetalIcon.Texture = selectedMetal.Icon;
-		MetalName.Text = selectedMetal.Name.Replace("_INGOT", "");
+		MetalName.Text = selectedMetal.MetalName;
 
 		LoadItems();
 	}
 
-	void LoadItems(int index = -1)
+	public void LoadItems(int index = -1)
 	{
 		foreach (var child in ItemsContainer.GetChildren())
 		{
@@ -45,21 +45,19 @@ public partial class ItemSelection : Control
 
 		foreach (var itemFile in itemFiles)
 		{
-			if (itemFile == selectedMetalNameForSearch + "Ingot.tres")
-				continue;
+			// if (itemFile == selectedMetalNameForSearch + "Ingot.tres")
+			// 	continue;
 
 			// GD.Print($"[ItemSelection] File name: {itemFile}");
 			fileNames.Append(itemFile);
 
-            // GD.Load
+			if (ResourceLoader.Load($"res://Content/Items/{selectedMetalNameForSearch}/{itemFile}") is not Item item)
+			{
+				fileNames.Append("(Skipped); ");
+				continue;
+			}
 
-            if (ResourceLoader.Load($"res://Content/Items/{selectedMetalNameForSearch}/{itemFile}") is not Item item)
-            {
-                fileNames.Append("(Skipped); ");
-                continue;
-            }
-
-            if (CategorySelectButton.GetSelectedId() == (int)ItemDatabase.ItemCategory.All || CategorySelectButton.GetSelectedId() == (int)item.Category)
+			if (item.ShowInSelection && CategorySelectButton.GetSelectedId() == (int)ItemDatabase.ItemCategory.All || CategorySelectButton.GetSelectedId() == (int)item.Category)
 			{
 				ItemOptionsButton newOptionButton = GD.Load<PackedScene>("res://Scenes/UI/ItemOptionsButton.tscn").Instantiate<ItemOptionsButton>();
 				newOptionButton.Item = item;

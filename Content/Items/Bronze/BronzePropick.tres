@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Item" load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://Resources/LastForgeActions.cs" id="1_cultk"]
+[ext_resource type="Script" path="res://Resources/ForgeRecipe.cs" id="2_6urrw"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/propick/bronze.png" id="3_cultk"]
+[ext_resource type="Resource" path="res://Content/Last Shown Forge Actions/LastPropickActions.tres" id="4_cultk"]
+[ext_resource type="Resource" path="res://Content/Items/Bronze/BronzeIngot.tres" id="5_qn7ex"]
+[ext_resource type="Script" path="res://Resources/ItemMadeFrom.cs" id="6_inm5m"]
+[ext_resource type="Resource" path="res://Content/MoltenMetals/Bronze.tres" id="7_vr3uf"]
+[ext_resource type="Script" path="res://Resources/MeltingRecipe.cs" id="8_km3k3"]
+[ext_resource type="Script" path="res://Resources/Item.cs" id="9_fttcr"]
+
+[sub_resource type="Resource" id="Resource_jtmg7"]
+script = ExtResource("1_cultk")
+FirstAction = 7
+SecondAction = -15
+ThirdAction = 2
+metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
+
+[sub_resource type="Resource" id="Resource_6urrw"]
+script = ExtResource("2_6urrw")
+RequiredWork = 70
+Shrink = 3
+Upset = 2
+Bend = 0
+Punch = 1
+WeakHit = 0
+MediumHit = 0
+StrongHit = 0
+Draw = 0
+LastActions = SubResource("Resource_jtmg7")
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[sub_resource type="Resource" id="Resource_7obnn"]
+script = ExtResource("6_inm5m")
+OriginalItem = ExtResource("5_qn7ex")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("8_km3k3")
+MeltsInto = ExtResource("7_vr3uf")
+Millibuckets = 100
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("9_fttcr")
+Icon = ExtResource("3_cultk")
+Name = "item.tool.propick"
+Category = 3
+MetalName = "metal.bronze"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_7obnn")
+MeltsInto = SubResource("Resource_efyd1")
+LastForgeActions = ExtResource("4_cultk")
+ForgeRecipe = SubResource("Resource_6urrw")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

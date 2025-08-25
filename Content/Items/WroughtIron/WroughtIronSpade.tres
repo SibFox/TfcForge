@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Item" load_steps=14 format=3 uid="uid://cwhyfywstqfnx"]
+
+[ext_resource type="Script" uid="uid://bevv7ssh4mjgi" path="res://Resources/LastForgeActions.cs" id="1_hjvrd"]
+[ext_resource type="Script" uid="uid://df3b2dyh7h4bi" path="res://Resources/ForgeRecipe.cs" id="2_7sum5"]
+[ext_resource type="Texture2D" uid="uid://p21i7fnlv01u" path="res://Assets/Sprites/spade/spade.png" id="3_hjvrd"]
+[ext_resource type="Resource" uid="uid://b1waytgsqi0pk" path="res://Content/Last Shown Forge Actions/LastSpadeActions.tres" id="4_7sum5"]
+[ext_resource type="Resource" uid="uid://cxffqkcs3xsw2" path="res://Content/Items/WroughtIron/WroughtIronDoubleIngot.tres" id="5_wynhg"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="6_n6y6n"]
+[ext_resource type="Resource" uid="uid://26cf8kwhe6hd" path="res://Content/MoltenMetals/CastIron.tres" id="7_5cqin"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="8_0c6c3"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="9_on5v1"]
+
+[sub_resource type="Resource" id="Resource_pfbyf"]
+script = ExtResource("1_hjvrd")
+FirstAction = -3
+SecondAction = 2
+ThirdAction = 0
+metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
+
+[sub_resource type="Resource" id="Resource_021uc"]
+script = ExtResource("2_7sum5")
+RequiredWork = 0
+Shrink = 0
+Upset = 0
+Bend = 0
+Punch = 0
+WeakHit = 0
+MediumHit = 0
+StrongHit = 0
+Draw = 0
+LastActions = SubResource("Resource_pfbyf")
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[sub_resource type="Resource" id="Resource_yhdsf"]
+script = ExtResource("6_n6y6n")
+OriginalItem = ExtResource("5_wynhg")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("8_0c6c3")
+MeltsInto = ExtResource("7_5cqin")
+Millibuckets = 200
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("9_on5v1")
+Icon = ExtResource("3_hjvrd")
+Name = "item.tool.spade"
+Category = 3
+MetalName = "metal.wrought_iron"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_yhdsf")
+MeltsInto = SubResource("Resource_efyd1")
+LastForgeActions = ExtResource("4_7sum5")
+ForgeRecipe = SubResource("Resource_021uc")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

@@ -5,7 +5,7 @@ public partial class BorderedIcon : TextureRect
 {
 	TextureRect IconNode => GetNode<TextureRect>("Icon");
 
-	// private Texture2D _icon;
+	private Texture2D _icon;
 
 	// public override void _Ready()
 	// {
@@ -13,22 +13,22 @@ public partial class BorderedIcon : TextureRect
 	// }
 
 	[Export]
-	public Texture2D Icon;
-	// {
-	// 	get => _icon;
-	// 	set
-	// 	{
-	// 		_icon = value;
-	// 		IconNode.Texture = value;
-	// 		SetSizing();
-	// 	}
-	// }
+	public Texture2D Icon
+	{
+		get => _icon;
+		set
+		{
+			_icon = value;
+			GetNode<TextureRect>("Icon").Texture = value;
+			SetSizing();
+		}
+	}
 
 	public override void _Ready()
 	{
 		// SetSizing();
 		GetTree().ProcessFrame += SetSizing;
-    }
+	}
 
 
 	void SetSizing()

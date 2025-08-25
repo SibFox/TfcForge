@@ -23,6 +23,7 @@ default_font_size = 16
 /fonts/Font = ExtResource("1_wuiyi")
 Button/styles/focus = SubResource("StyleBoxFlat_u66hj")
 Button/styles/pressed = SubResource("StyleBoxFlat_wuiyi")
+LineEdit/font_sizes/font_size = 8
 TooltipPanel/colors/title_color = Color(1, 1, 1, 1)
 TooltipPanel/font_sizes/title_font_size = 24
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_sd4rs")

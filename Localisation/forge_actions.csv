@@ -1,9 +1,17 @@
 ﻿code;en;ru
-TR_PULL;Pull;Протянуть
-TR_STRONGHIT;Strong Hit;Сильный удар
-TR_MEDIUMHIT;Medium Hit;Средный удар
-TR_WEAKHIT;Weak Hit;Слабый удар
-TR_STAMP;Stamp;Штамп
-TR_BEND;Bend;Согнуть
-TR_CRIMP;Crimp;Обжать
-TR_SHRINK;Shrink;Ужать
+TR_PULL;DrawQ;ПротянутьQ
+TR_STRONGHIT;Strong HitQ;Сильный ударQ
+TR_MEDIUMHIT;Medium HitQ;Средный ударQ
+TR_WEAKHIT;Weak HitQ;Слабый ударQ
+TR_STAMP;PunchQ;ШтампQ
+TR_BEND;BendQ;СогнутьQ
+TR_CRIMP;UpsetQ;ОбжатьQ
+TR_SHRINK;ShrinkQ;УсадитьQ
+action.draw;Draw;Протянуть
+action.stronghit;Strong Hit;Сильный удар
+action.mediumhit;Medium Hit;Средный удар
+action.weakhit;Weak Hit;Слабый удар
+action.punch;Punch;Штамп
+action.bend;Bend;Согнуть
+action.upset;Upset;Обжать
+action.shrink;Shrink;Усадить
