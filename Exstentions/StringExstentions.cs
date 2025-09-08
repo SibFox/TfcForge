@@ -7,7 +7,7 @@ public static class StringExstensions
 																				 .Replace("item", " ")
 																				 .Replace("tool", " ")
 																				 .Replace("misc", " ")
-																				 .Replace("metal", " ")
+																				 .Replace("equipment", " ")
 																				 .Replace("name", " ")
 																				 .Replace("weapon", " ")
 																				 .Replace("decor", " ")

@@ -8,7 +8,6 @@ public partial class Forge : Control
 	private ForgeRecipe _currentForgeRecipe = new ForgeRecipe();
 	private LastShowForgeActions _lastForgeActions;
 
-	private string _currentForgeRecipeResourcePath;
 	private string _lastForgeActionsResourcePath;
 
 	BoxContainer InterfaceContainer => GetNode<BoxContainer>("ForgeBG/InterfaceVBoxContainer");
@@ -41,18 +40,23 @@ public partial class Forge : Control
 		set
 		{
 			_selectedItem = value;
-			_currentForgeRecipe = value.ForgeRecipe.Duplicate() as ForgeRecipe;
-			_lastForgeActions = value.LastForgeActions.Duplicate() as LastShowForgeActions;
-			_currentForgeRecipeResourcePath = value.ForgeRecipe.ResourcePath;
-			_lastForgeActionsResourcePath = value.LastForgeActions.ResourcePath;
-			string[] LastActionSplittedPath = _lastForgeActionsResourcePath.Split('/');
-			string LastActionFileName = LastActionSplittedPath[^1].Replace(".tres", "");
-			GD.Print("[Forge] Last Actions File Name: " + LastActionFileName);
-			for (int i = 0; i < VariantsMenu.ItemCount; i++)
+			_currentForgeRecipe = value.ForgeRecipe == null ? new ForgeRecipe() { LastActions = new() } :
+															  value.ForgeRecipe.Duplicate() as ForgeRecipe;
+			// if (_currentForgeRecipe.LastActions == null)
+			// 	_currentForgeRecipe.LastActions = new();
+			_lastForgeActions = value.LastForgeActions == null ? new() : value.LastForgeActions.Duplicate() as LastShowForgeActions;
+			if (value.LastForgeActions != null)
 			{
-				if (VariantsMenu.GetItemText(i) == LastActionFileName)
-					VariantsMenu.Select(i);
-			}
+				_lastForgeActionsResourcePath = value.LastForgeActions.ResourcePath;
+				string[] LastActionSplittedPath = _lastForgeActionsResourcePath.Split('/');
+				string LastActionFileName = LastActionSplittedPath[^1].Replace(".tres", "");
+				GD.Print("[Forge] Last Actions File Name: " + LastActionFileName);
+				for (int i = 0; i < VariantsMenu.ItemCount; i++)
+				{
+					if (VariantsMenu.GetItemText(i) == LastActionFileName)
+						VariantsMenu.Select(i);
+				}
+			}			
 
 			ItemIcon.Icon = value.Icon;
 			ItemName.Text = value.Name;
@@ -292,14 +296,53 @@ public partial class Forge : Control
 
 	#region Last Actions Hit
 
-	void FirstWeakButtonPressed()
+	void HitLastActionButtonPressed(int place, int strength)
 	{
+		GD.Print($"[Forge/HitButton] Место: {place};\tСила: {strength}");
+
+		switch (place)
+		{
+			case 1:
+				_currentForgeRecipe.LastActions.FirstAction = strength switch
+				{
+					1 => ForgeDatabase.Action.WeakHit,
+					2 => ForgeDatabase.Action.MediumHit,
+					3 => ForgeDatabase.Action.StrongHit,
+					_ => ForgeDatabase.Action.WeakHit
+				};
+				break;
+			case 2:
+				_currentForgeRecipe.LastActions.SecondAction = strength switch
+				{
+					1 => ForgeDatabase.Action.WeakHit,
+					2 => ForgeDatabase.Action.MediumHit,
+					3 => ForgeDatabase.Action.StrongHit,
+					_ => ForgeDatabase.Action.WeakHit
+				};
+				break;
+			case 3:
+				_currentForgeRecipe.LastActions.ThirdAction = strength switch
+				{
+					1 => ForgeDatabase.Action.WeakHit,
+					2 => ForgeDatabase.Action.MediumHit,
+					3 => ForgeDatabase.Action.StrongHit,
+					_ => ForgeDatabase.Action.WeakHit
+				};
+				break;
+		}
+		RecalculateRequiredProgressBar();
+	}
+
+	void FirstWeakButtonPressed(int a)
+	{
+		GD.Print("[Forge/HitButton] " + a);
 		_currentForgeRecipe.LastActions.FirstAction = ForgeDatabase.Action.WeakHit;
 		RecalculateRequiredProgressBar();
 	}
 
-	void FirstMediumButtonPressed()
+	void FirstMediumButtonPressed(int a)
 	{
+		GD.Print("[Forge/HitButton] " + a);
 		_currentForgeRecipe.LastActions.FirstAction = ForgeDatabase.Action.MediumHit;
 		RecalculateRequiredProgressBar();
 	}
@@ -463,6 +506,7 @@ public partial class Forge : Control
 
 	void OnSaveButtonPressed()
 	{
+		_selectedItem.Name = ItemName.Text;
 		_selectedItem.ForgeRecipe = _currentForgeRecipe;
 		_selectedItem.LastForgeActions = _lastForgeActions;
 		_selectedItem.Icon = ItemIcon.Icon;
@@ -485,12 +529,15 @@ public partial class Forge : Control
 	void RecalculateRequiredProgressBar()
 	{
 		ProgressBar.RequiredProgress = (int)ForgeGoal.Value;
-		int goal =	(int)ForgeGoal.Value
-					- (int)_currentForgeRecipe.LastActions.FirstAction
-					- (int)_currentForgeRecipe.LastActions.SecondAction
-					- (int)_currentForgeRecipe.LastActions.ThirdAction;
-		ProgressBar.RequiredProgressNoLastActions = goal;
-		GoalNumber.Text = goal.ToString("000");											
+		if (_currentForgeRecipe != null && _currentForgeRecipe.LastActions != null)
+		{
+			int goal =	(int)ForgeGoal.Value
+						- (int)_currentForgeRecipe.LastActions.FirstAction
+						- (int)_currentForgeRecipe.LastActions.SecondAction
+						- (int)_currentForgeRecipe.LastActions.ThirdAction;
+			ProgressBar.RequiredProgressNoLastActions = goal;
+			GoalNumber.Text = goal.ToString("000");											
+		}
 	}
 
 	void LookForHitTypeInLastActions()

@@ -16,6 +16,20 @@
             ]
         },
         {
+            "name": "Launch on Notebook",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "D:/SteamLibrary/steamapps/common/Godot Engine/godot.windows.opt.tools.64.exe",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "args": [
+                "--path",
+                "${workspaceRoot}"
+            ]
+        },
+        {
             "name": "Launch (Select Scene)",
             "type": "coreclr",
             "request": "launch",

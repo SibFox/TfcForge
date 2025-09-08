@@ -35,7 +35,7 @@ public partial class Global : Node
 		string metalName = metalNameTransltaionCode.GetNameFromTransltaionCode();
 		GD.Print("[Global] Metal name translated: " + metalName);
 
-		Item metalItem = ResourceLoader.Load<Item>($"res://Content/Items/{metalName}/{metalName}Ingot.tres");
+		Item metalItem = ResourceLoader.Load<Item>(Paths.Items + $"{metalName}/Ingot.tres");
 
 		GD.Print("[Global] Metal name from resource: " + metalName/*metalItem.Name.GetNameFromTransltaionCode()*/);
 		GD.Print("[Global] Resource id: " + metalItem);
@@ -58,7 +58,7 @@ public partial class Global : Node
 		GD.Print("[Global] Item TR code: " + itemNameTransltaionCode);
 		string itemName = itemNameTransltaionCode.GetNameFromTransltaionCode();
 
-		Item selectedItem = ResourceLoader.Load<Item>($"res://Content/Items/{metalName}/{metalName}{itemName}.tres");
+		Item selectedItem = ResourceLoader.Load<Item>(Paths.Items + $"{metalName}/{itemName}.tres");
 
 		GD.Print("[Global] Item name from resource: " + selectedItem.Name.GetNameFromTransltaionCode());
 		GD.Print("[Global] Resource id: " + selectedItem);
@@ -78,5 +78,15 @@ public partial class Global : Node
 
 		main.InspectItem.SetItem(item);
 		main.InspectItem.Visible = true;
+	}
+
+	public static class Paths
+	{
+		public const string Content = "res://Content/";
+		public const string ItemSprites = "res://Assets/Sprites/";
+		public const string Items = Content + "Items/";
+		public const string LastForgeActions = Content + "Last Shown Forge Actions/";
+		public const string MoltenMetals = Content + "MoltenMetals/";
+
 	}
 }

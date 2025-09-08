@@ -133,7 +133,7 @@ public partial class InspectItem : Control
             }
         }
 
-        // Crimp / Обжать
+        // Upset / Обжать
         for (int i = 0; i < recipe.Upset; i++)
         {
             currentForgeWork += (int)ForgeDatabase.Action.Upset;
@@ -157,7 +157,7 @@ public partial class InspectItem : Control
             mathString.Append(" > " + currentForgeWork);
         }
 
-        // Stamp / Штамп
+        // Punch / Штамп
         for (int i = 0; i < recipe.Punch; i++)
         {
             currentForgeWork += (int)ForgeDatabase.Action.Punch;
@@ -206,7 +206,7 @@ public partial class InspectItem : Control
             mathString.Append(" > " + currentForgeWork);
         }
 
-        // Pull / Протянуть
+        // Draw / Протянуть
         for (int i = 0; i < recipe.Draw; i++)
         {
             currentForgeWork += (int)ForgeDatabase.Action.Draw;
@@ -218,9 +218,9 @@ public partial class InspectItem : Control
             mathString.Append(" > " + currentForgeWork);
         }
 
-        mathString.Append(" >>");
-        actionWeightString.Append(" >>");
-        actionsString.Append(" >>");
+        mathString.Append(" >>[ ");
+        actionWeightString.Append(" >>[ ");
+        actionsString.Append(" >>[ ");
 
         ushort actionAmount = 3;
         if (recipe.LastActions.SecondAction == ForgeDatabase.Action.None)
@@ -229,18 +229,17 @@ public partial class InspectItem : Control
             actionAmount--;
         for (int i = 1; i <= actionAmount; i++)
         {
-            ForgeDatabase.Action action = ForgeDatabase.Action.Draw;
+            ForgeDatabase.Action action = ForgeDatabase.Action.None;
             switch (i)
             {
                 case 1:
                     action = recipe.LastActions.FirstAction;
                     break;
                 case 2:
-                    if (recipe.LastActions.SecondAction != ForgeDatabase.Action.None)
-                        action = recipe.LastActions.SecondAction;
+                    action = recipe.LastActions.SecondAction;
                     break;
                 case 3:
-                    if (recipe.LastActions.ThirdAction != ForgeDatabase.Action.None)
+                    // if (recipe.LastActions.ThirdAction != ForgeDatabase.Action.None)
                         action = recipe.LastActions.ThirdAction;
                     break;
             }
@@ -296,7 +295,7 @@ public partial class InspectItem : Control
     #region  Made from
     void SetMadeFrom()
     {
-        if (_currentItem.MadeFrom == null)
+        if ((_currentItem.MadeFrom == null) || (_currentItem.MadeFrom.OriginalItem == null && _currentItem.MadeFrom.AdditionalItem == null))
         {
             NotSpecifiedMadeFromLabel.Visible = true;
             ItemsContainer.Visible = false;
