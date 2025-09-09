@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="Item" load_steps=15 format=3 uid="uid://hk2jpeym77yt"]
+
+[ext_resource type="Script" uid="uid://bevv7ssh4mjgi" path="res://Resources/LastForgeActions.cs" id="1_t1crq"]
+[ext_resource type="Script" uid="uid://df3b2dyh7h4bi" path="res://Resources/ForgeRecipe.cs" id="2_je1sv"]
+[ext_resource type="Texture2D" uid="uid://di5crlhm1uoef" path="res://Assets/Sprites/hammer/wrought_iron.png" id="3_7e41m"]
+[ext_resource type="Script" uid="uid://dis1ha2sv07iq" path="res://Resources/LastShowForgeActions.cs" id="4_825ii"]
+[ext_resource type="Resource" uid="uid://cxffqkcs3xsw2" path="res://Content/Items/WroughtIron/DoubleIngot.tres" id="5_ia54q"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="6_4q537"]
+[ext_resource type="Resource" uid="uid://26cf8kwhe6hd" path="res://Content/MoltenMetals/CastIron.tres" id="7_j2uc4"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="8_qfp3u"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="9_pg8c5"]
+
+[sub_resource type="Resource" id="Resource_kpnbx"]
+script = ExtResource("1_t1crq")
+FirstAction = 16
+SecondAction = 2
+ThirdAction = 0
+metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
+
+[sub_resource type="Resource" id="Resource_4htd1"]
+script = ExtResource("2_je1sv")
+RequiredWork = 99
+Shrink = 4
+Upset = 1
+Bend = 0
+Punch = 2
+WeakHit = 0
+MediumHit = 0
+StrongHit = 0
+Draw = 0
+LastActions = SubResource("Resource_kpnbx")
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[sub_resource type="Resource" id="Resource_oj1c6"]
+script = ExtResource("4_825ii")
+FirstAction = 5
+SecondAction = 2
+ThirdAction = -1
+metadata/_custom_type_script = "uid://dis1ha2sv07iq"
+
+[sub_resource type="Resource" id="Resource_yhdsf"]
+script = ExtResource("6_4q537")
+OriginalItem = ExtResource("5_ia54q")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("8_qfp3u")
+MeltsInto = ExtResource("7_j2uc4")
+Millibuckets = 100
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("9_pg8c5")
+Icon = ExtResource("3_7e41m")
+Name = "item.hammer"
+Category = 3
+MetalName = "metal.wrought_iron"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_yhdsf")
+MeltsInto = SubResource("Resource_efyd1")
+LastForgeActions = SubResource("Resource_oj1c6")
+ForgeRecipe = SubResource("Resource_4htd1")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

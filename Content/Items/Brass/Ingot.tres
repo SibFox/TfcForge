@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://bpuqystniuy3e"]
+
+[ext_resource type="Texture2D" uid="uid://dj7w5q527f6av" path="res://Assets/Sprites/ingot/brass.png" id="1_f6jqd"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="1_t153i"]
+[ext_resource type="Resource" uid="uid://1lp7qsi6767m" path="res://Content/MoltenMetals/Brass.tres" id="2_f6jqd"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="3_ga43d"]
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("3_ga43d")
+MeltsInto = ExtResource("2_f6jqd")
+Millibuckets = 0
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("1_t153i")
+Icon = ExtResource("1_f6jqd")
+Name = "item.ingot"
+Category = 1
+MetalName = "metal.brass"
+ShowInSelection = false
+MeltsInto = SubResource("Resource_efyd1")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

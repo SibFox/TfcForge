@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="Item" load_steps=12 format=3 uid="uid://bvfpt4ucq78yt"]
+
+[ext_resource type="Script" uid="uid://df3b2dyh7h4bi" path="res://Resources/ForgeRecipe.cs" id="1_seesc"]
+[ext_resource type="Texture2D" uid="uid://c0gdkt6gm6a7l" path="res://Assets/Sprites/sheet/copper.png" id="2_r6e8s"]
+[ext_resource type="Resource" uid="uid://b8abwjbj7wlqn" path="res://Content/Last Shown Forge Actions/LastSheetActions.tres" id="3_u8weg"]
+[ext_resource type="Resource" uid="uid://vfh3fd50re6x" path="res://Content/Items/Copper/DoubleIngot.tres" id="4_kaiau"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="5_pfq1h"]
+[ext_resource type="Resource" uid="uid://clbrmnw8ht10m" path="res://Content/MoltenMetals/Copper.tres" id="6_idv7r"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="7_n2plf"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="8_ucu7m"]
+
+[sub_resource type="Resource" id="Resource_76o2a"]
+script = ExtResource("1_seesc")
+RequiredWork = 63
+Shrink = 4
+Upset = 0
+Bend = 1
+Punch = 0
+WeakHit = 0
+MediumHit = 0
+StrongHit = 0
+Draw = 0
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[sub_resource type="Resource" id="Resource_qsp2n"]
+script = ExtResource("5_pfq1h")
+OriginalItem = ExtResource("4_kaiau")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_nv0o6"]
+script = ExtResource("7_n2plf")
+MeltsInto = ExtResource("6_idv7r")
+Millibuckets = 200
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("8_ucu7m")
+Icon = ExtResource("2_r6e8s")
+Name = "item.sheet"
+Category = 2
+MetalName = "metal.copper"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_qsp2n")
+MeltsInto = SubResource("Resource_nv0o6")
+LastForgeActions = ExtResource("3_u8weg")
+ForgeRecipe = SubResource("Resource_76o2a")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

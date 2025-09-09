@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Item" load_steps=9 format=3 uid="uid://dng3evbkeok8y"]
+
+[ext_resource type="Texture2D" uid="uid://ctcq20oxewnh" path="res://Assets/Sprites/shovel/copper.png" id="1_t3r1e"]
+[ext_resource type="Resource" uid="uid://b1gl26ewxrfh" path="res://Content/Items/Copper/Ingot.tres" id="2_0ld3v"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="3_uvco8"]
+[ext_resource type="Resource" uid="uid://clbrmnw8ht10m" path="res://Content/MoltenMetals/Copper.tres" id="4_1vyg1"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="5_k3pk1"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="6_5iy8f"]
+
+[sub_resource type="Resource" id="Resource_gqp6q"]
+script = ExtResource("3_uvco8")
+OriginalItem = ExtResource("2_0ld3v")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_5tduu"]
+script = ExtResource("5_k3pk1")
+MeltsInto = ExtResource("4_1vyg1")
+Millibuckets = 0
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("6_5iy8f")
+Icon = ExtResource("1_t3r1e")
+Name = "item.shovel"
+Category = 3
+MetalName = "metal.copper"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_gqp6q")
+MeltsInto = SubResource("Resource_5tduu")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

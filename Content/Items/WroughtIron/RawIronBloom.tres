@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
 [resource]
 script = ExtResource("4_0ceny")
 Icon = ExtResource("1_evb13")
-Name = "item.metal.raw_iron_bloom"
+Name = "item.raw_iron_bloom"
 Category = 1
 MetalName = "metal.wrought_iron"
 ShowInSelection = false

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Item" load_steps=9 format=3 uid="uid://2h0tpcw7wddw"]
+
+[ext_resource type="Texture2D" uid="uid://devkqqtk0oowf" path="res://Assets/Sprites/propick/copper.png" id="1_6wbgs"]
+[ext_resource type="Resource" uid="uid://b1gl26ewxrfh" path="res://Content/Items/Copper/Ingot.tres" id="2_bqs7h"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="3_gnf6n"]
+[ext_resource type="Resource" uid="uid://clbrmnw8ht10m" path="res://Content/MoltenMetals/Copper.tres" id="4_nk7gb"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="5_20yu1"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="6_irqmd"]
+
+[sub_resource type="Resource" id="Resource_63l0g"]
+script = ExtResource("3_gnf6n")
+OriginalItem = ExtResource("2_bqs7h")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_5tduu"]
+script = ExtResource("5_20yu1")
+MeltsInto = ExtResource("4_nk7gb")
+Millibuckets = 0
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("6_irqmd")
+Icon = ExtResource("1_6wbgs")
+Name = "item.propick"
+Category = 3
+MetalName = "metal.copper"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_63l0g")
+MeltsInto = SubResource("Resource_5tduu")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

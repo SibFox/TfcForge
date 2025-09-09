@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Item" load_steps=10 format=3 uid="uid://fb7e146ipk22"]
+
+[ext_resource type="Texture2D" uid="uid://de64mw2nyw2bl" path="res://Assets/Sprites/sheet/steel.png" id="1_hifih"]
+[ext_resource type="Resource" uid="uid://b8abwjbj7wlqn" path="res://Content/Last Shown Forge Actions/LastSheetActions.tres" id="2_0jvxw"]
+[ext_resource type="Resource" uid="uid://vfa3drlabq4b" path="res://Content/Items/Steel/DoubleIngot.tres" id="3_h2g84"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="4_80k7q"]
+[ext_resource type="Resource" uid="uid://n4mgun1ah2it" path="res://Content/MoltenMetals/Steel.tres" id="5_aqyvg"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="6_hbmo0"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="7_w2qu2"]
+
+[sub_resource type="Resource" id="Resource_qyn30"]
+script = ExtResource("4_80k7q")
+OriginalItem = ExtResource("3_h2g84")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_ii63d"]
+script = ExtResource("6_hbmo0")
+MeltsInto = ExtResource("5_aqyvg")
+Millibuckets = 200
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("7_w2qu2")
+Icon = ExtResource("1_hifih")
+Name = "item.sheet"
+Category = 2
+MetalName = "metal.steel"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_qyn30")
+MeltsInto = SubResource("Resource_ii63d")
+LastForgeActions = ExtResource("2_0jvxw")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

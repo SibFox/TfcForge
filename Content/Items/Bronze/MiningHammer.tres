@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Item" load_steps=14 format=3 uid="uid://dulifyvt8xejq"]
+
+[ext_resource type="Script" uid="uid://bevv7ssh4mjgi" path="res://Resources/LastForgeActions.cs" id="1_re63a"]
+[ext_resource type="Script" uid="uid://df3b2dyh7h4bi" path="res://Resources/ForgeRecipe.cs" id="2_dk2qk"]
+[ext_resource type="Texture2D" uid="uid://cj6n0igojx6s6" path="res://Assets/Sprites/mining_hammer/mining_hammer_head.png" id="3_re63a"]
+[ext_resource type="Resource" uid="uid://dp4es788fr202" path="res://Content/Last Shown Forge Actions/LastMiningHammerActions.tres" id="4_re63a"]
+[ext_resource type="Resource" uid="uid://bpkyi0mj0evs1" path="res://Content/Items/Bronze/DoubleIngot.tres" id="5_re63a"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="6_ufmqo"]
+[ext_resource type="Resource" uid="uid://d2se6573kb2ul" path="res://Content/MoltenMetals/Bronze.tres" id="7_ccsdh"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="8_uq5np"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="9_xgjmh"]
+
+[sub_resource type="Resource" id="Resource_qgb52"]
+script = ExtResource("1_re63a")
+FirstAction = 16
+SecondAction = 2
+ThirdAction = 0
+metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
+
+[sub_resource type="Resource" id="Resource_dk2qk"]
+script = ExtResource("2_dk2qk")
+RequiredWork = 101
+Shrink = 4
+Upset = 1
+Bend = 1
+Punch = 1
+WeakHit = 1
+MediumHit = 0
+StrongHit = 0
+Draw = 0
+LastActions = SubResource("Resource_qgb52")
+metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
+
+[sub_resource type="Resource" id="Resource_7obnn"]
+script = ExtResource("6_ufmqo")
+OriginalItem = ExtResource("5_re63a")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("8_uq5np")
+MeltsInto = ExtResource("7_ccsdh")
+Millibuckets = 200
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("9_xgjmh")
+Icon = ExtResource("3_re63a")
+Name = "item.mining_hammer"
+Category = 3
+MetalName = "metal.bronze"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_7obnn")
+MeltsInto = SubResource("Resource_efyd1")
+LastForgeActions = ExtResource("4_re63a")
+ForgeRecipe = SubResource("Resource_dk2qk")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

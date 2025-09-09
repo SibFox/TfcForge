@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Item" load_steps=11 format=3 uid="uid://bpkyi0mj0evs1"]
+
+[ext_resource type="Texture2D" uid="uid://c72tesd07a6b1" path="res://Assets/Sprites/double_ingot/bronze.png" id="1_jm2qy"]
+[ext_resource type="Resource" uid="uid://d2se6573kb2ul" path="res://Content/MoltenMetals/Bronze.tres" id="2_vuwk5"]
+[ext_resource type="Resource" uid="uid://cboies38rdyim" path="res://Content/Items/Bronze/Ingot.tres" id="2_w34sp"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="3_hglcj"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="3_hu55h"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="4_jm2qy"]
+[ext_resource type="Script" uid="uid://cqec8q7oihjq3" path="res://Resources/WeldRecipe.cs" id="6_p0b1a"]
+
+[sub_resource type="Resource" id="Resource_vqyjg"]
+script = ExtResource("3_hglcj")
+OriginalItem = ExtResource("2_w34sp")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_efyd1"]
+script = ExtResource("3_hu55h")
+MeltsInto = ExtResource("2_vuwk5")
+Millibuckets = 200
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[sub_resource type="Resource" id="Resource_is1sb"]
+script = ExtResource("6_p0b1a")
+FirstItem = ExtResource("2_w34sp")
+SecondItem = ExtResource("2_w34sp")
+metadata/_custom_type_script = "uid://cqec8q7oihjq3"
+
+[resource]
+script = ExtResource("4_jm2qy")
+Icon = ExtResource("1_jm2qy")
+Name = "item.double_ingot"
+Category = 1
+MetalName = "metal.bronze"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_vqyjg")
+MeltsInto = SubResource("Resource_efyd1")
+WeldRecipe = SubResource("Resource_is1sb")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

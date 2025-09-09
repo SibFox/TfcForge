@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Item" load_steps=11 format=3 uid="uid://yjpsrxbn86ds"]
+
+[ext_resource type="Texture2D" uid="uid://wr21ig8mc21n" path="res://Assets/Sprites/double_sheet/copper.png" id="1_kd6kp"]
+[ext_resource type="Resource" uid="uid://bvfpt4ucq78yt" path="res://Content/Items/Copper/Sheet.tres" id="2_nde05"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="3_3b854"]
+[ext_resource type="Resource" uid="uid://clbrmnw8ht10m" path="res://Content/MoltenMetals/Copper.tres" id="4_307at"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="5_w871r"]
+[ext_resource type="Script" uid="uid://cqec8q7oihjq3" path="res://Resources/WeldRecipe.cs" id="6_c8yu4"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="7_pem5h"]
+
+[sub_resource type="Resource" id="Resource_qqar8"]
+script = ExtResource("3_3b854")
+OriginalItem = ExtResource("2_nde05")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_nv0o6"]
+script = ExtResource("5_w871r")
+MeltsInto = ExtResource("4_307at")
+Millibuckets = 400
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[sub_resource type="Resource" id="Resource_5dme4"]
+script = ExtResource("6_c8yu4")
+FirstItem = ExtResource("2_nde05")
+SecondItem = ExtResource("2_nde05")
+metadata/_custom_type_script = "uid://cqec8q7oihjq3"
+
+[resource]
+script = ExtResource("7_pem5h")
+Icon = ExtResource("1_kd6kp")
+Name = "item.double_sheet"
+Category = 2
+MetalName = "metal.copper"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_qqar8")
+MeltsInto = SubResource("Resource_nv0o6")
+WeldRecipe = SubResource("Resource_5dme4")
+metadata/_custom_type_script = "uid://bit6oprricfpl"

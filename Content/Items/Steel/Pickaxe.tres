@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Item" load_steps=9 format=3 uid="uid://cnvkgvkheoxhu"]
+
+[ext_resource type="Texture2D" uid="uid://dqbvljpjumwb6" path="res://Assets/Sprites/pickaxe/steel.png" id="1_qxlg4"]
+[ext_resource type="Resource" uid="uid://dunrrshr4ev5n" path="res://Content/Items/Steel/Ingot.tres" id="2_bygjk"]
+[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="3_nxc56"]
+[ext_resource type="Resource" uid="uid://n4mgun1ah2it" path="res://Content/MoltenMetals/Steel.tres" id="4_wsuhq"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="5_cwqyw"]
+[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="6_tbhn3"]
+
+[sub_resource type="Resource" id="Resource_48y37"]
+script = ExtResource("3_nxc56")
+OriginalItem = ExtResource("2_bygjk")
+metadata/_custom_type_script = "uid://cm7kfv47h0dff"
+
+[sub_resource type="Resource" id="Resource_y1ur7"]
+script = ExtResource("5_cwqyw")
+MeltsInto = ExtResource("4_wsuhq")
+Millibuckets = 0
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
+[resource]
+script = ExtResource("6_tbhn3")
+Icon = ExtResource("1_qxlg4")
+Name = "item.pickaxe"
+Category = 3
+MetalName = "metal.steel"
+ShowInSelection = true
+MadeFrom = SubResource("Resource_48y37")
+MeltsInto = SubResource("Resource_y1ur7")
+metadata/_custom_type_script = "uid://bit6oprricfpl"
