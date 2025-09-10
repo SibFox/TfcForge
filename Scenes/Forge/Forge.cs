@@ -333,62 +333,6 @@ public partial class Forge : Control
 		RecalculateRequiredProgressBar();
 	}
 
-	void FirstWeakButtonPressed(int a)
-	{
-		GD.Print("[Forge/HitButton] " + a);
-		_currentForgeRecipe.LastActions.FirstAction = ForgeDatabase.Action.WeakHit;
-		RecalculateRequiredProgressBar();
-	}
-
-	void FirstMediumButtonPressed(int a)
-	{
-		GD.Print("[Forge/HitButton] " + a);
-		_currentForgeRecipe.LastActions.FirstAction = ForgeDatabase.Action.MediumHit;
-		RecalculateRequiredProgressBar();
-	}
-
-	void FirstStrongButtonPressed()
-	{
-		_currentForgeRecipe.LastActions.FirstAction = ForgeDatabase.Action.StrongHit;
-		RecalculateRequiredProgressBar();
-	}
-
-	void SecondWeakButtonPressed()
-	{
-		_currentForgeRecipe.LastActions.SecondAction = ForgeDatabase.Action.WeakHit;
-		RecalculateRequiredProgressBar();
-	}
-
-	void SecondMediumButtonPressed()
-	{
-		_currentForgeRecipe.LastActions.SecondAction = ForgeDatabase.Action.MediumHit;
-		RecalculateRequiredProgressBar();
-	}
-
-	void SecondStrongButtonPressed()
-	{
-		_currentForgeRecipe.LastActions.SecondAction = ForgeDatabase.Action.StrongHit;
-		RecalculateRequiredProgressBar();
-	}
-
-	void ThirdWeakButtonPressed()
-	{
-		_currentForgeRecipe.LastActions.ThirdAction = ForgeDatabase.Action.WeakHit;
-		RecalculateRequiredProgressBar();
-	}
-
-	void ThirdMediumButtonPressed()
-	{
-		_currentForgeRecipe.LastActions.ThirdAction = ForgeDatabase.Action.MediumHit;
-		RecalculateRequiredProgressBar();
-	}
-
-	void ThirdStrongButtonPressed()
-	{
-		_currentForgeRecipe.LastActions.ThirdAction = ForgeDatabase.Action.StrongHit;
-		RecalculateRequiredProgressBar();
-	}
-
 	#endregion
 
 
