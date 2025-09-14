@@ -10,6 +10,7 @@
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false,
+            "requireExactSource": false,
             "args": [
                 "--path",
                 "${workspaceRoot}"
@@ -24,6 +25,7 @@
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false,
+            "requireExactSource": false,
             "args": [
                 "--path",
                 "${workspaceRoot}"
@@ -38,6 +40,7 @@
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false,
+            "requireExactSource": false,
             "args": [
                 "--path",
                 "${workspaceRoot}",
@@ -53,6 +56,7 @@
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false,
+            "requireExactSource": false,
             "args": [
                 "--path",
                 "${workspaceRoot}",
