@@ -1,19 +1,26 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 public partial class ItemSelection : Control
 {
+	private const int MAX_ITEMS_ON_PAGE = 14;
+
 	private BoxContainer VBoxContainer => GetNode<BoxContainer>("VBoxContainer");
 	private BoxContainer MetalInfoContainer => VBoxContainer.GetNode<BoxContainer>("MetalInfoHBoxContainer");
 
 	private BorderedIcon MetalIcon => MetalInfoContainer.GetNode<BorderedIcon>("MetalBorderedIcon");
-	// private TextureRect MetalIcon => MetalInfoContainer.GetNode<TextureRect>("MetalIconBorder/MetalIcon");
 	private Label MetalName => MetalInfoContainer.GetNode<Label>("MetalNameLabel");
 	private GridContainer ItemsContainer => VBoxContainer.GetNode<GridContainer>("ItemsControl/ItemsGridContainer");
 	private OptionButton CategorySelectButton => MetalInfoContainer.GetNode<OptionButton>("CategoriesVBoxContainer/CategoriesSelect");
 
-	// private Button AddNewForgeButton => ItemsContainer.GetNode<Button>("AddNewForgeButton");
+	private PageSelector PageSelectorContainer => VBoxContainer.GetNode<PageSelector>("PageSelectorHBoxContainer");
+
+	private LinkedList<Item> ItemsCache = new();
+	private List<Item> CategorizedItems = new();
+
 
 	[Export]
 	private Item selectedMetal;
@@ -26,61 +33,82 @@ public partial class ItemSelection : Control
 		GD.Print($"[ItemSelection] Selected name for search: {selectedMetalNameForSearch}");
 
 		MetalIcon.Icon = selectedMetal.Icon;
-		// MetalIcon.Texture = selectedMetal.Icon;
 		MetalName.Text = selectedMetal.MetalName;
 
-		LoadItems();
+		LoadCache();
+		LoadItemsFromCache();
 	}
 
-	public void LoadItems(int index = -1)
+	public void ClearCache()
+	{
+		ItemsCache.Clear();
+	}
+
+	public byte GetMaxItemPages() => (byte)Mathf.Ceil((float)CategorizedItems.Count / MAX_ITEMS_ON_PAGE);
+
+	void LoadCache()
+	{
+		StringBuilder fileNames = new();
+		string[] itemFiles = DirAccess.GetFilesAt(Global.Paths.Items + $"{selectedMetalNameForSearch}");
+		GD.Print($"[ItemSelection] Metal: " + selectedMetal);
+
+		foreach (string itemFile in itemFiles)
+		{
+			fileNames.Append(itemFile);
+			string itemPath = Global.Paths.Items + $"{selectedMetalNameForSearch}/{itemFile}";
+			if (ResourceLoader.Load(itemPath) is not Item item)
+			{
+				fileNames.Append("(Skipped); ");
+				continue;
+			}
+
+			if (item.ShowInSelection)
+				ItemsCache.AddLast(item);
+
+			fileNames.Append("; ");
+		}
+		
+		CategorizedItems = ItemsCache.ToList();
+
+		GD.Print($"[ItemSelection] Loaded files with names({itemFiles.Length - 1}): " + fileNames.ToString());
+	}
+
+	public void LoadItemsFromCache(int index = -1)
 	{
 		foreach (var child in ItemsContainer.GetChildren())
 		{
 			child.Free();
 		}
 
-		StringBuilder fileNames = new();
-		string[] itemFiles = DirAccess.GetFilesAt($"res://Content/Items/{selectedMetalNameForSearch}");
-		GD.Print($"[ItemSelection] Metal: " + selectedMetal);
+		byte selectedPage = PageSelectorContainer.SelectedPage;
 
-		foreach (var itemFile in itemFiles)
+		CategorizedItems = CategorySelectButton.GetSelectedId() switch
 		{
-			// if (itemFile == selectedMetalNameForSearch + "Ingot.tres")
-			// 	continue;
+			(int)ItemDatabase.ItemCategory.All => ItemsCache.ToList(),
+			_ => ItemsCache.Where(i => (int)i.Category == CategorySelectButton.GetSelectedId()).ToList()
+		};
 
-			// GD.Print($"[ItemSelection] File name: {itemFile}");
-			fileNames.Append(itemFile);
+		for (int i = MAX_ITEMS_ON_PAGE * (selectedPage - 1); i < Mathf.Clamp(MAX_ITEMS_ON_PAGE * selectedPage, 0, CategorizedItems.Count); i++)
+		{
+			Item item = CategorizedItems.ElementAt(i);
 
-			if (ResourceLoader.Load($"res://Content/Items/{selectedMetalNameForSearch}/{itemFile}") is not Item item)
-			{
-				fileNames.Append("(Skipped); ");
-				continue;
-			}
+			ItemOptionsButton newOptionButton = GD.Load<PackedScene>(Global.Paths.UI + "ItemOptionsButton.tscn").Instantiate<ItemOptionsButton>();
+			newOptionButton.Item = item;
 
-			if (item.ShowInSelection && CategorySelectButton.GetSelectedId() == (int)ItemDatabase.ItemCategory.All || CategorySelectButton.GetSelectedId() == (int)item.Category)
-			{
-				ItemOptionsButton newOptionButton = GD.Load<PackedScene>("res://Scenes/UI/ItemOptionsButton.tscn").Instantiate<ItemOptionsButton>();
-				newOptionButton.Item = item;
+			newOptionButton.SizeFlagsHorizontal = (SizeFlags)6; //ShrinkCenter(4) + Expand(2)
+			newOptionButton.SizeFlagsVertical = SizeFlags.ShrinkCenter;
 
-				newOptionButton.SizeFlagsHorizontal = (SizeFlags)6; //ShrinkCenter(4) + Expand(2)
-				newOptionButton.SizeFlagsVertical = SizeFlags.ShrinkCenter;
-
-				ItemsContainer.AddChild(newOptionButton);
-			}
-
-			fileNames.Append("; ");
+			ItemsContainer.AddChild(newOptionButton);
 		}
 
-		GD.Print($"[ItemSelection] Loaded files with names({itemFiles.Length - 1}): " + fileNames.ToString());
-
-		Button newForgeButton = ResourceLoader.Load<PackedScene>("res://Scenes/UI/AddNewForgeButton.tscn").Instantiate<Button>();
+		Button newForgeButton = ResourceLoader.Load<PackedScene>(Global.Paths.UI + "AddNewForgeButton.tscn").Instantiate<Button>();
 		newForgeButton.Pressed += OnAddNewForgePressed;
 		newForgeButton.SizeFlagsHorizontal = (SizeFlags)6;
 		newForgeButton.SizeFlagsVertical = SizeFlags.ShrinkCenter;
 
 		ItemsContainer.AddChild(newForgeButton);
 
-		ItemsContainer.Columns = Mathf.Clamp(ItemsContainer.GetChildCount() / 3, 3, 6);
+		PageSelectorContainer.Visible = CategorizedItems.Count > MAX_ITEMS_ON_PAGE;
 	}
 
 	void OnAddNewForgePressed()
@@ -90,6 +118,7 @@ public partial class ItemSelection : Control
 
 	void OnBackPressed()
 	{
+		ClearCache();
 		Global.OpenMaterialSelectionScene(this);
 	}
 }

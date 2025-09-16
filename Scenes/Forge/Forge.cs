@@ -62,6 +62,7 @@ public partial class Forge : Control
 			ItemName.Text = value.Name;
 			ForgeGoal.Value = _currentForgeRecipe.RequiredWork;
 			SetLastForgeActions();
+			LookForHitTypeInLastActions();
 
 			RecalculateRequiredProgressBar();
 
@@ -409,26 +410,16 @@ public partial class Forge : Control
 			ThirdActionIcon.GetNode<BoxContainer>("HitHBoxContainer").Visible = false;
 	}
 
-	Texture2D GetActionIcon(ForgeDatabase.ShownAction action)
+	Texture2D GetActionIcon(ForgeDatabase.ShownAction action) => action switch
 	{
-		switch (action)
-		{
-			case ForgeDatabase.ShownAction.Draw:
-				return GD.Load<Texture2D>("res://Assets/Forge/Draw.png");
-			case ForgeDatabase.ShownAction.Hit:
-				return GD.Load<Texture2D>("res://Assets/Forge/Hit.png");
-			case ForgeDatabase.ShownAction.Punch:
-				return GD.Load<Texture2D>("res://Assets/Forge/Punch.png");
-			case ForgeDatabase.ShownAction.Bend:
-				return GD.Load<Texture2D>("res://Assets/Forge/Bend.png");
-			case ForgeDatabase.ShownAction.Upset:
-				return GD.Load<Texture2D>("res://Assets/Forge/Upset.png");
-			case ForgeDatabase.ShownAction.Shrink:
-				return GD.Load<Texture2D>("res://Assets/Forge/Shrink.png");
-			default:
-				return null;
-		}
-	}
+		ForgeDatabase.ShownAction.Draw => GD.Load<Texture2D>("res://Assets/Forge/Draw.png"),
+		ForgeDatabase.ShownAction.Hit => GD.Load<Texture2D>("res://Assets/Forge/Hit.png"),
+		ForgeDatabase.ShownAction.Punch => GD.Load<Texture2D>("res://Assets/Forge/Punch.png"),
+		ForgeDatabase.ShownAction.Bend => GD.Load<Texture2D>("res://Assets/Forge/Bend.png"),
+		ForgeDatabase.ShownAction.Upset => GD.Load<Texture2D>("res://Assets/Forge/Upset.png"),
+		ForgeDatabase.ShownAction.Shrink => GD.Load<Texture2D>("res://Assets/Forge/Shrink.png"),
+		_ => null,
+	};
 
 	void OnItemIconClick(InputEvent ev)
 	{
@@ -458,7 +449,7 @@ public partial class Forge : Control
 		ResourceSaver.Save(_selectedItem, _selectedItem.ResourcePath);
 		_selectedItem = null;
 		Visible = false;
-		Global.Main.ItemSelection.LoadItems();
+		Global.Main.ItemSelection.LoadItemsFromCache();
 		Global.Main.ItemSelection.Visible = true;
 	}
 

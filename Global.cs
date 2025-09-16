@@ -40,6 +40,7 @@ public partial class Global : Node
 		GD.Print("[Global] Metal name from resource: " + metalName/*metalItem.Name.GetNameFromTransltaionCode()*/);
 		GD.Print("[Global] Resource id: " + metalItem);
 
+		main.ItemSelection.ClearCache();
 		main.ItemSelection.SetMetal(metalItem, metalName);
 
 
@@ -88,5 +89,8 @@ public partial class Global : Node
 		public const string LastForgeActions = Content + "Last Shown Forge Actions/";
 		public const string MoltenMetals = Content + "MoltenMetals/";
 
+		public const string Scenes = "res://Scenes/";
+		public const string UI = Scenes + "UI/";
+		
 	}
 }

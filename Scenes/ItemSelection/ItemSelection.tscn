@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://di8gtu5jjib4c"]
+[gd_scene load_steps=9 format=3 uid="uid://di8gtu5jjib4c"]
 
 [ext_resource type="Script" uid="uid://bvx501g8au6ym" path="res://Scenes/ItemSelection/ItemSelection.cs" id="1_adm1k"]
 [ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_iwsp6"]
-[ext_resource type="Texture2D" uid="uid://b86aqb78xiw33" path="res://Assets/Sprites/ingot/bismuth.png" id="3_11ya8"]
 [ext_resource type="PackedScene" uid="uid://bap1xbjcnw27t" path="res://Scenes/UI/BorderedIcon.tscn" id="3_js31o"]
-[ext_resource type="Texture2D" uid="uid://dt2mnimuccw03" path="res://Assets/Forge/Action Border.png" id="3_vgaxw"]
 [ext_resource type="Texture2D" uid="uid://dnf4gxjq5cbnr" path="res://Assets/Forge/Button Back.png" id="5_vxrm3"]
 [ext_resource type="Texture2D" uid="uid://bvn5phejsme2c" path="res://Assets/Forge/Button Back Hover Press.png" id="6_js31o"]
+[ext_resource type="Script" path="res://Scenes/ItemSelection/PageSelector.cs" id="8_sq86s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ucxy1"]
 
@@ -41,30 +40,6 @@ size_flags_stretch_ratio = 1.5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-
-[node name="MetalIconBorder" type="TextureRect" parent="VBoxContainer/MetalInfoHBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-texture = ExtResource("3_vgaxw")
-stretch_mode = 5
-
-[node name="MetalIcon" type="TextureRect" parent="VBoxContainer/MetalInfoHBoxContainer/MetalIconBorder"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.38
-anchor_right = 0.62
-anchor_bottom = 1.0
-offset_left = -4.46
-offset_top = 12.0
-offset_right = 4.46
-offset_bottom = -12.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-texture = ExtResource("3_11ya8")
-stretch_mode = 5
 
 [node name="MetalNameLabel" type="Label" parent="VBoxContainer/MetalInfoHBoxContainer"]
 layout_mode = 2
@@ -145,5 +120,38 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 columns = 5
 
-[connection signal="item_selected" from="VBoxContainer/MetalInfoHBoxContainer/CategoriesVBoxContainer/CategoriesSelect" to="." method="LoadItems"]
+[node name="PageSelectorHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+script = ExtResource("8_sq86s")
+
+[node name="PreviousPageButton" type="TextureButton" parent="VBoxContainer/PageSelectorHBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("5_vxrm3")
+texture_pressed = ExtResource("6_js31o")
+texture_hover = ExtResource("6_js31o")
+texture_disabled = ExtResource("5_vxrm3")
+texture_focused = ExtResource("5_vxrm3")
+stretch_mode = 5
+
+[node name="NextPageButton" type="TextureButton" parent="VBoxContainer/PageSelectorHBoxContainer"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("5_vxrm3")
+texture_pressed = ExtResource("6_js31o")
+texture_hover = ExtResource("6_js31o")
+texture_disabled = ExtResource("5_vxrm3")
+texture_focused = ExtResource("5_vxrm3")
+stretch_mode = 5
+flip_h = true
+flip_v = true
+
+[connection signal="item_selected" from="VBoxContainer/MetalInfoHBoxContainer/CategoriesVBoxContainer/CategoriesSelect" to="." method="LoadItemsFromCache"]
 [connection signal="pressed" from="VBoxContainer/MetalInfoHBoxContainer/BackButton" to="." method="OnBackPressed"]
+[connection signal="pressed" from="VBoxContainer/PageSelectorHBoxContainer/PreviousPageButton" to="VBoxContainer/PageSelectorHBoxContainer" method="PreviousPage"]
+[connection signal="pressed" from="VBoxContainer/PageSelectorHBoxContainer/NextPageButton" to="VBoxContainer/PageSelectorHBoxContainer" method="NextPage"]
