@@ -3,7 +3,7 @@ using System;
 
 public partial class BorderedIcon : TextureRect
 {
-	TextureRect IconNode => GetNode<TextureRect>("Icon");
+	TextureRect IconNode => GetNodeOrNull<TextureRect>("Icon");
 
 	private Texture2D _icon;
 
@@ -15,18 +15,20 @@ public partial class BorderedIcon : TextureRect
 	[Export]
 	public Texture2D Icon
 	{
-		get => _icon;
+		get => IconNode.Texture;
 		set
 		{
-			_icon = value;
-			GetNode<TextureRect>("Icon").Texture = value;
-			SetSizing();
+			if (IconNode != null)
+			{
+				_icon = value;
+				IconNode.Texture = value;
+				SetSizing();
+			}
 		}
 	}
 
 	public override void _Ready()
 	{
-		// SetSizing();
 		GetTree().ProcessFrame += SetSizing;
 	}
 
