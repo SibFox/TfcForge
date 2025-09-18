@@ -37,7 +37,10 @@ public partial class ItemSelection : Control
 
 		LoadCache();
 		LoadItemsFromCache();
+		PageSelectorContainer.SelectedPage = 1;
 	}
+
+	int хуй = 69; // Объект истории со времён пары истории России
 
 	public void ClearCache()
 	{
