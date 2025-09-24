@@ -22,3 +22,7 @@ ui.forge.set_goal;Set Goal;Укажите цель
 ui.forge.add_new_last_actions;Add new Last Actions;Добавить ''Последние действия''
 ui.open;Open;Открыть
 ui.pick_sprite;Pick a Sprite;Выберите иконку
+ui.ingot_cost;An ingot melts into:;Слиток плавится в:
+ui.melts_into;Metls into:;Плавится в:
+ui.mb_short;MB;МБ
+ui.mb_long;Millibuckets;Миллибакетов
