@@ -75,13 +75,14 @@ public partial class InspectItem : Control
     private Label MoltenMetalLabel => MoltenMetalContainer.GetNode<Label>("MetalNameLabel");
     private Label MillibucketsLabel => MoltenMetalContainer.GetNode<Label>("MillibucketsLabel");
     private BorderedIcon MoltenMetalIcon => MoltenMetalContainer.GetNode<BorderedIcon>("BorderedIcon");
+
+    private int IngotCost => (int)Global.GlobalConfig.GetValue("ingot", "cost", 100);
     // ---- Melts into ----
     #endregion
     #endregion
 
     private Item _currentItem;
     int currentForgeWork;
-
 
     public void SetItem(Item item)
     {
@@ -346,7 +347,7 @@ public partial class InspectItem : Control
 
         MoltenMetalLabel.Text = metal.MeltsInto.Name;
         MoltenMetalIcon.Icon = metal.MeltsInto.Icon;
-        MillibucketsLabel.Text = metal.Millibuckets + " Millibuckets";
+        MillibucketsLabel.Text = (metal.Ingots * IngotCost) + " Millibuckets";
     }
     #endregion
     #endregion

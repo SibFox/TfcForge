@@ -6,6 +6,7 @@ using System.Linq;
 [GlobalClass]
 public partial class Global : Node
 {
+	private static Main main;
 	public static Main Main
 	{
 		get => main;
@@ -18,9 +19,30 @@ public partial class Global : Node
 		}
 	}
 
-	private static Main main;
-
 	public static string CurrentLocale { get; set; } = "ru";
+	public static int IngotCost { get; set; } = 100;
+
+	private static ConfigFile _globalConfig;
+    public static ConfigFile GlobalConfig
+    {
+		get
+		{
+			if (_globalConfig == null)
+			{
+				_globalConfig = new();
+				if (_globalConfig.Load("res://GlobalConfig.ini") != Error.Ok)
+					_globalConfig.Save("res://GlobalConfig.ini");
+			}
+
+			return _globalConfig;
+		}
+	}
+
+	public override void _Ready()
+	{
+
+    }
+
 
 	public static void OpenMaterialSelectionScene(Control scene)
 	{
@@ -37,7 +59,7 @@ public partial class Global : Node
 
 		Item metalItem = ResourceLoader.Load<Item>(Paths.Items + $"{metalName}/Ingot.tres");
 
-		GD.Print("[Global] Metal name from resource: " + metalName/*metalItem.Name.GetNameFromTransltaionCode()*/);
+		GD.Print("[Global] Metal name from resource: " + metalName);
 		GD.Print("[Global] Resource id: " + metalItem);
 
 		main.ItemSelection.ClearCache();

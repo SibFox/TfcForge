@@ -83,6 +83,8 @@ public partial class ItemSelection : Control
 			child.Free();
 		}
 
+		// if (index > -1)
+		// 	PageSelectorContainer.SelectedPage = 1;
 		byte selectedPage = PageSelectorContainer.SelectedPage;
 
 		CategorizedItems = CategorySelectButton.GetSelectedId() switch

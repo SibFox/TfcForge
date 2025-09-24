@@ -99,4 +99,28 @@ theme_override_font_sizes/font_size = 20
 button_group = SubResource("ButtonGroup_hs1ow")
 text = "TR_WORK_REDACT"
 
+[node name="IngotCostLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 621.0
+offset_right = 280.0
+offset_bottom = 658.0
+theme_override_font_sizes/font_size = 30
+text = "ui.ingot_cost"
+
+[node name="IngotCostEdit" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 43.0
+offset_top = -58.0
+offset_right = 177.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+placeholder_text = "ui.mb_short"
+max_length = 4
+
 [connection signal="item_activated" from="VBoxContainer/MaterialList" to="." method="OnMaterialActivate"]
+[connection signal="text_changed" from="IngotCostEdit" to="." method="OnIngotCostTextChanged"]
+[connection signal="text_submitted" from="IngotCostEdit" to="." method="OnIngotCostTextSubmitted"]

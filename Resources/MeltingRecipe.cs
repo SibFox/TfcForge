@@ -11,6 +11,9 @@ public partial class MeltingRecipe : Resource
     [Export]
     public MoltenMetal MeltsInto;
 
-    [Export(PropertyHint.Range, "100,800,100")]
-    public int Millibuckets;
+    /// <summary>
+    /// Amount of ingots it melts into (can be half or less of an ingot)
+    /// </summary>
+    [Export(PropertyHint.Range, "0.01,10,0.01")]
+    public float Ingots;
 }

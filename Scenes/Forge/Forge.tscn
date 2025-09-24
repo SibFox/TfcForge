@@ -143,6 +143,26 @@ max_value = 150.0
 rounded = true
 select_all_on_focus = true
 
+[node name="AdditionalInfoHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/MarginContainer/ItemVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="IngotAmountLabel" type="Label" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/MarginContainer/ItemVBoxContainer/AdditionalInfoHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "ui.melts_into"
+label_settings = SubResource("LabelSettings_143fd")
+
+[node name="IngotAmount" type="SpinBox" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/MarginContainer/ItemVBoxContainer/AdditionalInfoHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+min_value = 0.01
+max_value = 10.0
+step = 0.01
+value = 1.0
+alignment = 2
+
 [node name="LastActionsVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3

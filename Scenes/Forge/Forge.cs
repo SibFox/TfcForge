@@ -5,7 +5,7 @@ using System.Text;
 
 public partial class Forge : Control
 {
-	private ForgeRecipe _currentForgeRecipe = new ForgeRecipe();
+	private ForgeRecipe _currentForgeRecipe = new();
 	private LastShowForgeActions _lastForgeActions;
 
 	private string _lastForgeActionsResourcePath;
@@ -22,6 +22,7 @@ public partial class Forge : Control
 	BorderedIcon ItemIcon => GetNode<BorderedIcon>("%ItemIcon");
 	Label ItemName => GetNode<Label>("%ItemName");
 	SpinBox ForgeGoal => GetNode<SpinBox>("%ForgeGoal");
+	SpinBox IngotAmount => GetNode<SpinBox>("%IngotAmount");
 	FileDialog IconSelect => GetNode<FileDialog>("%IconSelect");
 
 	BorderedIcon FirstActionIcon => ActionIconsContainer.GetNode<BorderedIcon>("FirstAction");
@@ -42,8 +43,7 @@ public partial class Forge : Control
 			_selectedItem = value;
 			_currentForgeRecipe = value.ForgeRecipe == null ? new ForgeRecipe() { LastActions = new() } :
 															  value.ForgeRecipe.Duplicate() as ForgeRecipe;
-			// if (_currentForgeRecipe.LastActions == null)
-			// 	_currentForgeRecipe.LastActions = new();
+			
 			_lastForgeActions = value.LastForgeActions == null ? new() : value.LastForgeActions.Duplicate() as LastShowForgeActions;
 			if (value.LastForgeActions != null)
 			{
@@ -56,7 +56,11 @@ public partial class Forge : Control
 					if (VariantsMenu.GetItemText(i) == LastActionFileName)
 						VariantsMenu.Select(i);
 				}
-			}			
+			}
+
+			if (value.MeltsInto != null)
+				if (value.MeltsInto.MeltsInto != null)
+					IngotAmount.Value = value.MeltsInto.Ingots;
 
 			ItemIcon.Icon = value.Icon;
 			ItemName.Text = value.Name;
@@ -438,12 +442,23 @@ public partial class Forge : Control
 
 
 
-
+	// ~~~~~~~~~~~~~~~~~~~~ Item Resource Save ~~~~~~~~~~~~~~~~~~~~
 	void OnSaveButtonPressed()
 	{
 		_selectedItem.Name = ItemName.Text;
 		_selectedItem.ForgeRecipe = _currentForgeRecipe;
 		_selectedItem.LastForgeActions = _lastForgeActions;
+
+		if (_selectedItem.MeltsInto == null)
+		{
+            _selectedItem.MeltsInto = new()
+            {
+                MeltsInto = GD.Load<MoltenMetal>(Global.Paths.MoltenMetals +
+                            TranslationServer.Translate(_selectedItem.MetalName))
+            };
+        }
+		_selectedItem.MeltsInto.Ingots = (float)IngotAmount.Value;
+
 		_selectedItem.Icon = ItemIcon.Icon;
 		GD.Print("[Forge/Save] Item resource path: " + _selectedItem.ResourcePath);
 		ResourceSaver.Save(_selectedItem, _selectedItem.ResourcePath);
