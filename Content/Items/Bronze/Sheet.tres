@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Item" load_steps=15 format=3]
+[gd_resource type="Resource" script_class="Item" load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://Resources/LastForgeActions.cs" id="1_y8l43"]
 [ext_resource type="Resource" path="res://Content/MoltenMetals/Bronze.tres" id="2_b230d"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Resources/MeltingRecipe.cs" id="3_eb6l8"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/sheet/bronze.png" id="3_jlg1k"]
 [ext_resource type="Script" path="res://Resources/Item.cs" id="4_5k6d7"]
-[ext_resource type="Script" path="res://Resources/LastShowForgeActions.cs" id="4_yoj75"]
+[ext_resource type="Resource" path="res://Content/Last Shown Forge Actions/LastSheetActions.tres" id="4_yoj75"]
 [ext_resource type="Resource" path="res://Content/Items/Bronze/DoubleIngot.tres" id="5_mj2gt"]
 [ext_resource type="Script" path="res://Resources/ItemMadeFrom.cs" id="6_jyq4i"]
 
@@ -31,13 +31,6 @@ Draw = 0
 LastActions = SubResource("Resource_08q24")
 metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
 
-[sub_resource type="Resource" id="Resource_tidp1"]
-script = ExtResource("4_yoj75")
-FirstAction = 1
-SecondAction = 1
-ThirdAction = 1
-metadata/_custom_type_script = "uid://dis1ha2sv07iq"
-
 [sub_resource type="Resource" id="Resource_g16ya"]
 script = ExtResource("6_jyq4i")
 OriginalItem = ExtResource("5_mj2gt")
@@ -46,7 +39,7 @@ metadata/_custom_type_script = "uid://cm7kfv47h0dff"
 [sub_resource type="Resource" id="Resource_efyd1"]
 script = ExtResource("3_eb6l8")
 MeltsInto = ExtResource("2_b230d")
-Millibuckets = 200
+Ingots = 1.0
 metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
 
 [resource]
@@ -58,6 +51,6 @@ MetalName = "metal.bronze"
 ShowInSelection = true
 MadeFrom = SubResource("Resource_g16ya")
 MeltsInto = SubResource("Resource_efyd1")
-LastForgeActions = SubResource("Resource_tidp1")
+LastForgeActions = ExtResource("4_yoj75")
 ForgeRecipe = SubResource("Resource_qtxjc")
 metadata/_custom_type_script = "uid://bit6oprricfpl"

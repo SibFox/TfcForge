@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" load_steps=11 format=3 uid="uid://bkvpu7u4gcjy"]
 
 [ext_resource type="Texture2D" uid="uid://drwypl30trru1" path="res://Assets/Sprites/double_sheet/bronze.png" id="1_0fkv7"]
-[ext_resource type="Resource" uid="uid://d4maglieliil5" path="res://Content/Items/Bronze/Sheet.tres" id="2_uydde"]
+[ext_resource type="Resource" uid="uid://bx5dbledmye5i" path="res://Content/Items/Bronze/Sheet.tres" id="2_uydde"]
 [ext_resource type="Script" uid="uid://cqec8q7oihjq3" path="res://Resources/WeldRecipe.cs" id="6_ftwj0"]
 [ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="6_rwxy2"]
 [ext_resource type="Resource" uid="uid://d2se6573kb2ul" path="res://Content/MoltenMetals/Bronze.tres" id="7_sg8kt"]
@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://cm7kfv47h0dff"
 [sub_resource type="Resource" id="Resource_efyd1"]
 script = ExtResource("8_c7sa5")
 MeltsInto = ExtResource("7_sg8kt")
-Millibuckets = 400
+Ingots = 2
 metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
 
 [sub_resource type="Resource" id="Resource_uwe5a"]

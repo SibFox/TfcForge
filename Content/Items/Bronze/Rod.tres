@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="Item" load_steps=14 format=3 uid="uid://bypc382ye2r0q"]
+[gd_resource type="Resource" script_class="Item" load_steps=15 format=3]
 
-[ext_resource type="Script" uid="uid://bevv7ssh4mjgi" path="res://Resources/LastForgeActions.cs" id="1_2yq60"]
-[ext_resource type="Script" uid="uid://df3b2dyh7h4bi" path="res://Resources/ForgeRecipe.cs" id="2_pq8fi"]
-[ext_resource type="Texture2D" uid="uid://dyiuxmguxal8u" path="res://Assets/Sprites/rod/bronze.png" id="3_2yq60"]
-[ext_resource type="Resource" uid="uid://c52ksdmkne15x" path="res://Content/Last Shown Forge Actions/LastRodActions.tres" id="4_2yq60"]
-[ext_resource type="Resource" uid="uid://cboies38rdyim" path="res://Content/Items/Bronze/Ingot.tres" id="5_qr8j3"]
-[ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="6_4cwlq"]
-[ext_resource type="Resource" uid="uid://d2se6573kb2ul" path="res://Content/MoltenMetals/Bronze.tres" id="7_a6u78"]
-[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="8_xuthe"]
-[ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="9_5wr6q"]
+[ext_resource type="Script" path="res://Resources/LastForgeActions.cs" id="1_2yq60"]
+[ext_resource type="Script" path="res://Resources/ForgeRecipe.cs" id="2_pq8fi"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/rod/bronze.png" id="3_2yq60"]
+[ext_resource type="Script" path="res://Resources/LastShowForgeActions.cs" id="4_ea0ro"]
+[ext_resource type="Resource" path="res://Content/Items/Bronze/Ingot.tres" id="5_qr8j3"]
+[ext_resource type="Script" path="res://Resources/ItemMadeFrom.cs" id="6_4cwlq"]
+[ext_resource type="Resource" path="res://Content/MoltenMetals/Bronze.tres" id="7_a6u78"]
+[ext_resource type="Script" path="res://Resources/MeltingRecipe.cs" id="8_xuthe"]
+[ext_resource type="Script" path="res://Resources/Item.cs" id="9_5wr6q"]
 
 [sub_resource type="Resource" id="Resource_xiw63"]
 script = ExtResource("1_2yq60")
@@ -17,7 +17,7 @@ SecondAction = 0
 ThirdAction = 0
 metadata/_custom_type_script = "uid://bevv7ssh4mjgi"
 
-[sub_resource type="Resource" id="Resource_pq8fi"]
+[sub_resource type="Resource" id="Resource_ea0ro"]
 script = ExtResource("2_pq8fi")
 RequiredWork = 102
 Shrink = 5
@@ -31,6 +31,13 @@ Draw = 0
 LastActions = SubResource("Resource_xiw63")
 metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
 
+[sub_resource type="Resource" id="Resource_ysfsi"]
+script = ExtResource("4_ea0ro")
+FirstAction = 0
+SecondAction = -1
+ThirdAction = -1
+metadata/_custom_type_script = "uid://dis1ha2sv07iq"
+
 [sub_resource type="Resource" id="Resource_7obnn"]
 script = ExtResource("6_4cwlq")
 OriginalItem = ExtResource("5_qr8j3")
@@ -39,7 +46,7 @@ metadata/_custom_type_script = "uid://cm7kfv47h0dff"
 [sub_resource type="Resource" id="Resource_efyd1"]
 script = ExtResource("8_xuthe")
 MeltsInto = ExtResource("7_a6u78")
-Millibuckets = 100
+Ingots = 0.5
 metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
 
 [resource]
@@ -51,6 +58,6 @@ MetalName = "metal.bronze"
 ShowInSelection = true
 MadeFrom = SubResource("Resource_7obnn")
 MeltsInto = SubResource("Resource_efyd1")
-LastForgeActions = ExtResource("4_2yq60")
-ForgeRecipe = SubResource("Resource_pq8fi")
+LastForgeActions = SubResource("Resource_ysfsi")
+ForgeRecipe = SubResource("Resource_ea0ro")
 metadata/_custom_type_script = "uid://bit6oprricfpl"

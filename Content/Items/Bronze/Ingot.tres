@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_efyd1"]
 script = ExtResource("3_ue50s")
 MeltsInto = ExtResource("2_ov2m4")
-Millibuckets = 0
+Ingots = 1.0
 metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
 
 [resource]

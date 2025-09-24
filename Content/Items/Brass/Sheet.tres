@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://dx0bswkeu0dyt"]
+[gd_resource type="Resource" script_class="Item" load_steps=11 format=3 uid="uid://dx0bswkeu0dyt"]
 
 [ext_resource type="Texture2D" uid="uid://v61e4nueo85c" path="res://Assets/Sprites/sheet/brass.png" id="1_24gv0"]
 [ext_resource type="Script" uid="uid://bevv7ssh4mjgi" path="res://Resources/LastForgeActions.cs" id="1_jtfcu"]
 [ext_resource type="Script" uid="uid://df3b2dyh7h4bi" path="res://Resources/ForgeRecipe.cs" id="1_wkxhm"]
 [ext_resource type="Resource" uid="uid://b8abwjbj7wlqn" path="res://Content/Last Shown Forge Actions/LastSheetActions.tres" id="3_jtfcu"]
+[ext_resource type="Resource" uid="uid://1lp7qsi6767m" path="res://Content/MoltenMetals/Brass.tres" id="5_nw3h3"]
+[ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="6_au4k8"]
 [ext_resource type="Script" uid="uid://bit6oprricfpl" path="res://Resources/Item.cs" id="6_pj7f4"]
 
 [sub_resource type="Resource" id="Resource_l5560"]
@@ -27,6 +29,12 @@ Draw = 0
 LastActions = SubResource("Resource_l5560")
 metadata/_custom_type_script = "uid://df3b2dyh7h4bi"
 
+[sub_resource type="Resource" id="Resource_k5pbn"]
+script = ExtResource("6_au4k8")
+MeltsInto = ExtResource("5_nw3h3")
+Ingots = 1
+metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
+
 [resource]
 script = ExtResource("6_pj7f4")
 Icon = ExtResource("1_24gv0")
@@ -34,6 +42,7 @@ Name = "item.sheet"
 Category = 2
 MetalName = "metal.brass"
 ShowInSelection = true
+MeltsInto = SubResource("Resource_k5pbn")
 LastForgeActions = ExtResource("3_jtfcu")
 ForgeRecipe = SubResource("Resource_mkrkd")
 metadata/_custom_type_script = "uid://bit6oprricfpl"

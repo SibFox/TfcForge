@@ -15,5 +15,5 @@ public partial class MeltingRecipe : Resource
     /// Amount of ingots it melts into (can be half or less of an ingot)
     /// </summary>
     [Export(PropertyHint.Range, "0.01,10,0.01")]
-    public float Ingots;
+    public float Ingots { get; set; } = 1;
 }

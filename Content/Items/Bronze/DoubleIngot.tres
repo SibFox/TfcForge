@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://cm7kfv47h0dff"
 [sub_resource type="Resource" id="Resource_efyd1"]
 script = ExtResource("3_hu55h")
 MeltsInto = ExtResource("2_vuwk5")
-Millibuckets = 200
+Ingots = 2.0
 metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
 
 [sub_resource type="Resource" id="Resource_is1sb"]
