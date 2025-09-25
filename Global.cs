@@ -20,7 +20,6 @@ public partial class Global : Node
 	}
 
 	public static string CurrentLocale { get; set; } = "ru";
-	public static int IngotCost { get; set; } = 100;
 
 	private static ConfigFile _globalConfig;
     public static ConfigFile GlobalConfig
@@ -37,12 +36,6 @@ public partial class Global : Node
 			return _globalConfig;
 		}
 	}
-
-	public override void _Ready()
-	{
-
-    }
-
 
 	public static void OpenMaterialSelectionScene(Control scene)
 	{
@@ -106,7 +99,9 @@ public partial class Global : Node
 	public static class Paths
 	{
 		public const string Content = "res://Content/";
-		public const string ItemSprites = "res://Assets/Sprites/";
+		public const string Assets = "res://Assets/";
+		public const string ItemSprites = Assets + "Sprites/";
+		public const string ForgeSprites = Assets + "Forge/";
 		public const string Items = Content + "Items/";
 		public const string LastForgeActions = Content + "Last Shown Forge Actions/";
 		public const string MoltenMetals = Content + "MoltenMetals/";

@@ -344,7 +344,7 @@ public partial class Forge : Control
 	void OnVariantSelected(int index)
 	{
 		string fileName = VariantsMenu.GetItemText(index) + ".tres";
-		_lastForgeActions = GD.Load<LastShowForgeActions>($"res://Content/Last Shown Forge Actions/{fileName}");
+		_lastForgeActions = GD.Load<LastShowForgeActions>(Global.Paths.LastForgeActions + fileName);
 
 		_currentForgeRecipe.LastActions.FirstAction = _lastForgeActions.FirstAction switch
 		{
@@ -416,12 +416,12 @@ public partial class Forge : Control
 
 	Texture2D GetActionIcon(ForgeDatabase.ShownAction action) => action switch
 	{
-		ForgeDatabase.ShownAction.Draw => GD.Load<Texture2D>("res://Assets/Forge/Draw.png"),
-		ForgeDatabase.ShownAction.Hit => GD.Load<Texture2D>("res://Assets/Forge/Hit.png"),
-		ForgeDatabase.ShownAction.Punch => GD.Load<Texture2D>("res://Assets/Forge/Punch.png"),
-		ForgeDatabase.ShownAction.Bend => GD.Load<Texture2D>("res://Assets/Forge/Bend.png"),
-		ForgeDatabase.ShownAction.Upset => GD.Load<Texture2D>("res://Assets/Forge/Upset.png"),
-		ForgeDatabase.ShownAction.Shrink => GD.Load<Texture2D>("res://Assets/Forge/Shrink.png"),
+		ForgeDatabase.ShownAction.Draw => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Draw.png"),
+		ForgeDatabase.ShownAction.Hit => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Hit.png"),
+		ForgeDatabase.ShownAction.Punch => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Punch.png"),
+		ForgeDatabase.ShownAction.Bend => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Bend.png"),
+		ForgeDatabase.ShownAction.Upset => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Upset.png"),
+		ForgeDatabase.ShownAction.Shrink => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Shrink.png"),
 		_ => null,
 	};
 
