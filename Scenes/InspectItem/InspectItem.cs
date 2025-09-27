@@ -339,7 +339,13 @@ public partial class InspectItem : Control
             MoltenMetalContainer.Visible = false;
             return;
         }
-
+        if (_currentItem.MeltsInto.MeltsInto == null)
+        {
+            NotSpecifiedMeltsIntoLabel.Visible = true;
+            MoltenMetalContainer.Visible = false;
+            return;
+        }
+        
         MoltenMetalContainer.Visible = true;
         NotSpecifiedMeltsIntoLabel.Visible = false;
 

@@ -15,13 +15,11 @@ public partial class PageSelector : HBoxContainer
         get => _selectedPage;
         set
         {
-            byte maxPages = SelectionWindow.GetMaxItemPages();
-            _selectedPage = (byte)Mathf.Clamp(value, 1, maxPages);
+            _selectedPage = (byte)Mathf.Clamp(value, 1, SelectionWindow.GetMaxItemPages());
 
             SelectionWindow.LoadItemsFromCache();
 
-            PreviousButton.Visible = _selectedPage > 1;
-            NextButton.Visible = _selectedPage < maxPages;
+            SetVisibilityForButtons();
         }
     }
 
@@ -29,8 +27,15 @@ public partial class PageSelector : HBoxContainer
 
     void NextPage() => SelectedPage++;
 
+    void SetVisibilityForButtons()
+    {
+        PreviousButton.Visible = _selectedPage > 1;
+        NextButton.Visible = _selectedPage < SelectionWindow.GetMaxItemPages();;
+    }
+
     void OnVisibilityChanged()
     {
         SelectedPage = 1;
+        SetVisibilityForButtons();
     }
 }

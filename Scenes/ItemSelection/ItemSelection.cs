@@ -47,6 +47,14 @@ public partial class ItemSelection : Control
 		ItemsCache.Clear();
 	}
 
+	public void AddToCache(Item newItem)
+	{
+		if (ItemsCache.Contains(newItem))
+			return;
+
+		ItemsCache.AddLast(newItem);
+	}
+
 	public byte GetMaxItemPages() => (byte)Mathf.Ceil((float)CategorizedItems.Count / MAX_ITEMS_ON_PAGE);
 
 	void LoadCache()
@@ -82,9 +90,7 @@ public partial class ItemSelection : Control
 		{
 			child.Free();
 		}
-
-		// if (index > -1)
-		// 	PageSelectorContainer.SelectedPage = 1;
+		
 		byte selectedPage = PageSelectorContainer.SelectedPage;
 
 		CategorizedItems = CategorySelectButton.GetSelectedId() switch
@@ -93,7 +99,8 @@ public partial class ItemSelection : Control
 			_ => ItemsCache.Where(i => (int)i.Category == CategorySelectButton.GetSelectedId()).ToList()
 		};
 
-		for (int i = MAX_ITEMS_ON_PAGE * (selectedPage - 1); i < Mathf.Clamp(MAX_ITEMS_ON_PAGE * selectedPage, 0, CategorizedItems.Count); i++)
+		for (int i = MAX_ITEMS_ON_PAGE * (selectedPage - 1);
+			i < Mathf.Clamp(MAX_ITEMS_ON_PAGE * selectedPage, 0, CategorizedItems.Count); i++)
 		{
 			Item item = CategorizedItems.ElementAt(i);
 
@@ -118,7 +125,7 @@ public partial class ItemSelection : Control
 
 	void OnAddNewForgePressed()
 	{
-
+		Global.OpenForgeSceneWithNewItem(selectedMetal.MetalName);
 	}
 
 	void OnBackPressed()

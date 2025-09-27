@@ -66,26 +66,40 @@ public partial class Global : Node
 		main.ItemSelection.Visible = true;
 	}
 
-	public static void OpenForgeScene(string metalNameTransltaionCode, string itemNameTransltaionCode)
+	public static void OpenForgeScene(Item item)
 	{
-		GD.Print("[Global] Metal TR code: " + metalNameTransltaionCode);
-		string metalName = metalNameTransltaionCode.GetNameFromTransltaionCode();
+		GD.Print("[Global] Metal TR code: " + item.MetalName);
+		string metalName = item.MetalName.GetNameFromTransltaionCode();
 
-		GD.Print("[Global] Item TR code: " + itemNameTransltaionCode);
-		string itemName = itemNameTransltaionCode.GetNameFromTransltaionCode();
+		GD.Print("[Global] Item TR code: " + item.Name);
+		string itemName = item.Name.GetNameFromTransltaionCode();
 
-		Item selectedItem = ResourceLoader.Load<Item>(Paths.Items + $"{metalName}/{itemName}.tres");
+		// Item selectedItem = ResourceLoader.Load<Item>(Paths.Items + $"{metalName}/{itemName}.tres");
 
-		GD.Print("[Global] Item name from resource: " + selectedItem.Name.GetNameFromTransltaionCode());
-		GD.Print("[Global] Resource id: " + selectedItem);
+		GD.Print("[Global] Item name from resource: " + item.Name.GetNameFromTransltaionCode());
+		GD.Print("[Global] Resource id: " + item);
 
-		main.Forge.SelectedItem = selectedItem;
+		main.Forge.SelectedItem = item;
 
 		float zoom = (float)ProjectSettings.GetSetting("display/window/size/viewport_height") / 360;
 		main.Camera.Zoom = new(zoom, zoom);
 
 		main.ItemSelection.Visible = false;
 		main.Forge.Visible = true;
+	}
+
+	public static void OpenForgeSceneWithNewItem(string metalNameTransltaionCode)
+	{
+		GD.Print("[Global] Metal TR code: " + metalNameTransltaionCode);
+
+		main.Forge.SelectedItem = new() { Name = "New Item", MetalName = metalNameTransltaionCode };
+		GD.Print("[Global] New Item created");
+
+		float zoom = (float)ProjectSettings.GetSetting("display/window/size/viewport_height") / 360;
+		main.Camera.Zoom = new(zoom, zoom);
+
+		main.ItemSelection.Visible = false;
+		main.Forge.Visible = true;	
 	}
 
 	public static void OpenInspectItemScene(Item item)

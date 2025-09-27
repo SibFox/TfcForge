@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c2ldy4uvet4or"]
+[gd_scene load_steps=35 format=3 uid="uid://c2ldy4uvet4or"]
 
 [ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_as2me"]
 [ext_resource type="Script" uid="uid://gwlt7f3j5dlo" path="res://Scenes/Forge/Forge.cs" id="1_j7md3"]
@@ -27,9 +27,6 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_id1gd"]
 bg_color = Color(0.34, 0.34, 0.34, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ve6p6"]
-font_size = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_143fd"]
 font_size = 8
@@ -116,15 +113,11 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ItemName" type="Label" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/MarginContainer/ItemVBoxContainer/ItemInfoHBoxContainer"]
+[node name="ItemName" type="LineEdit" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/MarginContainer/ItemVBoxContainer/ItemInfoHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
 text = "item_name"
-label_settings = SubResource("LabelSettings_ve6p6")
-vertical_alignment = 1
-autowrap_mode = 3
 
 [node name="SpecifyHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/MarginContainer/ItemVBoxContainer"]
 layout_mode = 2

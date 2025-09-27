@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bap1xbjcnw27t" path="res://Scenes/UI/BorderedIcon.tscn" id="3_js31o"]
 [ext_resource type="Texture2D" uid="uid://dnf4gxjq5cbnr" path="res://Assets/Forge/Button Back.png" id="5_vxrm3"]
 [ext_resource type="Texture2D" uid="uid://bvn5phejsme2c" path="res://Assets/Forge/Button Back Hover Press.png" id="6_js31o"]
-[ext_resource type="Script" path="res://Scenes/ItemSelection/PageSelector.cs" id="8_sq86s"]
+[ext_resource type="Script" uid="uid://cma523ln7ioxt" path="res://Scenes/ItemSelection/PageSelector.cs" id="8_sq86s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ucxy1"]
 
@@ -153,5 +153,6 @@ flip_v = true
 
 [connection signal="item_selected" from="VBoxContainer/MetalInfoHBoxContainer/CategoriesVBoxContainer/CategoriesSelect" to="." method="LoadItemsFromCache"]
 [connection signal="pressed" from="VBoxContainer/MetalInfoHBoxContainer/BackButton" to="." method="OnBackPressed"]
+[connection signal="visibility_changed" from="VBoxContainer/PageSelectorHBoxContainer" to="VBoxContainer/PageSelectorHBoxContainer" method="OnVisibilityChanged"]
 [connection signal="pressed" from="VBoxContainer/PageSelectorHBoxContainer/PreviousPageButton" to="VBoxContainer/PageSelectorHBoxContainer" method="PreviousPage"]
 [connection signal="pressed" from="VBoxContainer/PageSelectorHBoxContainer/NextPageButton" to="VBoxContainer/PageSelectorHBoxContainer" method="NextPage"]

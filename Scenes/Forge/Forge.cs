@@ -1,6 +1,4 @@
 using Godot;
-using System.Collections;
-using System.Diagnostics;
 using System.Text;
 
 public partial class Forge : Control
@@ -20,7 +18,7 @@ public partial class Forge : Control
 	OptionButton VariantsMenu => LastActionsContainer.GetNode<OptionButton>("VariantsHBoxContainer/Variants");
 
 	BorderedIcon ItemIcon => GetNode<BorderedIcon>("%ItemIcon");
-	Label ItemName => GetNode<Label>("%ItemName");
+	LineEdit ItemName => GetNode<LineEdit>("%ItemName");
 	SpinBox ForgeGoal => GetNode<SpinBox>("%ForgeGoal");
 	SpinBox IngotAmount => GetNode<SpinBox>("%IngotAmount");
 	FileDialog IconSelect => GetNode<FileDialog>("%IconSelect");
@@ -55,9 +53,12 @@ public partial class Forge : Control
 				{
 					if (VariantsMenu.GetItemText(i) == LastActionFileName)
 						VariantsMenu.Select(i);
+					else
+						VariantsMenu.Select(-1);
 				}
 			}
 
+			IngotAmount.Value = 1;
 			if (value.MeltsInto != null)
 				if (value.MeltsInto.MeltsInto != null)
 					IngotAmount.Value = value.MeltsInto.Ingots;
@@ -126,13 +127,9 @@ public partial class Forge : Control
 
 			fileNames.Append("; ");
 		}
-	}
 
-	public void OpenWithNewForgeRecipe()
-	{
-		_currentForgeRecipe = new ForgeRecipe();
+		GD.Print("[Forge] Loaded Last Actions: " + fileNames.ToString());
 	}
-
 
 	#region Forge Clicks
 	//// Left Clicks
@@ -441,31 +438,71 @@ public partial class Forge : Control
 	}
 
 
-
-	// ~~~~~~~~~~~~~~~~~~~~ Item Resource Save ~~~~~~~~~~~~~~~~~~~~
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// ~~~~~~~~~~~~~~~~~~~~ Item Resource Save ~~~~~~~~~~~~~~~~~~~~~
 	void OnSaveButtonPressed()
 	{
-		_selectedItem.Name = ItemName.Text;
-		_selectedItem.ForgeRecipe = _currentForgeRecipe;
-		_selectedItem.LastForgeActions = _lastForgeActions;
+		/*
+		А теперь проверка на переименование уже существуюещего итема на такой же существующий
+		Можно попробовать хранить название файла, с которым уже зашёл итем
+		Если находится существующий файл и совпадает имя итема - сохраняет
+		Если находится существующий файл, но имя итема было изначально другое - не сохраняет
+		*/
+		string oldPath = SelectedItem.ResourcePath;
+		if (oldPath.Length < 1)
+			oldPath = Global.Paths.Items +
+					SelectedItem.MetalName.GetNameFromTransltaionCode() +
+					$"/{SelectedItem.Name.GetNameFromTransltaionCode()}.tres";
+		string newPath = Global.Paths.Items +
+						SelectedItem.MetalName.GetNameFromTransltaionCode() +
+						$"/{ItemName.Text.GetNameFromTransltaionCode()}.tres";
 
-		if (_selectedItem.MeltsInto == null)
+		if (SelectedItem.Name != ItemName.Text && FileAccess.FileExists(newPath))
 		{
-            _selectedItem.MeltsInto = new()
-            {
-                MeltsInto = GD.Load<MoltenMetal>(Global.Paths.MoltenMetals +
-                            TranslationServer.Translate(_selectedItem.MetalName))
-            };
-        }
-		_selectedItem.MeltsInto.Ingots = (float)IngotAmount.Value;
+			GD.PushError("[Forge/Save] Item already present.");
+			return;
+		}
 
-		_selectedItem.Icon = ItemIcon.Icon;
-		GD.Print("[Forge/Save] Item resource path: " + _selectedItem.ResourcePath);
-		ResourceSaver.Save(_selectedItem, _selectedItem.ResourcePath);
+		SelectedItem.Name = ItemName.Text;
+		SelectedItem.ForgeRecipe = _currentForgeRecipe;
+		SelectedItem.LastForgeActions = _lastForgeActions;
+		SelectedItem.Icon = ItemIcon.Icon;
+
+		SelectedItem.MeltsInto ??= new()
+		{
+			MeltsInto = GD.Load<Item>(Global.Paths.Items + 
+									SelectedItem.MetalName.GetNameFromTransltaionCode() + 
+									"/Ingot.tres").MeltsInto.MeltsInto,
+			Ingots = (float)IngotAmount.Value
+		};
+
+
+		GD.Print("[Forge/Save] Item save resource path: " + newPath);
+		if (ResourceSaver.Save(SelectedItem, newPath) != Error.Ok)
+		{
+			GD.PushError("[Forge/Save] Item couldn't be saved!");
+			return;
+		}
+		GD.Print("[Forge/Save] Item successfully saved");
+
+		if (newPath != oldPath && FileAccess.FileExists(oldPath))
+		{
+			// DirAccess.Open(Global.Paths.Items +
+			// 				SelectedItem.MetalName.GetNameFromTransltaionCode())
+			// 				.Remove(SelectedItem.Name + ".tres")
+			if (DirAccess.RemoveAbsolute(oldPath) != Error.Ok)
+				GD.Print("[Forge/Save] Old resource file was not deleted");
+			else
+				GD.Print("[Forge/Save] Old resource file successfully deleted");
+					
+		}
+
+		Global.Main.ItemSelection.AddToCache(SelectedItem);
 		_selectedItem = null;
 		Visible = false;
 		Global.Main.ItemSelection.LoadItemsFromCache();
 		Global.Main.ItemSelection.Visible = true;
+		
 	}
 
 	void OnCancelButtonPressed()
@@ -476,17 +513,20 @@ public partial class Forge : Control
 	}
 
 
-	void RecalculateRequiredProgressBar()
+public void RecalculateRequiredProgressBar()
 	{
-		ProgressBar.RequiredProgress = (int)ForgeGoal.Value;
-		if (_currentForgeRecipe != null && _currentForgeRecipe.LastActions != null)
+		if (_currentForgeRecipe != null)
 		{
-			int goal =	(int)ForgeGoal.Value
-						- (int)_currentForgeRecipe.LastActions.FirstAction
-						- (int)_currentForgeRecipe.LastActions.SecondAction
-						- (int)_currentForgeRecipe.LastActions.ThirdAction;
-			ProgressBar.RequiredProgressNoLastActions = goal;
-			GoalNumber.Text = goal.ToString("000");											
+			ProgressBar.RequiredProgress = (int)ForgeGoal.Value;
+			if (_currentForgeRecipe != null && _currentForgeRecipe.LastActions != null)
+			{
+				int goal =	(int)ForgeGoal.Value
+							- (int)_currentForgeRecipe.LastActions.FirstAction
+							- (int)_currentForgeRecipe.LastActions.SecondAction
+							- (int)_currentForgeRecipe.LastActions.ThirdAction;
+				ProgressBar.RequiredProgressNoLastActions = goal;
+				GoalNumber.Text = goal.ToString("000");											
+			}
 		}
 	}
 
