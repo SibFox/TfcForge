@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://5k4euglcifki" path="res://Assets/Forge/Upset.png" id="11_cfajf"]
 [ext_resource type="Texture2D" uid="uid://bsdta7ctbi2ev" path="res://Assets/Forge/Add Button Disabled.png" id="12_8fecf"]
 [ext_resource type="Texture2D" uid="uid://bftthcmose80j" path="res://Assets/Forge/Shrink.png" id="12_uo6um"]
-[ext_resource type="Script" uid="uid://cx8jdo4ncl0dh" path="res://Scenes/Forge/ActionHBoxContainer.cs" id="13_143fd"]
+[ext_resource type="Script" uid="uid://cx8jdo4ncl0dh" path="res://Scenes/Forge/ForgeActionsContainer.cs" id="13_143fd"]
 [ext_resource type="PackedScene" uid="uid://cvwe3d60etcql" path="res://Scenes/UI/ForgeProgressBar.tscn" id="13_mm0nf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_id1gd"]
@@ -370,21 +370,21 @@ texture_disabled = ExtResource("12_8fecf")
 texture_focused = ExtResource("11_1al1s")
 stretch_mode = 5
 
-[node name="ActionHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer"]
+[node name="ForgeActionsContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 size_flags_stretch_ratio = 10.0
 script = ExtResource("13_143fd")
 
-[node name="ActionVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer"]
+[node name="ActionVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PositiveHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer"]
+[node name="PositiveHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Shrink" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer"]
+[node name="Shrink" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -398,7 +398,7 @@ expand_icon = true
 script = ExtResource("4_602a4")
 metadata/_custom_type_script = "uid://mn147mp6dqug"
 
-[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink"]
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -415,7 +415,7 @@ texture = ExtResource("12_uo6um")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink"]
+[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -429,7 +429,7 @@ label_settings = SubResource("LabelSettings_rql2q")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Upset" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer"]
+[node name="Upset" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -443,7 +443,7 @@ expand_icon = true
 script = ExtResource("4_602a4")
 metadata/_custom_type_script = "uid://mn147mp6dqug"
 
-[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset"]
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -460,7 +460,7 @@ texture = ExtResource("11_cfajf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset"]
+[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -474,7 +474,7 @@ label_settings = SubResource("LabelSettings_rql2q")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Bend" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer"]
+[node name="Bend" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -488,7 +488,7 @@ expand_icon = true
 script = ExtResource("4_602a4")
 metadata/_custom_type_script = "uid://mn147mp6dqug"
 
-[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend"]
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -505,7 +505,7 @@ texture = ExtResource("10_ntixs")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend"]
+[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -519,7 +519,7 @@ label_settings = SubResource("LabelSettings_rql2q")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Punch" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer"]
+[node name="Punch" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -533,7 +533,7 @@ expand_icon = true
 script = ExtResource("4_602a4")
 metadata/_custom_type_script = "uid://mn147mp6dqug"
 
-[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch"]
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -550,7 +550,7 @@ texture = ExtResource("9_3pq3t")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch"]
+[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -564,11 +564,11 @@ label_settings = SubResource("LabelSettings_rql2q")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NegativeHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer"]
+[node name="NegativeHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Draw" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer"]
+[node name="Draw" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -582,7 +582,7 @@ expand_icon = true
 script = ExtResource("4_602a4")
 metadata/_custom_type_script = "uid://mn147mp6dqug"
 
-[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw"]
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -599,7 +599,7 @@ texture = ExtResource("7_nom56")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw"]
+[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -610,7 +610,7 @@ label_settings = SubResource("LabelSettings_rql2q")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StrongHit" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer"]
+[node name="StrongHit" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -624,7 +624,7 @@ expand_icon = true
 script = ExtResource("4_602a4")
 metadata/_custom_type_script = "uid://mn147mp6dqug"
 
-[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit"]
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -641,7 +641,7 @@ texture = ExtResource("6_k3vwi")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit"]
+[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -652,7 +652,7 @@ label_settings = SubResource("LabelSettings_rql2q")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MediumHit" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer"]
+[node name="MediumHit" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -666,7 +666,7 @@ expand_icon = true
 script = ExtResource("4_602a4")
 metadata/_custom_type_script = "uid://mn147mp6dqug"
 
-[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit"]
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -683,7 +683,7 @@ texture = ExtResource("5_602a4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit"]
+[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -694,7 +694,7 @@ label_settings = SubResource("LabelSettings_rql2q")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WeakHit" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer"]
+[node name="WeakHit" type="Button" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -708,7 +708,7 @@ expand_icon = true
 script = ExtResource("4_602a4")
 metadata/_custom_type_script = "uid://mn147mp6dqug"
 
-[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit"]
+[node name="ActionSprite" type="TextureRect" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -725,7 +725,7 @@ texture = ExtResource("4_rql2q")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit"]
+[node name="Amount" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -736,19 +736,19 @@ label_settings = SubResource("LabelSettings_rql2q")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CurrentForgeProgressVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer"]
+[node name="CurrentForgeProgressVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ProgressLabelsHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/CurrentForgeProgressVBoxContainer"]
+[node name="ProgressLabelsHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/CurrentForgeProgressVBoxContainer"]
 layout_mode = 2
 
-[node name="CurrentVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer"]
+[node name="CurrentVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 3
 
-[node name="CurrentProgressLabel" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer/CurrentVBoxContainer"]
+[node name="CurrentProgressLabel" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer/CurrentVBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 10
@@ -756,7 +756,7 @@ text = "ui.forge.progress"
 label_settings = SubResource("LabelSettings_1ki8b")
 horizontal_alignment = 2
 
-[node name="CurrentProgressNumber" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer/CurrentVBoxContainer"]
+[node name="CurrentProgressNumber" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer/CurrentVBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -765,12 +765,12 @@ text = "000"
 label_settings = SubResource("LabelSettings_1ki8b")
 horizontal_alignment = 2
 
-[node name="GoalVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer"]
+[node name="GoalVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 alignment = 2
 
-[node name="GoalLabel" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer/GoalVBoxContainer"]
+[node name="GoalLabel" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer/GoalVBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 10
@@ -778,7 +778,7 @@ text = "ui.forge.goal"
 label_settings = SubResource("LabelSettings_1ki8b")
 vertical_alignment = 1
 
-[node name="GoalNumber" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer/GoalVBoxContainer"]
+[node name="GoalNumber" type="Label" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/CurrentForgeProgressVBoxContainer/ProgressLabelsHBoxContainer/GoalVBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -786,11 +786,11 @@ size_flags_vertical = 10
 text = "000"
 label_settings = SubResource("LabelSettings_1ki8b")
 
-[node name="ProgressBarVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/CurrentForgeProgressVBoxContainer"]
+[node name="ProgressBarVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/CurrentForgeProgressVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ForgeProgressBar" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/CurrentForgeProgressVBoxContainer/ProgressBarVBoxContainer" instance=ExtResource("13_mm0nf")]
+[node name="ForgeProgressBar" parent="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/CurrentForgeProgressVBoxContainer/ProgressBarVBoxContainer" instance=ExtResource("13_mm0nf")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -883,22 +883,22 @@ script = SubResource("GDScript_ve6p6")
 [connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer/MediumButton" to="." method="HitLastActionButtonPressed" binds= [3, 2]]
 [connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer/StrongButton" to="." method="HitLastActionButtonPressed" binds= [3, 3]]
 [connection signal="item_selected" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/VariantsHBoxContainer/Variants" to="." method="OnVariantSelected"]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [16]]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-16]]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [13]]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-13]]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [7]]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-7]]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [2]]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-2]]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-15]]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [15]]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-9]]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [9]]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-6]]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [6]]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-3]]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [3]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [16]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [-16]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [13]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [-13]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [7]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [-7]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [2]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [-2]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [-15]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [15]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [-9]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [9]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [-6]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [6]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [-3]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [3]]
 [connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/SaveCancelHBoxContainer/SaveButton" to="." method="OnSaveButtonPressed"]
 [connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/SaveCancelHBoxContainer/CancelButton" to="." method="OnCancelButtonPressed"]
 [connection signal="file_selected" from="IconSelect" to="." method="OnIconSelected"]
