@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c2ldy4uvet4or"]
+[gd_scene load_steps=36 format=3 uid="uid://c2ldy4uvet4or"]
 
 [ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_as2me"]
 [ext_resource type="Script" uid="uid://gwlt7f3j5dlo" path="res://Scenes/Forge/Forge.cs" id="1_j7md3"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://5k4euglcifki" path="res://Assets/Forge/Upset.png" id="11_cfajf"]
 [ext_resource type="Texture2D" uid="uid://bsdta7ctbi2ev" path="res://Assets/Forge/Add Button Disabled.png" id="12_8fecf"]
 [ext_resource type="Texture2D" uid="uid://bftthcmose80j" path="res://Assets/Forge/Shrink.png" id="12_uo6um"]
+[ext_resource type="Script" uid="uid://cx8jdo4ncl0dh" path="res://Scenes/Forge/ActionHBoxContainer.cs" id="13_143fd"]
 [ext_resource type="PackedScene" uid="uid://cvwe3d60etcql" path="res://Scenes/UI/ForgeProgressBar.tscn" id="13_mm0nf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_id1gd"]
@@ -373,6 +374,7 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_vertical = 6
 size_flags_stretch_ratio = 10.0
+script = ExtResource("13_143fd")
 
 [node name="ActionVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer"]
 layout_mode = 2
@@ -881,22 +883,22 @@ script = SubResource("GDScript_ve6p6")
 [connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer/MediumButton" to="." method="HitLastActionButtonPressed" binds= [3, 2]]
 [connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer/StrongButton" to="." method="HitLastActionButtonPressed" binds= [3, 3]]
 [connection signal="item_selected" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/VariantsHBoxContainer/Variants" to="." method="OnVariantSelected"]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink" to="." method="OnLeftShrinkPressed"]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink" to="." method="OnRightShrinkPressed"]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset" to="." method="OnLeftUpsetPressed"]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset" to="." method="OnRightUpsetPressed"]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend" to="." method="OnLeftBendPressed"]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend" to="." method="OnRightBendPressed"]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch" to="." method="OnLeftPunchPressed"]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch" to="." method="OnRightPunchPressed"]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw" to="." method="OnLeftDrawPressed"]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw" to="." method="OnRightDrawPressed"]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit" to="." method="OnLeftStrongHitPressed"]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit" to="." method="OnRightStrongHitPressed"]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit" to="." method="OnLeftMediumHitPressed"]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit" to="." method="OnRightMediumHitPressed"]
-[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit" to="." method="OnLeftWeakHitPressed"]
-[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit" to="." method="OnRightWeakHitPressed"]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [16]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-16]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [13]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-13]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [7]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Bend" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-7]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [2]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/PositiveHBoxContainer/Punch" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-2]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-15]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/Draw" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [15]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-9]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/StrongHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [9]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-6]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/MediumHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [6]]
+[connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [-3]]
+[connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer/ActionVBoxContainer/NegativeHBoxContainer/WeakHit" to="ForgeBG/InterfaceVBoxContainer/ActionHBoxContainer" method="OnActionClick" binds= [3]]
 [connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/SaveCancelHBoxContainer/SaveButton" to="." method="OnSaveButtonPressed"]
 [connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/SaveCancelHBoxContainer/CancelButton" to="." method="OnCancelButtonPressed"]
 [connection signal="file_selected" from="IconSelect" to="." method="OnIconSelected"]

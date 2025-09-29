@@ -6,6 +6,12 @@ public partial class Forge : Control
 	private ForgeRecipe _currentForgeRecipe = new();
 	private LastShowForgeActions _lastForgeActions;
 
+	public ForgeRecipe CurrentForgeRecipe
+	{
+		get => _currentForgeRecipe;
+		set => _currentForgeRecipe = value;
+	}
+
 	private string _lastForgeActionsResourcePath;
 
 	BoxContainer InterfaceContainer => GetNode<BoxContainer>("ForgeBG/InterfaceVBoxContainer");
@@ -39,7 +45,7 @@ public partial class Forge : Control
 		set
 		{
 			_selectedItem = value;
-			_currentForgeRecipe = value.ForgeRecipe == null ? new ForgeRecipe() { LastActions = new() } :
+			CurrentForgeRecipe = value.ForgeRecipe == null ? new ForgeRecipe() { LastActions = new() } :
 															  value.ForgeRecipe.Duplicate() as ForgeRecipe;
 			
 			_lastForgeActions = value.LastForgeActions == null ? new() : value.LastForgeActions.Duplicate() as LastShowForgeActions;
@@ -65,42 +71,40 @@ public partial class Forge : Control
 
 			ItemIcon.Icon = value.Icon;
 			ItemName.Text = value.Name;
-			ForgeGoal.Value = _currentForgeRecipe.RequiredWork;
+			ForgeGoal.Value = CurrentForgeRecipe.RequiredWork;
 			SetLastForgeActions();
 			LookForHitTypeInLastActions();
 
 			RecalculateRequiredProgressBar();
 
-			NegativeActionsContainer.GetNode<Label>("WeakHit/Amount").Text = _currentForgeRecipe.WeakHit.ToString();
-			NegativeActionsContainer.GetNode<Label>("MediumHit/Amount").Text = _currentForgeRecipe.MediumHit.ToString();
-			NegativeActionsContainer.GetNode<Label>("StrongHit/Amount").Text = _currentForgeRecipe.StrongHit.ToString();
-			NegativeActionsContainer.GetNode<Label>("Draw/Amount").Text = _currentForgeRecipe.Draw.ToString();
-			PositiveActionsContainer.GetNode<Label>("Punch/Amount").Text = _currentForgeRecipe.Punch.ToString();
-			PositiveActionsContainer.GetNode<Label>("Bend/Amount").Text = _currentForgeRecipe.Bend.ToString();
-			PositiveActionsContainer.GetNode<Label>("Upset/Amount").Text = _currentForgeRecipe.Upset.ToString();
-			PositiveActionsContainer.GetNode<Label>("Shrink/Amount").Text = _currentForgeRecipe.Shrink.ToString();
+			NegativeActionsContainer.GetNode<Label>("WeakHit/Amount").Text = CurrentForgeRecipe.WeakHit.ToString();
+			NegativeActionsContainer.GetNode<Label>("MediumHit/Amount").Text = CurrentForgeRecipe.MediumHit.ToString();
+			NegativeActionsContainer.GetNode<Label>("StrongHit/Amount").Text = CurrentForgeRecipe.StrongHit.ToString();
+			NegativeActionsContainer.GetNode<Label>("Draw/Amount").Text = CurrentForgeRecipe.Draw.ToString();
+			PositiveActionsContainer.GetNode<Label>("Punch/Amount").Text = CurrentForgeRecipe.Punch.ToString();
+			PositiveActionsContainer.GetNode<Label>("Bend/Amount").Text = CurrentForgeRecipe.Bend.ToString();
+			PositiveActionsContainer.GetNode<Label>("Upset/Amount").Text = CurrentForgeRecipe.Upset.ToString();
+			PositiveActionsContainer.GetNode<Label>("Shrink/Amount").Text = CurrentForgeRecipe.Shrink.ToString();
 
-			_currentProgress = 0;
-			CurrentProgress = _currentForgeRecipe.WeakHit * -3 +
-							  _currentForgeRecipe.MediumHit * -6 +
-							  _currentForgeRecipe.StrongHit * -9 +
-							  _currentForgeRecipe.Draw * -15 +
-							  _currentForgeRecipe.Punch * 2 +
-							  _currentForgeRecipe.Bend * 7 +
-							  _currentForgeRecipe.Upset * 13 +
-							  _currentForgeRecipe.Shrink * 16;
+			CurrentProgress = CurrentForgeRecipe.WeakHit * -3 +
+							  CurrentForgeRecipe.MediumHit * -6 +
+							  CurrentForgeRecipe.StrongHit * -9 +
+							  CurrentForgeRecipe.Draw * -15 +
+							  CurrentForgeRecipe.Punch * 2 +
+							  CurrentForgeRecipe.Bend * 7 +
+							  CurrentForgeRecipe.Upset * 13 +
+							  CurrentForgeRecipe.Shrink * 16;
 		}
 	}
 
 	private int _currentProgress = 0;
 
-	int CurrentProgress
+	public int CurrentProgress
 	{
-		get => 0;
+		get => _currentProgress;
 		set
 		{
-			// GD.Print($"[Forge] {value}///{_currentProgress}" );
-			_currentProgress += value;
+			_currentProgress = value;
 
 			CurrentProgressNumber.Text = _currentProgress.ToString("000");
 
@@ -131,171 +135,6 @@ public partial class Forge : Control
 		GD.Print("[Forge] Loaded Last Actions: " + fileNames.ToString());
 	}
 
-	#region Forge Clicks
-	//// Left Clicks
-	void OnLeftWeakHitPressed()     // -3
-	{
-		if (_currentProgress > 0)
-		{
-			CurrentProgress -= 3;
-			_currentForgeRecipe.WeakHit++;
-			NegativeActionsContainer.GetNode<Label>("WeakHit/Amount").Text = _currentForgeRecipe.WeakHit.ToString();
-		}
-	}
-
-	void OnLeftMediumHitPressed()   // -6
-	{
-		if (_currentProgress > 0)
-		{
-			CurrentProgress -= 6;
-			_currentForgeRecipe.MediumHit++;
-			NegativeActionsContainer.GetNode<Label>("MediumHit/Amount").Text = _currentForgeRecipe.MediumHit.ToString();
-		}
-	}
-
-	void OnLeftStrongHitPressed()   // -9
-	{
-		if (_currentProgress > 0)
-		{
-			CurrentProgress -= 9;
-			_currentForgeRecipe.StrongHit++;
-			NegativeActionsContainer.GetNode<Label>("StrongHit/Amount").Text = _currentForgeRecipe.StrongHit.ToString();
-		}
-	}
-
-	void OnLeftDrawPressed()        // -15
-	{
-		if (_currentProgress > 0)
-		{
-			CurrentProgress -= 15;
-			_currentForgeRecipe.Draw++;
-			NegativeActionsContainer.GetNode<Label>("Draw/Amount").Text = _currentForgeRecipe.Draw.ToString();
-		}
-	}
-
-	void OnLeftPunchPressed()       // +2
-	{
-		if (_currentProgress < 150)
-		{
-			CurrentProgress += 2;
-			_currentForgeRecipe.Punch++;
-			PositiveActionsContainer.GetNode<Label>("Punch/Amount").Text = _currentForgeRecipe.Punch.ToString();
-		}
-	}
-
-	void OnLeftBendPressed()        // +7
-	{
-		if (_currentProgress < 150)
-		{
-			CurrentProgress += 7;
-			_currentForgeRecipe.Bend++;
-			PositiveActionsContainer.GetNode<Label>("Bend/Amount").Text = _currentForgeRecipe.Bend.ToString();
-		}
-	}
-
-	void OnLeftUpsetPressed()       // +13
-	{
-		if (_currentProgress < 150)
-		{
-			CurrentProgress += 13;
-			_currentForgeRecipe.Upset++;
-			PositiveActionsContainer.GetNode<Label>("Upset/Amount").Text = _currentForgeRecipe.Upset.ToString();
-		}
-	}
-
-	void OnLeftShrinkPressed()      // +16
-	{
-		if (_currentProgress < 150)
-		{
-			CurrentProgress += 16;
-			_currentForgeRecipe.Shrink++;
-			PositiveActionsContainer.GetNode<Label>("Shrink/Amount").Text = _currentForgeRecipe.Shrink.ToString();
-		}
-	}
-
-
-	//// Right Clicks
-	void OnRightWeakHitPressed()    // +3
-	{
-		if (_currentForgeRecipe.WeakHit > 0)
-		{
-			CurrentProgress += 3;
-			_currentForgeRecipe.WeakHit--;
-			NegativeActionsContainer.GetNode<Label>("WeakHit/Amount").Text = _currentForgeRecipe.WeakHit.ToString();
-		}
-	}
-
-	void OnRightMediumHitPressed()  // +6
-	{
-		if (_currentForgeRecipe.MediumHit > 0)
-		{
-			CurrentProgress += 6;
-			_currentForgeRecipe.MediumHit--;
-			NegativeActionsContainer.GetNode<Label>("MediumHit/Amount").Text = _currentForgeRecipe.MediumHit.ToString();
-		}
-	}
-
-	void OnRightStrongHitPressed()  // +9
-	{
-		if (_currentForgeRecipe.StrongHit > 0)
-		{
-			CurrentProgress += 9;
-			_currentForgeRecipe.StrongHit--;
-			NegativeActionsContainer.GetNode<Label>("StrongHit/Amount").Text = _currentForgeRecipe.StrongHit.ToString();
-		}
-	}
-
-	void OnRightDrawPressed()       // +15
-	{
-		if (_currentForgeRecipe.Draw > 0)
-		{
-			CurrentProgress += 15;
-			_currentForgeRecipe.Draw--;
-			NegativeActionsContainer.GetNode<Label>("Draw/Amount").Text = _currentForgeRecipe.Draw.ToString();
-		}
-	}
-
-	void OnRightPunchPressed()      // -2
-	{
-		if (_currentForgeRecipe.Punch > 0)
-		{
-			CurrentProgress -= 2;
-			_currentForgeRecipe.Punch--;
-			PositiveActionsContainer.GetNode<Label>("Punch/Amount").Text = _currentForgeRecipe.Punch.ToString();
-		}
-	}
-
-	void OnRightBendPressed()       // -7
-	{
-		if (_currentForgeRecipe.Bend > 0)
-		{
-			CurrentProgress -= 7;
-			_currentForgeRecipe.Bend--;
-			PositiveActionsContainer.GetNode<Label>("Bend/Amount").Text = _currentForgeRecipe.Bend.ToString();
-		}
-	}
-
-	void OnRightUpsetPressed()      // -13
-	{
-		if (_currentForgeRecipe.Upset > 0)
-		{
-			CurrentProgress -= 13;
-			_currentForgeRecipe.Upset--;
-			PositiveActionsContainer.GetNode<Label>("Upset/Amount").Text = _currentForgeRecipe.Upset.ToString();
-		}
-	}
-
-	void OnRightShrinkPressed()     // -16
-	{
-		if (_currentForgeRecipe.Shrink > 0)
-		{
-			CurrentProgress -= 16;
-			_currentForgeRecipe.Shrink--;
-			PositiveActionsContainer.GetNode<Label>("Shrink/Amount").Text = _currentForgeRecipe.Shrink.ToString();
-		}
-	}
-	#endregion
-
 	#region Last Actions Hit
 
 	void HitLastActionButtonPressed(int place, int strength)
@@ -305,7 +144,7 @@ public partial class Forge : Control
 		switch (place)
 		{
 			case 1:
-				_currentForgeRecipe.LastActions.FirstAction = strength switch
+				CurrentForgeRecipe.LastActions.FirstAction = strength switch
 				{
 					1 => ForgeDatabase.Action.WeakHit,
 					2 => ForgeDatabase.Action.MediumHit,
@@ -314,7 +153,7 @@ public partial class Forge : Control
 				};
 				break;
 			case 2:
-				_currentForgeRecipe.LastActions.SecondAction = strength switch
+				CurrentForgeRecipe.LastActions.SecondAction = strength switch
 				{
 					1 => ForgeDatabase.Action.WeakHit,
 					2 => ForgeDatabase.Action.MediumHit,
@@ -323,7 +162,7 @@ public partial class Forge : Control
 				};
 				break;
 			case 3:
-				_currentForgeRecipe.LastActions.ThirdAction = strength switch
+				CurrentForgeRecipe.LastActions.ThirdAction = strength switch
 				{
 					1 => ForgeDatabase.Action.WeakHit,
 					2 => ForgeDatabase.Action.MediumHit,
@@ -343,7 +182,7 @@ public partial class Forge : Control
 		string fileName = VariantsMenu.GetItemText(index) + ".tres";
 		_lastForgeActions = GD.Load<LastShowForgeActions>(Global.Paths.LastForgeActions + fileName);
 
-		_currentForgeRecipe.LastActions.FirstAction = _lastForgeActions.FirstAction switch
+		CurrentForgeRecipe.LastActions.FirstAction = _lastForgeActions.FirstAction switch
 		{
 			ForgeDatabase.ShownAction.Draw => ForgeDatabase.Action.Draw,
 			ForgeDatabase.ShownAction.Hit => ForgeDatabase.Action.WeakHit,
@@ -355,7 +194,7 @@ public partial class Forge : Control
 			_ => ForgeDatabase.Action.None
 		};
 
-		_currentForgeRecipe.LastActions.SecondAction = _lastForgeActions.SecondAction switch
+		CurrentForgeRecipe.LastActions.SecondAction = _lastForgeActions.SecondAction switch
 		{
 			ForgeDatabase.ShownAction.Draw => ForgeDatabase.Action.Draw,
 			ForgeDatabase.ShownAction.Hit => ForgeDatabase.Action.WeakHit,
@@ -367,7 +206,7 @@ public partial class Forge : Control
 			_ => ForgeDatabase.Action.None
 		};
 
-		_currentForgeRecipe.LastActions.ThirdAction = _lastForgeActions.ThirdAction switch
+		CurrentForgeRecipe.LastActions.ThirdAction = _lastForgeActions.ThirdAction switch
 		{
 			ForgeDatabase.ShownAction.Draw => ForgeDatabase.Action.Draw,
 			ForgeDatabase.ShownAction.Hit => ForgeDatabase.Action.WeakHit,
@@ -385,7 +224,7 @@ public partial class Forge : Control
 
 	void ForgeGoalValueChanged(float value)
 	{
-		_currentForgeRecipe.RequiredWork = (int)value;
+		CurrentForgeRecipe.RequiredWork = (int)value;
 		RecalculateRequiredProgressBar();
 	}
 
@@ -464,7 +303,7 @@ public partial class Forge : Control
 		}
 
 		SelectedItem.Name = ItemName.Text;
-		SelectedItem.ForgeRecipe = _currentForgeRecipe;
+		SelectedItem.ForgeRecipe = CurrentForgeRecipe;
 		SelectedItem.LastForgeActions = _lastForgeActions;
 		SelectedItem.Icon = ItemIcon.Icon;
 
@@ -515,15 +354,15 @@ public partial class Forge : Control
 
 public void RecalculateRequiredProgressBar()
 	{
-		if (_currentForgeRecipe != null)
+		if (CurrentForgeRecipe != null)
 		{
 			ProgressBar.RequiredProgress = (int)ForgeGoal.Value;
-			if (_currentForgeRecipe != null && _currentForgeRecipe.LastActions != null)
+			if (CurrentForgeRecipe != null && CurrentForgeRecipe.LastActions != null)
 			{
 				int goal =	(int)ForgeGoal.Value
-							- (int)_currentForgeRecipe.LastActions.FirstAction
-							- (int)_currentForgeRecipe.LastActions.SecondAction
-							- (int)_currentForgeRecipe.LastActions.ThirdAction;
+							- (int)CurrentForgeRecipe.LastActions.FirstAction
+							- (int)CurrentForgeRecipe.LastActions.SecondAction
+							- (int)CurrentForgeRecipe.LastActions.ThirdAction;
 				ProgressBar.RequiredProgressNoLastActions = goal;
 				GoalNumber.Text = goal.ToString("000");											
 			}
@@ -532,7 +371,7 @@ public void RecalculateRequiredProgressBar()
 
 	void LookForHitTypeInLastActions()
 	{
-		switch (_currentForgeRecipe.LastActions.FirstAction)
+		switch (CurrentForgeRecipe.LastActions.FirstAction)
 			{
 				case ForgeDatabase.Action.WeakHit:
 					FirstActionIcon.GetNode<TextureButton>("HitHBoxContainer/WeakButton").ButtonPressed = true;
@@ -545,7 +384,7 @@ public void RecalculateRequiredProgressBar()
 					break;
 			}
 
-			switch (_currentForgeRecipe.LastActions.SecondAction)
+			switch (CurrentForgeRecipe.LastActions.SecondAction)
 			{
 				case ForgeDatabase.Action.WeakHit:
 					SecondActionIcon.GetNode<TextureButton>("HitHBoxContainer/WeakButton").ButtonPressed = true;
@@ -558,7 +397,7 @@ public void RecalculateRequiredProgressBar()
 					break;
 			}
 
-			switch (_currentForgeRecipe.LastActions.ThirdAction)
+			switch (CurrentForgeRecipe.LastActions.ThirdAction)
 			{
 				case ForgeDatabase.Action.WeakHit:
 					ThirdActionIcon.GetNode<TextureButton>("HitHBoxContainer/WeakButton").ButtonPressed = true;
