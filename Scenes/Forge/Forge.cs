@@ -40,24 +40,23 @@ public partial class Forge : Control
 	}
 
 	BoxContainer InterfaceContainer => GetNode<BoxContainer>("ForgeBG/InterfaceVBoxContainer");
+	BoxContainer InfoContainer => InterfaceContainer.GetNode<BoxContainer>("InfoHBoxContainer");
 
 	ForgeActionsContainer ActionsContainer => InterfaceContainer.GetNode<ForgeActionsContainer>("ForgeActionsContainer");
 	BoxContainer PositiveActionsContainer => ActionsContainer.PositiveActionsContainer;
 	BoxContainer NegativeActionsContainer => ActionsContainer.NegativeActionsContainer;
-	BoxContainer InfoContainer => InterfaceContainer.GetNode<BoxContainer>("InfoHBoxContainer");
-	BoxContainer LastActionsContainer => InfoContainer.GetNode<BoxContainer>("LastActionsVBoxContainer");
-	BoxContainer ActionIconsContainer => LastActionsContainer.GetNode<BoxContainer>("IconsHBoxContainer");
-	OptionButton VariantsMenu => LastActionsContainer.GetNode<OptionButton>("VariantsHBoxContainer/Variants");
+	
+	LastActionsContainer LastActionsContainer => InfoContainer.GetNode<LastActionsContainer>("LastActionsContainer");
+	OptionButton VariantsMenu => LastActionsContainer.VariantsMenu;
+	BorderedIcon FirstActionIcon => LastActionsContainer.FirstActionIcon;
+	BorderedIcon SecondActionIcon => LastActionsContainer.SecondActionIcon;
+	BorderedIcon ThirdActionIcon => LastActionsContainer.ThirdActionIcon;
 
 	BorderedIcon ItemIcon => GetNode<BorderedIcon>("%ItemIcon");
 	LineEdit ItemName => GetNode<LineEdit>("%ItemName");
 	SpinBox ForgeGoal => GetNode<SpinBox>("%ForgeGoal");
 	SpinBox IngotAmount => GetNode<SpinBox>("%IngotAmount");
-	FileDialog IconSelect => GetNode<FileDialog>("%IconSelect");
-
-	BorderedIcon FirstActionIcon => ActionIconsContainer.GetNode<BorderedIcon>("FirstAction");
-	BorderedIcon SecondActionIcon => ActionIconsContainer.GetNode<BorderedIcon>("SecondAction");
-	BorderedIcon ThirdActionIcon => ActionIconsContainer.GetNode<BorderedIcon>("ThirdAction");
+	FileDialog IconSelect => GetNode<FileDialog>("%IconSelect");	
 
 	Label CurrentProgressNumber => GetNode<Label>("%CurrentProgressNumber");
 	Label GoalNumber => GetNode<Label>("%GoalNumber");
@@ -72,7 +71,7 @@ public partial class Forge : Control
 		{
 			_selectedItem = value;
 			CurrentForgeRecipe = value.ForgeRecipe == null ? new ForgeRecipe() { LastActions = new() } :
-															  value.ForgeRecipe.Duplicate() as ForgeRecipe;
+															value.ForgeRecipe.Duplicate() as ForgeRecipe;
 			
 			LastForgeActions = value.LastForgeActions == null ? new() : value.LastForgeActions.Duplicate() as LastShowForgeActions;
 			if (value.LastForgeActions != null)
@@ -84,7 +83,10 @@ public partial class Forge : Control
 				for (int i = 0; i < VariantsMenu.ItemCount; i++)
 				{
 					if (VariantsMenu.GetItemText(i) == LastActionFileName)
+					{
 						VariantsMenu.Select(i);
+						break;
+					}
 					else
 						VariantsMenu.Select(-1);
 				}
@@ -98,8 +100,8 @@ public partial class Forge : Control
 			ItemIcon.Icon = value.Icon;
 			ItemName.Text = value.Name;
 			ForgeGoal.Value = CurrentForgeRecipe.RequiredWork;
-			SetLastForgeActions();
-			LookForHitTypeInLastActions();
+			LastActionsContainer.SetLastForgeActions();
+			LastActionsContainer.LookForHitTypeInLastActions();
 
 			RecalculateRequiredProgressBar();
 
@@ -142,133 +144,6 @@ public partial class Forge : Control
 		GD.Print("[Forge] Loaded Last Actions: " + fileNames.ToString());
 	}
 
-	#region Last Actions Hit
-
-	void HitLastActionButtonPressed(int place, int strength)
-	{
-		GD.Print($"[Forge/HitButton] Место: {place};\tСила: {strength}");
-
-		switch (place)
-		{
-			case 1:
-				CurrentForgeRecipe.LastActions.FirstAction = strength switch
-				{
-					1 => ForgeDatabase.Action.WeakHit,
-					2 => ForgeDatabase.Action.MediumHit,
-					3 => ForgeDatabase.Action.StrongHit,
-					_ => ForgeDatabase.Action.WeakHit
-				};
-				break;
-			case 2:
-				CurrentForgeRecipe.LastActions.SecondAction = strength switch
-				{
-					1 => ForgeDatabase.Action.WeakHit,
-					2 => ForgeDatabase.Action.MediumHit,
-					3 => ForgeDatabase.Action.StrongHit,
-					_ => ForgeDatabase.Action.WeakHit
-				};
-				break;
-			case 3:
-				CurrentForgeRecipe.LastActions.ThirdAction = strength switch
-				{
-					1 => ForgeDatabase.Action.WeakHit,
-					2 => ForgeDatabase.Action.MediumHit,
-					3 => ForgeDatabase.Action.StrongHit,
-					_ => ForgeDatabase.Action.WeakHit
-				};
-				break;
-		}
-		RecalculateRequiredProgressBar();
-	}
-
-	#endregion
-
-
-	void OnVariantSelected(int index)
-	{
-		string fileName = VariantsMenu.GetItemText(index) + ".tres";
-		LastForgeActions = GD.Load<LastShowForgeActions>(Global.Paths.LastForgeActions + fileName);
-
-		CurrentForgeRecipe.LastActions.FirstAction = LastForgeActions.FirstAction switch
-		{
-			ForgeDatabase.ShownAction.Draw => ForgeDatabase.Action.Draw,
-			ForgeDatabase.ShownAction.Hit => ForgeDatabase.Action.WeakHit,
-			ForgeDatabase.ShownAction.Punch => ForgeDatabase.Action.Punch,
-			ForgeDatabase.ShownAction.Bend => ForgeDatabase.Action.Bend,
-			ForgeDatabase.ShownAction.Upset => ForgeDatabase.Action.Upset,
-			ForgeDatabase.ShownAction.Shrink => ForgeDatabase.Action.Shrink,
-			ForgeDatabase.ShownAction.None => ForgeDatabase.Action.None,
-			_ => ForgeDatabase.Action.None
-		};
-
-		CurrentForgeRecipe.LastActions.SecondAction = LastForgeActions.SecondAction switch
-		{
-			ForgeDatabase.ShownAction.Draw => ForgeDatabase.Action.Draw,
-			ForgeDatabase.ShownAction.Hit => ForgeDatabase.Action.WeakHit,
-			ForgeDatabase.ShownAction.Punch => ForgeDatabase.Action.Punch,
-			ForgeDatabase.ShownAction.Bend => ForgeDatabase.Action.Bend,
-			ForgeDatabase.ShownAction.Upset => ForgeDatabase.Action.Upset,
-			ForgeDatabase.ShownAction.Shrink => ForgeDatabase.Action.Shrink,
-			ForgeDatabase.ShownAction.None => ForgeDatabase.Action.None,
-			_ => ForgeDatabase.Action.None
-		};
-
-		CurrentForgeRecipe.LastActions.ThirdAction = LastForgeActions.ThirdAction switch
-		{
-			ForgeDatabase.ShownAction.Draw => ForgeDatabase.Action.Draw,
-			ForgeDatabase.ShownAction.Hit => ForgeDatabase.Action.WeakHit,
-			ForgeDatabase.ShownAction.Punch => ForgeDatabase.Action.Punch,
-			ForgeDatabase.ShownAction.Bend => ForgeDatabase.Action.Bend,
-			ForgeDatabase.ShownAction.Upset => ForgeDatabase.Action.Upset,
-			ForgeDatabase.ShownAction.Shrink => ForgeDatabase.Action.Shrink,
-			ForgeDatabase.ShownAction.None => ForgeDatabase.Action.None,
-			_ => ForgeDatabase.Action.None
-		};
-
-		RecalculateRequiredProgressBar();
-		SetLastForgeActions();
-	}
-
-	// Где это используется вообще?
-	void ForgeGoalValueChanged(float value)
-	{
-		CurrentForgeRecipe.RequiredWork = (int)value;
-		RecalculateRequiredProgressBar();
-	}
-
-	void SetLastForgeActions()
-	{
-		FirstActionIcon.Icon = GetActionIcon(LastForgeActions.FirstAction);
-		SecondActionIcon.Icon = GetActionIcon(LastForgeActions.SecondAction);
-		ThirdActionIcon.Icon = GetActionIcon(LastForgeActions.ThirdAction);
-
-		if (LastForgeActions.FirstAction == ForgeDatabase.ShownAction.Hit)
-			FirstActionIcon.GetNode<BoxContainer>("HitHBoxContainer").Visible = true;
-		else
-			FirstActionIcon.GetNode<BoxContainer>("HitHBoxContainer").Visible = false;
-
-		if (LastForgeActions.SecondAction == ForgeDatabase.ShownAction.Hit)
-			SecondActionIcon.GetNode<BoxContainer>("HitHBoxContainer").Visible = true;
-		else
-			SecondActionIcon.GetNode<BoxContainer>("HitHBoxContainer").Visible = false;
-
-		if (LastForgeActions.ThirdAction == ForgeDatabase.ShownAction.Hit)
-			ThirdActionIcon.GetNode<BoxContainer>("HitHBoxContainer").Visible = true;
-		else
-			ThirdActionIcon.GetNode<BoxContainer>("HitHBoxContainer").Visible = false;
-	}
-
-	Texture2D GetActionIcon(ForgeDatabase.ShownAction action) => action switch
-	{
-		ForgeDatabase.ShownAction.Draw => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Draw.png"),
-		ForgeDatabase.ShownAction.Hit => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Hit.png"),
-		ForgeDatabase.ShownAction.Punch => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Punch.png"),
-		ForgeDatabase.ShownAction.Bend => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Bend.png"),
-		ForgeDatabase.ShownAction.Upset => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Upset.png"),
-		ForgeDatabase.ShownAction.Shrink => GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Shrink.png"),
-		_ => null,
-	};
-
 	void OnItemIconClick(InputEvent ev)
 	{
 		if (ev is InputEventMouseButton && ev.IsPressed())
@@ -284,6 +159,28 @@ public partial class Forge : Control
 		IconSelect.Visible = false;
 	}
 
+	void ForgeGoalValueChanged(float value)
+	{
+		CurrentForgeRecipe.RequiredWork = (int)value;
+		RecalculateRequiredProgressBar();
+	}
+
+	public void RecalculateRequiredProgressBar()
+	{
+		if (CurrentForgeRecipe != null)
+		{
+			ProgressBar.RequiredProgress = (int)ForgeGoal.Value;
+			if (CurrentForgeRecipe != null && CurrentForgeRecipe.LastActions != null)
+			{
+				int goal =	(int)ForgeGoal.Value
+							- (int)CurrentForgeRecipe.LastActions.FirstAction
+							- (int)CurrentForgeRecipe.LastActions.SecondAction
+							- (int)CurrentForgeRecipe.LastActions.ThirdAction;
+				ProgressBar.RequiredProgressNoLastActions = goal;
+				GoalNumber.Text = goal.ToString("000");											
+			}
+		}
+	}
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// ~~~~~~~~~~~~~~~~~~~~ Item Resource Save ~~~~~~~~~~~~~~~~~~~~~
@@ -327,9 +224,6 @@ public partial class Forge : Control
 
 		if (newPath != oldPath && FileAccess.FileExists(oldPath))
 		{
-			// DirAccess.Open(Global.Paths.Items +
-			// 				SelectedItem.MetalName.GetNameFromTransltaionCode())
-			// 				.Remove(SelectedItem.Name + ".tres")
 			if (DirAccess.RemoveAbsolute(oldPath) != Error.Ok)
 				GD.Print("[Forge/Save] Old resource file was not deleted");
 			else
@@ -352,65 +246,4 @@ public partial class Forge : Control
 		Visible = false;
 		Global.Main.ItemSelection.Visible = true;
 	}
-
-
-	public void RecalculateRequiredProgressBar()
-	{
-		if (CurrentForgeRecipe != null)
-		{
-			ProgressBar.RequiredProgress = (int)ForgeGoal.Value;
-			if (CurrentForgeRecipe != null && CurrentForgeRecipe.LastActions != null)
-			{
-				int goal =	(int)ForgeGoal.Value
-							- (int)CurrentForgeRecipe.LastActions.FirstAction
-							- (int)CurrentForgeRecipe.LastActions.SecondAction
-							- (int)CurrentForgeRecipe.LastActions.ThirdAction;
-				ProgressBar.RequiredProgressNoLastActions = goal;
-				GoalNumber.Text = goal.ToString("000");											
-			}
-		}
-	}
-
-	void LookForHitTypeInLastActions()
-	{
-		switch (CurrentForgeRecipe.LastActions.FirstAction)
-		{
-			case ForgeDatabase.Action.WeakHit:
-				FirstActionIcon.GetNode<TextureButton>("HitHBoxContainer/WeakButton").ButtonPressed = true;
-				break;
-			case ForgeDatabase.Action.MediumHit:
-				FirstActionIcon.GetNode<TextureButton>("HitHBoxContainer/MediumButton").ButtonPressed = true;
-				break;
-			case ForgeDatabase.Action.StrongHit:
-				FirstActionIcon.GetNode<TextureButton>("HitHBoxContainer/StrongButton").ButtonPressed = true;
-				break;
-		}
-
-		switch (CurrentForgeRecipe.LastActions.SecondAction)
-		{
-			case ForgeDatabase.Action.WeakHit:
-				SecondActionIcon.GetNode<TextureButton>("HitHBoxContainer/WeakButton").ButtonPressed = true;
-				break;
-			case ForgeDatabase.Action.MediumHit:
-				SecondActionIcon.GetNode<TextureButton>("HitHBoxContainer/MediumButton").ButtonPressed = true;
-				break;
-			case ForgeDatabase.Action.StrongHit:
-				SecondActionIcon.GetNode<TextureButton>("HitHBoxContainer/StrongButton").ButtonPressed = true;
-				break;
-		}
-
-		switch (CurrentForgeRecipe.LastActions.ThirdAction)
-		{
-			case ForgeDatabase.Action.WeakHit:
-				ThirdActionIcon.GetNode<TextureButton>("HitHBoxContainer/WeakButton").ButtonPressed = true;
-				break;
-			case ForgeDatabase.Action.MediumHit:
-				ThirdActionIcon.GetNode<TextureButton>("HitHBoxContainer/MediumButton").ButtonPressed = true;
-				break;
-			case ForgeDatabase.Action.StrongHit:
-				ThirdActionIcon.GetNode<TextureButton>("HitHBoxContainer/StrongButton").ButtonPressed = true;
-				break;
-		}
-	}
-
 }

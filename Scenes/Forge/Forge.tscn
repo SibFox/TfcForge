@@ -1,10 +1,11 @@
-[gd_scene load_steps=36 format=3 uid="uid://c2ldy4uvet4or"]
+[gd_scene load_steps=37 format=3 uid="uid://c2ldy4uvet4or"]
 
 [ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_as2me"]
 [ext_resource type="Script" uid="uid://gwlt7f3j5dlo" path="res://Scenes/Forge/Forge.cs" id="1_j7md3"]
 [ext_resource type="PackedScene" uid="uid://bap1xbjcnw27t" path="res://Scenes/UI/BorderedIcon.tscn" id="3_602a4"]
 [ext_resource type="Texture2D" uid="uid://rr23tat7ru2g" path="res://Assets/Forge/Red Forge Button.png" id="3_mm0nf"]
 [ext_resource type="Script" uid="uid://mn147mp6dqug" path="res://Exstentions/LeftRightClickButton.cs" id="4_602a4"]
+[ext_resource type="Script" uid="uid://f7mo3s4t0t5u" path="res://Scenes/Forge/LastActionsContainer.cs" id="4_apm8i"]
 [ext_resource type="Texture2D" uid="uid://d1iooklb8w6xu" path="res://Assets/Forge/Weak Hit.png" id="4_rql2q"]
 [ext_resource type="Texture2D" uid="uid://cxm7emowv72a7" path="res://Assets/Forge/Hit Weak Button.png" id="4_ve6p6"]
 [ext_resource type="Texture2D" uid="uid://c86ql68xk2jpy" path="res://Assets/Forge/Hit Weak Button Toggled.png" id="5_143fd"]
@@ -153,15 +154,16 @@ layout_mode = 2
 size_flags_horizontal = 8
 min_value = 0.01
 max_value = 10.0
-step = 0.01
+step = 0.1
 value = 1.0
 alignment = 2
 
-[node name="LastActionsVBoxContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer"]
+[node name="LastActionsContainer" type="VBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("4_apm8i")
 
-[node name="Label" type="Label" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer"]
+[node name="Label" type="Label" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 size_flags_stretch_ratio = 0.3
@@ -170,17 +172,17 @@ label_settings = SubResource("LabelSettings_k3vwi")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="IconsHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer"]
+[node name="IconsHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="FirstAction" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer" instance=ExtResource("3_602a4")]
+[node name="FirstAction" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer" instance=ExtResource("3_602a4")]
 layout_mode = 2
 size_flags_horizontal = 3
 Icon = null
 
-[node name="HitHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/FirstAction"]
+[node name="HitHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/FirstAction"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -191,7 +193,7 @@ offset_right = 17.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="WeakButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer"]
+[node name="WeakButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 8
@@ -205,7 +207,7 @@ texture_pressed = ExtResource("5_143fd")
 texture_hover = ExtResource("5_143fd")
 texture_focused = ExtResource("5_143fd")
 
-[node name="MediumButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer"]
+[node name="MediumButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
@@ -218,7 +220,7 @@ texture_pressed = ExtResource("7_qjfaj")
 texture_hover = ExtResource("7_qjfaj")
 texture_focused = ExtResource("7_qjfaj")
 
-[node name="StrongButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer"]
+[node name="StrongButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
@@ -231,12 +233,12 @@ texture_pressed = ExtResource("9_nikf1")
 texture_hover = ExtResource("9_nikf1")
 texture_focused = ExtResource("9_nikf1")
 
-[node name="SecondAction" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer" instance=ExtResource("3_602a4")]
+[node name="SecondAction" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer" instance=ExtResource("3_602a4")]
 layout_mode = 2
 size_flags_horizontal = 3
 Icon = null
 
-[node name="HitHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/SecondAction"]
+[node name="HitHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/SecondAction"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -247,7 +249,7 @@ offset_right = 17.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="WeakButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer"]
+[node name="WeakButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 8
@@ -261,7 +263,7 @@ texture_pressed = ExtResource("5_143fd")
 texture_hover = ExtResource("5_143fd")
 texture_focused = ExtResource("5_143fd")
 
-[node name="MediumButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer"]
+[node name="MediumButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
@@ -274,7 +276,7 @@ texture_pressed = ExtResource("7_qjfaj")
 texture_hover = ExtResource("7_qjfaj")
 texture_focused = ExtResource("7_qjfaj")
 
-[node name="StrongButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer"]
+[node name="StrongButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
@@ -287,12 +289,12 @@ texture_pressed = ExtResource("9_nikf1")
 texture_hover = ExtResource("9_nikf1")
 texture_focused = ExtResource("9_nikf1")
 
-[node name="ThirdAction" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer" instance=ExtResource("3_602a4")]
+[node name="ThirdAction" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer" instance=ExtResource("3_602a4")]
 layout_mode = 2
 size_flags_horizontal = 3
 Icon = null
 
-[node name="HitHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction"]
+[node name="HitHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/ThirdAction"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -303,7 +305,7 @@ offset_right = 17.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="WeakButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer"]
+[node name="WeakButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 8
@@ -317,7 +319,7 @@ texture_pressed = ExtResource("5_143fd")
 texture_hover = ExtResource("5_143fd")
 texture_focused = ExtResource("5_143fd")
 
-[node name="MediumButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer"]
+[node name="MediumButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
@@ -330,7 +332,7 @@ texture_pressed = ExtResource("7_qjfaj")
 texture_hover = ExtResource("7_qjfaj")
 texture_focused = ExtResource("7_qjfaj")
 
-[node name="StrongButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer"]
+[node name="StrongButton" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
@@ -343,12 +345,12 @@ texture_pressed = ExtResource("9_nikf1")
 texture_hover = ExtResource("9_nikf1")
 texture_focused = ExtResource("9_nikf1")
 
-[node name="VariantsHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer"]
+[node name="VariantsHBoxContainer" type="HBoxContainer" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 0.0
 
-[node name="Variants" type="OptionButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/VariantsHBoxContainer"]
+[node name="Variants" type="OptionButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/VariantsHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
@@ -357,7 +359,7 @@ text_overrun_behavior = 3
 clip_text = true
 fit_to_longest_item = false
 
-[node name="Button" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/VariantsHBoxContainer"]
+[node name="Button" type="TextureButton" parent="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/VariantsHBoxContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -873,16 +875,16 @@ script = SubResource("GDScript_ve6p6")
 
 [connection signal="gui_input" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/MarginContainer/ItemVBoxContainer/ItemInfoHBoxContainer/ItemIcon" to="." method="OnItemIconClick"]
 [connection signal="value_changed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/MarginContainer/ItemVBoxContainer/SpecifyHBoxContainer/ForgeGoal" to="." method="ForgeGoalValueChanged"]
-[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer/WeakButton" to="." method="HitLastActionButtonPressed" binds= [1, 1]]
-[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer/MediumButton" to="." method="HitLastActionButtonPressed" binds= [1, 2]]
-[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer/StrongButton" to="." method="HitLastActionButtonPressed" binds= [1, 3]]
-[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer/WeakButton" to="." method="HitLastActionButtonPressed" binds= [2, 1]]
-[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer/MediumButton" to="." method="HitLastActionButtonPressed" binds= [2, 2]]
-[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer/StrongButton" to="." method="HitLastActionButtonPressed" binds= [2, 3]]
-[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer/WeakButton" to="." method="HitLastActionButtonPressed" binds= [3, 1]]
-[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer/MediumButton" to="." method="HitLastActionButtonPressed" binds= [3, 2]]
-[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer/StrongButton" to="." method="HitLastActionButtonPressed" binds= [3, 3]]
-[connection signal="item_selected" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsVBoxContainer/VariantsHBoxContainer/Variants" to="." method="OnVariantSelected"]
+[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer/WeakButton" to="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer" method="HitLastActionButtonPressed" binds= [1, 1]]
+[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer/MediumButton" to="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer" method="HitLastActionButtonPressed" binds= [1, 2]]
+[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/FirstAction/HitHBoxContainer/StrongButton" to="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer" method="HitLastActionButtonPressed" binds= [1, 3]]
+[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer/WeakButton" to="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer" method="HitLastActionButtonPressed" binds= [2, 1]]
+[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer/MediumButton" to="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer" method="HitLastActionButtonPressed" binds= [2, 2]]
+[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/SecondAction/HitHBoxContainer/StrongButton" to="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer" method="HitLastActionButtonPressed" binds= [2, 3]]
+[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer/WeakButton" to="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer" method="HitLastActionButtonPressed" binds= [3, 1]]
+[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer/MediumButton" to="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer" method="HitLastActionButtonPressed" binds= [3, 2]]
+[connection signal="pressed" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/IconsHBoxContainer/ThirdAction/HitHBoxContainer/StrongButton" to="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer" method="HitLastActionButtonPressed" binds= [3, 3]]
+[connection signal="item_selected" from="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer/VariantsHBoxContainer/Variants" to="ForgeBG/InterfaceVBoxContainer/InfoHBoxContainer/LastActionsContainer" method="OnVariantSelected"]
 [connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [16]]
 [connection signal="RightClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Shrink" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [-16]]
 [connection signal="LeftClick" from="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer/ActionVBoxContainer/PositiveHBoxContainer/Upset" to="ForgeBG/InterfaceVBoxContainer/ForgeActionsContainer" method="OnActionClick" binds= [13]]
