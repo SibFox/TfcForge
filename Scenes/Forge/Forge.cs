@@ -18,7 +18,7 @@ public partial class Forge : Control
 		set => _lastForgeActions = value;
 	}
 
-	private string _lastForgeActionsResourcePath;	
+	private string lastForgeActionsResourcePath;
 
 	private int _currentProgress = 0;
 	public int CurrentProgress
@@ -45,7 +45,7 @@ public partial class Forge : Control
 	ForgeActionsContainer ActionsContainer => InterfaceContainer.GetNode<ForgeActionsContainer>("ForgeActionsContainer");
 	BoxContainer PositiveActionsContainer => ActionsContainer.PositiveActionsContainer;
 	BoxContainer NegativeActionsContainer => ActionsContainer.NegativeActionsContainer;
-	
+
 	LastActionsContainer LastActionsContainer => InfoContainer.GetNode<LastActionsContainer>("LastActionsContainer");
 	OptionButton VariantsMenu => LastActionsContainer.VariantsMenu;
 	BorderedIcon FirstActionIcon => LastActionsContainer.FirstActionIcon;
@@ -56,7 +56,7 @@ public partial class Forge : Control
 	LineEdit ItemName => GetNode<LineEdit>("%ItemName");
 	SpinBox ForgeGoal => GetNode<SpinBox>("%ForgeGoal");
 	SpinBox IngotAmount => GetNode<SpinBox>("%IngotAmount");
-	FileDialog IconSelect => GetNode<FileDialog>("%IconSelect");	
+	FileDialog IconSelect => GetNode<FileDialog>("%IconSelect");
 
 	Label CurrentProgressNumber => GetNode<Label>("%CurrentProgressNumber");
 	Label GoalNumber => GetNode<Label>("%GoalNumber");
@@ -71,14 +71,14 @@ public partial class Forge : Control
 		{
 			_selectedItem = value;
 			CurrentForgeRecipe = value.ForgeRecipe == null ? new ForgeRecipe() { LastActions = new() } :
-															value.ForgeRecipe.Duplicate() as ForgeRecipe;
-			
-			LastForgeActions = value.LastForgeActions == null ? new() : value.LastForgeActions.Duplicate() as LastShowForgeActions;
+														value.ForgeRecipe.Duplicate() as ForgeRecipe;
+			LastForgeActions = value.LastForgeActions == null ? new() :
+														value.LastForgeActions.Duplicate() as LastShowForgeActions;
+
 			if (value.LastForgeActions != null)
 			{
-				_lastForgeActionsResourcePath = value.LastForgeActions.ResourcePath;
-				string[] LastActionSplittedPath = _lastForgeActionsResourcePath.Split('/');
-				string LastActionFileName = LastActionSplittedPath[^1].Replace(".tres", "");
+				lastForgeActionsResourcePath = value.LastForgeActions.ResourcePath;
+				string LastActionFileName = lastForgeActionsResourcePath.Split('/')[^1].Replace(".tres", "");
 				GD.Print("[Forge] Last Actions File Name: " + LastActionFileName);
 				for (int i = 0; i < VariantsMenu.ItemCount; i++)
 				{
@@ -92,7 +92,7 @@ public partial class Forge : Control
 				}
 			}
 
-			IngotAmount.Value = 1;
+			IngotAmount.Value = 1.0;
 			if (value.MeltsInto != null)
 				if (value.MeltsInto.MeltsInto != null)
 					IngotAmount.Value = value.MeltsInto.Ingots;
@@ -102,7 +102,6 @@ public partial class Forge : Control
 			ForgeGoal.Value = CurrentForgeRecipe.RequiredWork;
 			LastActionsContainer.SetLastForgeActions();
 			LastActionsContainer.LookForHitTypeInLastActions();
-
 			RecalculateRequiredProgressBar();
 
 			NegativeActionsContainer.GetNode<Label>("WeakHit/Amount").Text = CurrentForgeRecipe.WeakHit.ToString();
@@ -134,15 +133,14 @@ public partial class Forge : Control
 
 		foreach (string actionFile in actionFiles)
 		{
-			fileNames.Append(actionFile);
-
+			fileNames.Append(actionFile + "; ");
 			VariantsMenu.AddItem(actionFile.Replace(".tres", ""));
-
-			fileNames.Append("; ");
 		}
 
 		GD.Print("[Forge] Loaded Last Actions: " + fileNames.ToString());
 	}
+
+
 
 	void OnItemIconClick(InputEvent ev)
 	{
@@ -172,18 +170,19 @@ public partial class Forge : Control
 			ProgressBar.RequiredProgress = (int)ForgeGoal.Value;
 			if (CurrentForgeRecipe != null && CurrentForgeRecipe.LastActions != null)
 			{
-				int goal =	(int)ForgeGoal.Value
+				int goal = (int)ForgeGoal.Value
 							- (int)CurrentForgeRecipe.LastActions.FirstAction
 							- (int)CurrentForgeRecipe.LastActions.SecondAction
 							- (int)CurrentForgeRecipe.LastActions.ThirdAction;
 				ProgressBar.RequiredProgressNoLastActions = goal;
-				GoalNumber.Text = goal.ToString("000");											
+				GoalNumber.Text = goal.ToString("000");
 			}
 		}
 	}
 
-	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// ~~~~~~~~~~~~~~~~~~~~ Item Resource Save ~~~~~~~~~~~~~~~~~~~~~
+	#region Item Resource Save
 	void OnSaveButtonPressed()
 	{
 		string oldPath = SelectedItem.ResourcePath;
@@ -201,18 +200,19 @@ public partial class Forge : Control
 			return;
 		}
 
+
 		SelectedItem.Name = ItemName.Text;
 		SelectedItem.ForgeRecipe = CurrentForgeRecipe;
 		SelectedItem.LastForgeActions = LastForgeActions;
 		SelectedItem.Icon = ItemIcon.Icon;
-
 		SelectedItem.MeltsInto ??= new()
 		{
-			MeltsInto = GD.Load<Item>(Global.Paths.Items + 
-									SelectedItem.MetalName.GetNameFromTransltaionCode() + 
+			MeltsInto = GD.Load<Item>(Global.Paths.Items +
+									SelectedItem.MetalName.GetNameFromTransltaionCode() +
 									"/Ingot.tres").MeltsInto.MeltsInto,
 			Ingots = (float)IngotAmount.Value
 		};
+
 
 		GD.Print("[Forge/Save] Item save resource path: " + newPath);
 		if (ResourceSaver.Save(SelectedItem, newPath) != Error.Ok)
@@ -228,22 +228,23 @@ public partial class Forge : Control
 				GD.Print("[Forge/Save] Old resource file was not deleted");
 			else
 				GD.Print("[Forge/Save] Old resource file successfully deleted");
-					
+
 		}
+
 
 		Global.Main.ItemSelection.AddToCache(SelectedItem);
 		_selectedItem = null;
 		Visible = false;
 		Global.Main.ItemSelection.LoadItemsFromCache();
 		Global.Main.ItemSelection.Visible = true;
-		
 	}
 
 	void OnCancelButtonPressed()
 	{
-		GD.Print("[Forge/Save] Item editing canceled");
+		GD.Print("[Forge/Cancel] Item editing canceled");
 		_selectedItem = null;
 		Visible = false;
 		Global.Main.ItemSelection.Visible = true;
 	}
+	#endregion
 }
