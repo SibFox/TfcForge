@@ -8,7 +8,7 @@ public partial class MaterialSelection : Control
 
 	public override void _Ready()
 	{
-		IngotCostEdit.Text = Global.GlobalConfig.GetValue("ingot", "cost", 100).ToString(); //ProjectSettings.GetSetting("global/IngotCost", 100).ToString();
+		IngotCostEdit.Text = Global.Config.GetValue("ingot", "cost", 100).ToString();
 	}
 
 
@@ -29,8 +29,8 @@ public partial class MaterialSelection : Control
 
 	void OnIngotCostTextSubmitted(string str)
 	{
-		Global.GlobalConfig.SetValue("ingot", "cost", str.ToInt());
-		Global.GlobalConfig.Save("res://GlobalConfig.ini");
-		GD.Print("[MaterialSelection] Ingot cost changed to " + str + $"; (Control value: {Global.GlobalConfig.GetValue("ingot", "cost")})");
+		Global.Config.SetValue("ingot", "cost", str.ToInt());
+		Global.Config.Save("res://GlobalConfig.ini");
+		GD.Print("[MaterialSelection] Ingot cost changed to " + str + $"; (Control value: {Global.Config.GetValue("ingot", "cost")})");
 	}
 }

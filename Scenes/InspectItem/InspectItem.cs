@@ -5,12 +5,12 @@ using static Godot.TranslationServer;
 
 public partial class InspectItem : Control
 {
+    #region Node Section
     private BoxContainer MainContainer => GetNode<BoxContainer>("MainVBoxContainer");
     private BoxContainer ItemInfoContainer => MainContainer.GetNode<BoxContainer>("ItemInfoHBoxContainer");
     private BoxContainer InspectTabContainer => MainContainer.GetNode<BoxContainer>("InspectTabVBoxContainer");
 
     private BorderedIcon ItemIcon => ItemInfoContainer.GetNode<BorderedIcon>("ItemBorderedIcon");
-    // private TextureRect ItemIcon => ItemInfoContainer.GetNode<TextureRect>("ItemIconBorder/ItemIcon");
     private Label ItemNameLabel => ItemInfoContainer.GetNode<Label>("ItemNameLabel");
     private Label CategoryLabel => ItemInfoContainer.GetNode<Label>("CategoryLabel");
 
@@ -76,32 +76,36 @@ public partial class InspectItem : Control
     private Label MillibucketsLabel => MoltenMetalContainer.GetNode<Label>("MillibucketsLabel");
     private BorderedIcon MoltenMetalIcon => MoltenMetalContainer.GetNode<BorderedIcon>("BorderedIcon");
 
-    private int IngotCost => (int)Global.GlobalConfig.GetValue("ingot", "cost", 100);
+    private int IngotCost => (int)Global.Config.GetValue("ingot", "cost", 100);
     // ---- Melts into ----
     #endregion
     #endregion
+    #endregion
 
-    private Item _currentItem;
     int currentForgeWork;
 
-    public void SetItem(Item item)
+    private Item _currentItem;
+    public Item CurrentItem
     {
-        _currentItem = item;
-        currentForgeWork = 0;
+        get => _currentItem;
+        set
+        {
+            _currentItem = value;
+            currentForgeWork = 0;
 
-        ForgeRecipeContainer.Visible = WeldRecipeContainer.Visible = false;
+            ForgeRecipeContainer.Visible = WeldRecipeContainer.Visible = false;
 
-        ItemIcon.Icon = _currentItem.Icon;
-        // ItemIcon.Texture = _currentItem.Icon;
-        ItemNameLabel.Text = _currentItem.Name;
-        CategoryLabel.Text = ItemDatabase.ItemCategoryTRCodes[_currentItem.Category];
+            ItemIcon.Icon = value.Icon;
+            ItemNameLabel.Text = value.Name;
+            CategoryLabel.Text = ItemDatabase.ItemCategoryTRCodes[value.Category];
 
-        if (item.WeldRecipe == null)
-            SetForgeRecipe();
-        else
-            SetWendRecipe();
+            if (value.WeldRecipe == null)
+                SetForgeRecipe();
+            else
+                SetWendRecipe();
 
-        SetAdditionalInfo();
+            SetAdditionalInfo();
+        }
     }
 
     #region Forge recipe
@@ -113,7 +117,7 @@ public partial class InspectItem : Control
         StringBuilder mathString = new();
         StringBuilder actionsString = new();
 
-        ForgeRecipe recipe = _currentItem.ForgeRecipe;
+        ForgeRecipe recipe = CurrentItem.ForgeRecipe;
 
         ForgeWorkResultLabel.Text = recipe.RequiredWork.ToString();
 
@@ -240,8 +244,7 @@ public partial class InspectItem : Control
                     action = recipe.LastActions.SecondAction;
                     break;
                 case 3:
-                    // if (recipe.LastActions.ThirdAction != ForgeDatabase.Action.None)
-                        action = recipe.LastActions.ThirdAction;
+                    action = recipe.LastActions.ThirdAction;
                     break;
             }
 
@@ -275,7 +278,7 @@ public partial class InspectItem : Control
     {
         WeldRecipeContainer.Visible = true;
 
-        WeldRecipe recipe = _currentItem.WeldRecipe;
+        WeldRecipe recipe = CurrentItem.WeldRecipe;
 
         FirstWeldItemLabel.Text = recipe.FirstItem.Name;
         FirstWeldItemIcon.Icon = recipe.FirstItem.Icon;
@@ -296,7 +299,7 @@ public partial class InspectItem : Control
     #region  Made from
     void SetMadeFrom()
     {
-        if ((_currentItem.MadeFrom == null) || (_currentItem.MadeFrom.OriginalItem == null && _currentItem.MadeFrom.AdditionalItem == null))
+        if ((CurrentItem.MadeFrom == null) || (CurrentItem.MadeFrom.OriginalItem == null && CurrentItem.MadeFrom.AdditionalItem == null))
         {
             NotSpecifiedMadeFromLabel.Visible = true;
             ItemsContainer.Visible = false;
@@ -307,8 +310,8 @@ public partial class InspectItem : Control
         NotSpecifiedMadeFromLabel.Visible = false;
         AdditionalItemContainer.Visible = false;
 
-        Item originalItem = _currentItem.MadeFrom.OriginalItem;
-        Item additionalItem = _currentItem.MadeFrom.AdditionalItem;
+        Item originalItem = CurrentItem.MadeFrom.OriginalItem;
+        Item additionalItem = CurrentItem.MadeFrom.AdditionalItem;
 
         if (originalItem == null)
         {
@@ -333,13 +336,13 @@ public partial class InspectItem : Control
     #region  Melts into
     void SetMeltsInto()
     {
-        if (_currentItem.MeltsInto == null)
+        if (CurrentItem.MeltsInto == null)
         {
             NotSpecifiedMeltsIntoLabel.Visible = true;
             MoltenMetalContainer.Visible = false;
             return;
         }
-        if (_currentItem.MeltsInto.MeltsInto == null)
+        if (CurrentItem.MeltsInto.MeltsInto == null)
         {
             NotSpecifiedMeltsIntoLabel.Visible = true;
             MoltenMetalContainer.Visible = false;
@@ -349,7 +352,7 @@ public partial class InspectItem : Control
         MoltenMetalContainer.Visible = true;
         NotSpecifiedMeltsIntoLabel.Visible = false;
 
-        MeltingRecipe metal = _currentItem.MeltsInto;
+        MeltingRecipe metal = CurrentItem.MeltsInto;
 
         MoltenMetalLabel.Text = metal.MeltsInto.Name;
         MoltenMetalIcon.Icon = metal.MeltsInto.Icon;
@@ -361,7 +364,6 @@ public partial class InspectItem : Control
     void OnBackPressed()
     {
         Visible = false;
-
         Global.Main.ItemSelection.Visible = true;
 	}
 }
