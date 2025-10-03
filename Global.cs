@@ -34,6 +34,8 @@ public partial class Global : Node
 		}
 	}
 
+	public static int IngotCost => (int)Global.Config.GetValue("ingot", "cost", 100);
+
 	public static void OpenMaterialSelectionScene(Control scene)
 	{
 		Main.MaterialSelection.Visible = true;

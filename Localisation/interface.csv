@@ -6,12 +6,12 @@ TR_WORK_INSPECT;Inspect;Просмотреть
 TR_PICK_ITEM;Pick an Item to Inspect or Redact;Выберите предмет для просмотра или редактирования
 TR_ADD_NEW_FORGE;Add new forge;Добавить новую ковку
 TR_SPECIFY_CATEGORY;Specify category;Выберите категорию
-TR_FORGE_EXPECTED;Expected work:;Ожидаемая работа:
+ui.inspect.forge_expected;Expected work:;Ожидаемая работа:
 ui.inspect.forge_recipe;Forge Recipe;Создание на кузне
 ui.inspect.weld_recipe;Weld Recipe;Создание сваркой
 ui.inspect.made_from;Made From;Делается из
 ui.inspect.melts_into;Melts Into;Плавится в
-TR_NOT_SPECIFIED;Not Specified;Не указано
+ui.inspect.not_specified;Not Specified;Не указано
 ui.save;Save;Сохранить
 ui.cancel;Cancel;Отмена
 ui.forge.last_actions;Last Actions;Последние действия

@@ -1,12 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://bddg8koxurtv"]
+[gd_scene load_steps=17 format=3 uid="uid://bddg8koxurtv"]
 
 [ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_41x0h"]
 [ext_resource type="Script" uid="uid://b1vdmhy7e88b6" path="res://Scenes/InspectItem/InspectItem.cs" id="1_sdwbh"]
-[ext_resource type="Texture2D" uid="uid://dt2mnimuccw03" path="res://Assets/Forge/Action Border.png" id="2_41x0h"]
-[ext_resource type="Texture2D" uid="uid://b86aqb78xiw33" path="res://Assets/Sprites/ingot/bismuth.png" id="3_dubhn"]
 [ext_resource type="PackedScene" uid="uid://bap1xbjcnw27t" path="res://Scenes/UI/BorderedIcon.tscn" id="3_w7sf6"]
 [ext_resource type="Texture2D" uid="uid://dnf4gxjq5cbnr" path="res://Assets/Forge/Button Back.png" id="4_w7sf6"]
 [ext_resource type="Texture2D" uid="uid://bvn5phejsme2c" path="res://Assets/Forge/Button Back Hover Press.png" id="5_1nxv0"]
+[ext_resource type="Script" uid="uid://dcifxaqr3sgnb" path="res://Scenes/InspectItem/ForgeRecipeContainer.cs" id="6_dubhn"]
+[ext_resource type="Script" uid="uid://cict3lowmv7vg" path="res://Scenes/InspectItem/WeldRecipeContainer.cs" id="7_1nxv0"]
+[ext_resource type="Script" uid="uid://bbivdlygckxau" path="res://Scenes/InspectItem/AdditionalInfoContainer.cs" id="7_w7sf6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r4s8k"]
 
@@ -60,29 +61,6 @@ size_flags_stretch_ratio = 1.6
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ItemIconBorder" type="TextureRect" parent="MainVBoxContainer/ItemInfoHBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("2_41x0h")
-stretch_mode = 5
-
-[node name="ItemIcon" type="TextureRect" parent="MainVBoxContainer/ItemInfoHBoxContainer/ItemIconBorder"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.38
-anchor_right = 0.62
-anchor_bottom = 1.0
-offset_left = -2.62
-offset_top = 10.0
-offset_right = 2.62
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-texture = ExtResource("3_dubhn")
-stretch_mode = 5
-
 [node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/ItemInfoHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -117,99 +95,101 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 6.0
 
-[node name="ForgeRecipeVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer"]
+[node name="ForgeRecipeContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("6_dubhn")
 
-[node name="LabelHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer"]
+[node name="LabelHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer"]
 layout_mode = 2
 
-[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/LabelHBoxContainer"]
+[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer/LabelHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 text = "ui.inspect.forge_recipe"
 horizontal_alignment = 1
 
-[node name="ExpectedLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/LabelHBoxContainer"]
+[node name="ExpectedLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer/LabelHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 1
-text = "TR_FORGE_EXPECTED"
+text = "ui.inspect.forge_expected"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/LabelHBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer/LabelHBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_right = 20
 
-[node name="ForgeWorkResultLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/LabelHBoxContainer/MarginContainer"]
+[node name="ForgeWorkResultLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer/LabelHBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.0
-text = "ForgeWorkResult"
+text = "ForgeResult"
 vertical_alignment = 1
 
-[node name="ActionWeightMarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer"]
+[node name="ActionWeightMarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 0
 
-[node name="ActionWeightLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/ActionWeightMarginContainer"]
+[node name="ActionWeightLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer/ActionWeightMarginContainer"]
 layout_mode = 2
 text = "ActionWeight"
 label_settings = SubResource("LabelSettings_dubhn")
 
-[node name="MathMarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer"]
+[node name="MathMarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 0
 
-[node name="MathLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/MathMarginContainer"]
+[node name="MathLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer/MathMarginContainer"]
 layout_mode = 2
 text = "Math"
 label_settings = SubResource("LabelSettings_w7sf6")
 
-[node name="ActionsMarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer"]
+[node name="ActionsMarginContainer" type="MarginContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 0
 
-[node name="ActionsLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeVBoxContainer/ActionsMarginContainer"]
+[node name="ActionsLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/ForgeRecipeContainer/ActionsMarginContainer"]
 layout_mode = 2
 text = "Actions"
 label_settings = SubResource("LabelSettings_1nxv0")
 autowrap_mode = 3
 
-[node name="WeldRecipeVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer"]
+[node name="WeldRecipeContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("7_1nxv0")
 
-[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer"]
+[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 text = "ui.inspect.weld_recipe"
 horizontal_alignment = 1
 
-[node name="WeldIngredientsHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer"]
+[node name="WeldIngredientsHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="FirstItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer"]
+[node name="FirstItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeContainer/WeldIngredientsHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer/FirstItemHBoxContainer"]
+[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeContainer/WeldIngredientsHBoxContainer/FirstItemHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 0.0
@@ -218,11 +198,11 @@ label_settings = SubResource("LabelSettings_u6yjh")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer/FirstItemHBoxContainer" instance=ExtResource("3_w7sf6")]
+[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeContainer/WeldIngredientsHBoxContainer/FirstItemHBoxContainer" instance=ExtResource("3_w7sf6")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PlusMark" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer"]
+[node name="PlusMark" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeContainer/WeldIngredientsHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -233,12 +213,12 @@ label_settings = SubResource("LabelSettings_wyupq")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="SecondItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer"]
+[node name="SecondItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeContainer/WeldIngredientsHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer/SecondItemHBoxContainer"]
+[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeContainer/WeldIngredientsHBoxContainer/SecondItemHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 0.0
@@ -247,23 +227,24 @@ label_settings = SubResource("LabelSettings_u6yjh")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeVBoxContainer/WeldIngredientsHBoxContainer/SecondItemHBoxContainer" instance=ExtResource("3_w7sf6")]
+[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/WeldRecipeContainer/WeldIngredientsHBoxContainer/SecondItemHBoxContainer" instance=ExtResource("3_w7sf6")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="AdditionalInfoSplitContainer" type="SplitContainer" parent="MainVBoxContainer/InspectTabVBoxContainer"]
+[node name="AdditionalInfoContainer" type="SplitContainer" parent="MainVBoxContainer/InspectTabVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 collapsed = true
 dragging_enabled = false
 dragger_visibility = 2
 drag_area_highlight_in_editor = true
+script = ExtResource("7_w7sf6")
 
-[node name="MadeFromVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer"]
+[node name="MadeFromVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer"]
+[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 0.2
@@ -271,26 +252,26 @@ text = "ui.inspect.made_from"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="NotSpecifiedLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer"]
+[node name="NotSpecifiedLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
-text = "TR_NOT_SPECIFIED"
+text = "ui.inspect.not_specified"
 label_settings = SubResource("LabelSettings_jacx8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemsHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer"]
+[node name="ItemsHBoxContainer" type="HBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="OriginalItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer"]
+[node name="OriginalItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer/ItemsHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
 
-[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/OriginalItemHBoxContainer"]
+[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer/ItemsHBoxContainer/OriginalItemHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 0.0
@@ -299,11 +280,11 @@ label_settings = SubResource("LabelSettings_u845h")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/OriginalItemHBoxContainer" instance=ExtResource("3_w7sf6")]
+[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer/ItemsHBoxContainer/OriginalItemHBoxContainer" instance=ExtResource("3_w7sf6")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/OriginalItemHBoxContainer"]
+[node name="MarginLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer/ItemsHBoxContainer/OriginalItemHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
@@ -311,13 +292,13 @@ label_settings = SubResource("LabelSettings_u845h")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AdditionalItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer"]
+[node name="AdditionalItemHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer/ItemsHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
 
-[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/AdditionalItemHBoxContainer"]
+[node name="ItemNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer/ItemsHBoxContainer/AdditionalItemHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 0.0
@@ -326,11 +307,11 @@ label_settings = SubResource("LabelSettings_u845h")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/AdditionalItemHBoxContainer" instance=ExtResource("3_w7sf6")]
+[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer/ItemsHBoxContainer/AdditionalItemHBoxContainer" instance=ExtResource("3_w7sf6")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MadeFromVBoxContainer/ItemsHBoxContainer/AdditionalItemHBoxContainer"]
+[node name="MarginLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MadeFromVBoxContainer/ItemsHBoxContainer/AdditionalItemHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
@@ -338,11 +319,11 @@ label_settings = SubResource("LabelSettings_u845h")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MeltsIntoVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer"]
+[node name="MeltsIntoVBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer"]
+[node name="ContainerLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MeltsIntoVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 0.2
@@ -350,7 +331,7 @@ text = "ui.inspect.melts_into"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="NotSpecifiedLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer"]
+[node name="NotSpecifiedLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MeltsIntoVBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -359,11 +340,11 @@ label_settings = SubResource("LabelSettings_jacx8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MoltenMetalHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer"]
+[node name="MoltenMetalHBoxContainer" type="VBoxContainer" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MeltsIntoVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MetalNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer"]
+[node name="MetalNameLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 0.0
@@ -372,15 +353,15 @@ label_settings = SubResource("LabelSettings_u845h")
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer" instance=ExtResource("3_w7sf6")]
+[node name="BorderedIcon" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer" instance=ExtResource("3_w7sf6")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MillibucketsLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoSplitContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer"]
+[node name="MillibucketsLabel" type="Label" parent="MainVBoxContainer/InspectTabVBoxContainer/AdditionalInfoContainer/MeltsIntoVBoxContainer/MoltenMetalHBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
-text = "Millibuckets"
+text = "ui.mb_long"
 label_settings = SubResource("LabelSettings_u845h")
 horizontal_alignment = 1
 vertical_alignment = 1
