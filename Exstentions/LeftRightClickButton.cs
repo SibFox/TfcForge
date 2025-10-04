@@ -4,9 +4,9 @@ using Godot;
 public partial class LeftRightClickButton : Button
 {
 	[Signal]
-	public delegate void LeftClickEventHandler();
+	public delegate void LeftClickEventHandler(int num);
 	[Signal]
-	public delegate void RightClickEventHandler();
+	public delegate void RightClickEventHandler(int num);
 
 	public override void _Ready()
 	{

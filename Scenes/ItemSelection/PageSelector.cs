@@ -35,7 +35,6 @@ public partial class PageSelector : HBoxContainer
 
     void OnVisibilityChanged()
     {
-        SelectedPage = 1;
         SetVisibilityForButtons();
     }
 }

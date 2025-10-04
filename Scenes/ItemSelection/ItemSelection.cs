@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,20 +23,22 @@ public partial class ItemSelection : Control
 
 	[Export]
 	private Item selectedMetal;
-	private string selectedMetalNameForSearch;
 
-	public void SetMetal(Item _selectedMetal, string _metalName)
+	public Item SelectedMetal
 	{
-		selectedMetal = _selectedMetal;
-		selectedMetalNameForSearch = _metalName;
-		GD.Print($"[ItemSelection] Selected name for search: {selectedMetalNameForSearch}");
+		get => selectedMetal;
+		set
+		{
+			selectedMetal = value;
+			GD.Print($"[ItemSelection] Selected name for search: {value.MetalName}");
 
-		MetalIcon.Icon = selectedMetal.Icon;
-		MetalName.Text = selectedMetal.MetalName;
+			MetalIcon.Icon = value.Icon;
+			MetalName.Text = value.MetalName;
 
-		LoadCache();
-		LoadItemsFromCache();
-		PageSelectorContainer.SelectedPage = 1;
+			LoadCache();
+			LoadItemsFromCache();
+			PageSelectorContainer.SelectedPage = 1;
+		}
 	}
 
 	int хуй = 69; // Объект истории со времён пары истории России
@@ -60,13 +61,14 @@ public partial class ItemSelection : Control
 	void LoadCache()
 	{
 		StringBuilder fileNames = new();
-		string[] itemFiles = DirAccess.GetFilesAt(Global.Paths.Items + $"{selectedMetalNameForSearch}");
-		GD.Print($"[ItemSelection] Metal: " + selectedMetal);
+		string metalNameTransltaionCode = SelectedMetal.MetalName.GetNameFromTransltaionCode();
+		string[] itemFiles = DirAccess.GetFilesAt(Global.Paths.Items + $"{metalNameTransltaionCode}");
+		GD.Print($"[ItemSelection] Metal: " + SelectedMetal);
 
 		foreach (string itemFile in itemFiles)
 		{
 			fileNames.Append(itemFile);
-			string itemPath = Global.Paths.Items + $"{selectedMetalNameForSearch}/{itemFile}";
+			string itemPath = Global.Paths.Items + $"{metalNameTransltaionCode}/{itemFile}";
 			if (ResourceLoader.Load(itemPath) is not Item item)
 			{
 				fileNames.Append("(Skipped); ");
@@ -125,7 +127,7 @@ public partial class ItemSelection : Control
 
 	void OnAddNewForgePressed()
 	{
-		Global.OpenForgeSceneWithNewItem(selectedMetal.MetalName);
+		Global.OpenForgeSceneWithNewItem(SelectedMetal.MetalName);
 	}
 
 	void OnBackPressed()

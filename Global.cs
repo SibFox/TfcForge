@@ -1,7 +1,4 @@
 using Godot;
-using System;
-using System.IO;
-using System.Linq;
 
 [GlobalClass]
 public partial class Global : Node
@@ -21,26 +18,28 @@ public partial class Global : Node
 
 	public static string CurrentLocale { get; set; } = "ru";
 
-	private static ConfigFile _globalConfig;
-    public static ConfigFile GlobalConfig
+	private static ConfigFile _сonfig;
+    public static ConfigFile Config
     {
 		get
 		{
-			if (_globalConfig == null)
+			if (_сonfig == null)
 			{
-				_globalConfig = new();
-				if (_globalConfig.Load("res://GlobalConfig.ini") != Error.Ok)
-					_globalConfig.Save("res://GlobalConfig.ini");
+				_сonfig = new();
+				if (_сonfig.Load("res://GlobalConfig.ini") != Error.Ok)
+					_сonfig.Save("res://GlobalConfig.ini");
 			}
 
-			return _globalConfig;
+			return _сonfig;
 		}
 	}
 
+	public static int IngotCost => (int)Global.Config.GetValue("ingot", "cost", 100);
+
 	public static void OpenMaterialSelectionScene(Control scene)
 	{
-		main.MaterialSelection.Visible = true;
-		main.Camera.Zoom = Vector2.One;
+		Main.MaterialSelection.Visible = true;
+		Main.Camera.Zoom = Vector2.One;
 		scene.Visible = false;
 	}
 
@@ -55,59 +54,53 @@ public partial class Global : Node
 		GD.Print("[Global] Metal name from resource: " + metalName);
 		GD.Print("[Global] Resource id: " + metalItem);
 
-		main.ItemSelection.ClearCache();
-		main.ItemSelection.SetMetal(metalItem, metalName);
+		Main.ItemSelection.ClearCache();
+		Main.ItemSelection.SelectedMetal = metalItem;
 
 
 		float zoom = (float)ProjectSettings.GetSetting("display/window/size/viewport_height") / 360;
-		main.Camera.Zoom = new(zoom, zoom);
+		Main.Camera.Zoom = new(zoom, zoom);
 
-		main.MaterialSelection.Visible = false;
-		main.ItemSelection.Visible = true;
+		Main.MaterialSelection.Visible = false;
+		Main.ItemSelection.Visible = true;
 	}
 
 	public static void OpenForgeScene(Item item)
 	{
 		GD.Print("[Global] Metal TR code: " + item.MetalName);
-		string metalName = item.MetalName.GetNameFromTransltaionCode();
-
 		GD.Print("[Global] Item TR code: " + item.Name);
-		string itemName = item.Name.GetNameFromTransltaionCode();
-
-		// Item selectedItem = ResourceLoader.Load<Item>(Paths.Items + $"{metalName}/{itemName}.tres");
-
 		GD.Print("[Global] Item name from resource: " + item.Name.GetNameFromTransltaionCode());
 		GD.Print("[Global] Resource id: " + item);
 
-		main.Forge.SelectedItem = item;
+		Main.Forge.SelectedItem = item;
 
 		float zoom = (float)ProjectSettings.GetSetting("display/window/size/viewport_height") / 360;
-		main.Camera.Zoom = new(zoom, zoom);
+		Main.Camera.Zoom = new(zoom, zoom);
 
-		main.ItemSelection.Visible = false;
-		main.Forge.Visible = true;
+		Main.ItemSelection.Visible = false;
+		Main.Forge.Visible = true;
 	}
 
 	public static void OpenForgeSceneWithNewItem(string metalNameTransltaionCode)
 	{
 		GD.Print("[Global] Metal TR code: " + metalNameTransltaionCode);
 
-		main.Forge.SelectedItem = new() { Name = "New Item", MetalName = metalNameTransltaionCode };
+		Main.Forge.SelectedItem = new() { Name = "New Item", MetalName = metalNameTransltaionCode };
 		GD.Print("[Global] New Item created");
 
 		float zoom = (float)ProjectSettings.GetSetting("display/window/size/viewport_height") / 360;
-		main.Camera.Zoom = new(zoom, zoom);
+		Main.Camera.Zoom = new(zoom, zoom);
 
-		main.ItemSelection.Visible = false;
-		main.Forge.Visible = true;	
+		Main.ItemSelection.Visible = false;
+		Main.Forge.Visible = true;	
 	}
 
 	public static void OpenInspectItemScene(Item item)
 	{
-		main.ItemSelection.Visible = false;
+		Main.ItemSelection.Visible = false;
 
-		main.InspectItem.SetItem(item);
-		main.InspectItem.Visible = true;
+		Main.InspectItem.CurrentItem = item;
+		Main.InspectItem.Visible = true;
 	}
 
 	public static class Paths
