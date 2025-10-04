@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -62,13 +61,14 @@ public partial class ItemSelection : Control
 	void LoadCache()
 	{
 		StringBuilder fileNames = new();
-		string[] itemFiles = DirAccess.GetFilesAt(Global.Paths.Items + $"{SelectedMetal.MetalName}");
+		string metalNameTransltaionCode = SelectedMetal.MetalName.GetNameFromTransltaionCode();
+		string[] itemFiles = DirAccess.GetFilesAt(Global.Paths.Items + $"{metalNameTransltaionCode}");
 		GD.Print($"[ItemSelection] Metal: " + SelectedMetal);
 
 		foreach (string itemFile in itemFiles)
 		{
 			fileNames.Append(itemFile);
-			string itemPath = Global.Paths.Items + $"{SelectedMetal.MetalName}/{itemFile}";
+			string itemPath = Global.Paths.Items + $"{metalNameTransltaionCode}/{itemFile}";
 			if (ResourceLoader.Load(itemPath) is not Item item)
 			{
 				fileNames.Append("(Skipped); ");

@@ -209,10 +209,9 @@ public partial class Forge : Control
 		{
 			MeltsInto = GD.Load<Item>(Global.Paths.Items +
 									SelectedItem.MetalName.GetNameFromTransltaionCode() +
-									"/Ingot.tres").MeltsInto.MeltsInto,
-			Ingots = (float)IngotAmount.Value
+									"/Ingot.tres").MeltsInto.MeltsInto
 		};
-
+		SelectedItem.MeltsInto.Ingots = (float)Mathf.Snapped(IngotAmount.Value, 0.01);
 
 		GD.Print("[Forge/Save] Item save resource path: " + newPath);
 		if (ResourceSaver.Save(SelectedItem, newPath) != Error.Ok)

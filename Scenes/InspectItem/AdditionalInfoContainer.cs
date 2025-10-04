@@ -107,7 +107,7 @@ public partial class AdditionalInfoContainer : SplitContainer
 
         MoltenMetalLabel.Text = metal.MeltsInto.Name;
         MoltenMetalIcon.Icon = metal.MeltsInto.Icon;
-        MillibucketsLabel.Text = (metal.Ingots * Global.IngotCost) + " " + TranslationServer.Translate("ui.mb_long");
+        MillibucketsLabel.Text = Mathf.Snapped(metal.Ingots * Global.IngotCost, 0.01) + " " + TranslationServer.Translate("ui.mb_long");
     }
     #endregion
     #endregion
