@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="TFC Forge"
-config/tags=PackedStringArray("c#")
+config/version="alpha36"
+config/tags=PackedStringArray("c#", "main")
 run/main_scene="uid://dwu0lxtqdnhyp"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"

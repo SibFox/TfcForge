@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://df3b2dyh7h4bi" path="res://Resources/ForgeRecipe.cs" id="2_ulntk"]
 [ext_resource type="Texture2D" uid="uid://bu62wwlbk3t5w" path="res://Assets/Sprites/sheet/cast_iron.png" id="3_dex4k"]
 [ext_resource type="Resource" uid="uid://b8abwjbj7wlqn" path="res://Content/Last Shown Forge Actions/LastSheetActions.tres" id="4_gkbqk"]
-[ext_resource type="Resource" uid="uid://cnp7v5a6dncc2" path="res://Content/Items/WroughtIron/Ingot.tres" id="5_plb17"]
+[ext_resource type="Resource" uid="uid://wp6rwbg5s4fb" path="res://Content/Items/WroughtIron/Ingot.tres" id="5_plb17"]
 [ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="6_u5etq"]
 [ext_resource type="Resource" uid="uid://26cf8kwhe6hd" path="res://Content/MoltenMetals/CastIron.tres" id="7_cu0tu"]
 [ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="8_s3ipe"]
@@ -39,14 +39,14 @@ metadata/_custom_type_script = "uid://cm7kfv47h0dff"
 [sub_resource type="Resource" id="Resource_efyd1"]
 script = ExtResource("8_s3ipe")
 MeltsInto = ExtResource("7_cu0tu")
-Millibuckets = 100
+Ingots = 1.0
 metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
 
 [resource]
 script = ExtResource("9_qwwgx")
 Icon = ExtResource("3_dex4k")
 Name = "item.cast_iron_sheet"
-Category = 1
+Category = 2
 MetalName = "metal.wrought_iron"
 ShowInSelection = true
 MadeFrom = SubResource("Resource_yhdsf")

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" load_steps=11 format=3 uid="uid://cdceadlsjv01s"]
 
 [ext_resource type="Texture2D" uid="uid://c1hp81te23j3w" path="res://Assets/Sprites/double_sheet/wrought_iron.png" id="1_x3o70"]
-[ext_resource type="Resource" uid="uid://bgssgc1tvb6si" path="res://Content/Items/WroughtIron/Sheet.tres" id="2_310h3"]
+[ext_resource type="Resource" uid="uid://dfnl2lksk3r17" path="res://Content/Items/WroughtIron/Sheet.tres" id="2_310h3"]
 [ext_resource type="Script" uid="uid://cm7kfv47h0dff" path="res://Resources/ItemMadeFrom.cs" id="3_vjff5"]
 [ext_resource type="Resource" uid="uid://26cf8kwhe6hd" path="res://Content/MoltenMetals/CastIron.tres" id="4_8v7mh"]
 [ext_resource type="Script" uid="uid://bqudjt5mnpbg8" path="res://Resources/MeltingRecipe.cs" id="5_ebufb"]
@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://cm7kfv47h0dff"
 [sub_resource type="Resource" id="Resource_gopr0"]
 script = ExtResource("5_ebufb")
 MeltsInto = ExtResource("4_8v7mh")
-Millibuckets = 200
+Ingots = 1.0
 metadata/_custom_type_script = "uid://bqudjt5mnpbg8"
 
 [sub_resource type="Resource" id="Resource_fbw5p"]
@@ -29,7 +29,7 @@ metadata/_custom_type_script = "uid://cqec8q7oihjq3"
 script = ExtResource("7_amybe")
 Icon = ExtResource("1_x3o70")
 Name = "item.double_sheet"
-Category = 1
+Category = 2
 MetalName = "metal.wrought_iron"
 ShowInSelection = true
 MadeFrom = SubResource("Resource_l46bp")

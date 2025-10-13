@@ -1,5 +1,6 @@
 using Godot;
 using System.Text;
+using static TfcForge.Common.Logger.Logger;
 
 public partial class Forge : Control
 {
@@ -79,7 +80,7 @@ public partial class Forge : Control
 			{
 				lastForgeActionsResourcePath = value.LastForgeActions.ResourcePath;
 				string LastActionFileName = lastForgeActionsResourcePath.Split('/')[^1].Replace(".tres", "");
-				GD.Print("[Forge] Last Actions File Name: " + LastActionFileName);
+				LogInfo(nameof(Forge), nameof(SelectedItem)).AddLine("Last Actions File Name:", LastActionFileName).Push();
 				for (int i = 0; i < VariantsMenu.ItemCount; i++)
 				{
 					if (VariantsMenu.GetItemText(i) == LastActionFileName)
@@ -137,7 +138,7 @@ public partial class Forge : Control
 			VariantsMenu.AddItem(actionFile.Replace(".tres", ""));
 		}
 
-		GD.Print("[Forge] Loaded Last Actions: " + fileNames.ToString());
+		LogInfo(nameof(Forge), nameof(_Ready)).AddLine("Loaded Last Actions:", fileNames).Push();
 	}
 
 
@@ -152,7 +153,7 @@ public partial class Forge : Control
 
 	void OnIconSelected(string path)
 	{
-		GD.Print("[Forge/IconSelect] Path to sprite: " + path);
+		LogInfo(nameof(Forge), "IconSelect").AddLine("Path to sprite", path).Push();
 		ItemIcon.Icon = GD.Load<Texture2D>(path);
 		IconSelect.Visible = false;
 	}
@@ -196,7 +197,7 @@ public partial class Forge : Control
 
 		if (SelectedItem.Name != ItemName.Text && FileAccess.FileExists(newPath))
 		{
-			GD.PushError("[Forge/Save] Item already present.");
+			LogErr(nameof(Forge), "Save").AddLine("Item already present").Push();
 			return;
 		}
 
@@ -213,26 +214,28 @@ public partial class Forge : Control
 		};
 		SelectedItem.MeltsInto.Ingots = (float)Mathf.Snapped(IngotAmount.Value, 0.01);
 
-		GD.Print("[Forge/Save] Item save resource path: " + newPath);
+		LogInfo(nameof(Forge), "Save").AddLine("Item save resource path", newPath).Push();
 		if (ResourceSaver.Save(SelectedItem, newPath) != Error.Ok)
 		{
-			GD.PushError("[Forge/Save] Item couldn't be saved!");
+			LogErr(nameof(Forge), "Save").AddLine("Item couldn't be saved").Push();
 			return;
 		}
-		GD.Print("[Forge/Save] Item successfully saved");
+		LogInfo(nameof(Forge), "Save").AddLine("Item successfully saved").Push();
 
 		if (newPath != oldPath && FileAccess.FileExists(oldPath))
 		{
 			if (DirAccess.RemoveAbsolute(oldPath) != Error.Ok)
-				GD.Print("[Forge/Save] Old resource file was not deleted");
+				LogInfo(nameof(Forge), "Save").AddLine("Old resource file was not deleted").Push();
 			else
-				GD.Print("[Forge/Save] Old resource file successfully deleted");
+				LogInfo(nameof(Forge), "Save").AddLine("Old resource file successfully deleted").Push();
 
 		}
 
 
 		Global.Main.ItemSelection.AddToCache(SelectedItem);
 		_selectedItem = null;
+		_currentForgeRecipe = null;
+		_lastForgeActions = null;
 		Visible = false;
 		Global.Main.ItemSelection.LoadItemsFromCache();
 		Global.Main.ItemSelection.Visible = true;
@@ -240,8 +243,10 @@ public partial class Forge : Control
 
 	void OnCancelButtonPressed()
 	{
-		GD.Print("[Forge/Cancel] Item editing canceled");
+		LogInfo(nameof(Forge), "Save").AddLine("Item editing canceled").Push();
 		_selectedItem = null;
+		_currentForgeRecipe = null;
+		_lastForgeActions = null;
 		Visible = false;
 		Global.Main.ItemSelection.Visible = true;
 	}

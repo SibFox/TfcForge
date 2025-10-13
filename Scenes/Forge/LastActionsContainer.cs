@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class LastActionsContainer : VBoxContainer
 {
@@ -40,8 +39,6 @@ public partial class LastActionsContainer : VBoxContainer
 
     void HitLastActionButtonPressed(int place, int strength)
     {
-        GD.Print($"[LastActionsContainer/HitButton] Место: {place};\tСила: {strength}");
-
         switch (place)
         {
             case 1:

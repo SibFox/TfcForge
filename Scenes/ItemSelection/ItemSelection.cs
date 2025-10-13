@@ -2,6 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static TfcForge.Common.Logger.Logger;
 
 public partial class ItemSelection : Control
 {
@@ -20,17 +21,14 @@ public partial class ItemSelection : Control
 	private LinkedList<Item> ItemsCache = new();
 	private List<Item> CategorizedItems = new();
 
-
-	[Export]
 	private Item selectedMetal;
-
 	public Item SelectedMetal
 	{
 		get => selectedMetal;
 		set
 		{
 			selectedMetal = value;
-			GD.Print($"[ItemSelection] Selected name for search: {value.MetalName}");
+			LogInfo(nameof(ItemSelection)).AddLine("Selected name for search:", value.MetalName).Push();
 
 			MetalIcon.Icon = value.Icon;
 			MetalName.Text = value.MetalName;
@@ -40,8 +38,6 @@ public partial class ItemSelection : Control
 			PageSelectorContainer.SelectedPage = 1;
 		}
 	}
-
-	int хуй = 69; // Объект истории со времён пары истории России
 
 	public void ClearCache()
 	{
@@ -63,7 +59,7 @@ public partial class ItemSelection : Control
 		StringBuilder fileNames = new();
 		string metalNameTransltaionCode = SelectedMetal.MetalName.GetNameFromTransltaionCode();
 		string[] itemFiles = DirAccess.GetFilesAt(Global.Paths.Items + $"{metalNameTransltaionCode}");
-		GD.Print($"[ItemSelection] Metal: " + SelectedMetal);
+		LogInfo(nameof(ItemSelection)).AddLine("Metal:", SelectedMetal).Push();
 
 		foreach (string itemFile in itemFiles)
 		{
@@ -83,7 +79,7 @@ public partial class ItemSelection : Control
 		
 		CategorizedItems = ItemsCache.ToList();
 
-		GD.Print($"[ItemSelection] Loaded files with names({itemFiles.Length - 1}): " + fileNames.ToString());
+		LogInfo(nameof(ItemSelection)).AddLine($"Loaded files with names({itemFiles.Length - 1}):", fileNames).Push();
 	}
 
 	public void LoadItemsFromCache(int index = -1)
@@ -92,8 +88,10 @@ public partial class ItemSelection : Control
 		{
 			child.Free();
 		}
-		
-		byte selectedPage = PageSelectorContainer.SelectedPage;
+
+		if (index > -1)
+			PageSelectorContainer.SelectedPage = 1;
+		byte selectedPage = PageSelectorContainer.SelectedPage;            
 
 		CategorizedItems = CategorySelectButton.GetSelectedId() switch
 		{

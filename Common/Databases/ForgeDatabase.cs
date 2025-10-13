@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 [GlobalClass]
@@ -31,14 +30,14 @@ public partial class ForgeDatabase : Node
 
 	public static Dictionary<Action, string> ActionTRCodes = new()
 	{
-		{ Action.None, "" },
-		{ Action.Draw, "action.draw" },
+		{ Action.None, 		"" },
+		{ Action.Draw, 		"action.draw" },
 		{ Action.StrongHit, "action.stronghit" },
 		{ Action.MediumHit, "action.mediumhit" },
-		{ Action.WeakHit, "action.weakhit" },
-		{ Action.Punch, "action.punch" },
-		{ Action.Bend, "action.bend" },
-		{ Action.Upset, "action.upset" },
-		{ Action.Shrink, "action.shrink" }
+		{ Action.WeakHit, 	"action.weakhit" },
+		{ Action.Punch, 	"action.punch" },
+		{ Action.Bend, 		"action.bend" },
+		{ Action.Upset, 	"action.upset" },
+		{ Action.Shrink, 	"action.shrink" }
 	};
 }

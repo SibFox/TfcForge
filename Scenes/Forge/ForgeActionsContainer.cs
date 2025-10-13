@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class ForgeActionsContainer : HBoxContainer
 {
@@ -19,6 +18,8 @@ public partial class ForgeActionsContainer : HBoxContainer
 
 	public HBoxContainer PositiveActionsContainer => GetNode<HBoxContainer>("ActionVBoxContainer/PositiveHBoxContainer");
 	public HBoxContainer NegativeActionsContainer => GetNode<HBoxContainer>("ActionVBoxContainer/NegativeHBoxContainer");
+
+
 
 	void OnActionClick(int strength)
 	{

@@ -1,9 +1,9 @@
 ﻿code;en;ru
-TR_CATEGORY_ALL;All;Все
-TR_CATEGORY_METAL;Metal;Металл
-TR_CATEGORY_COMPONENT;Component;Компонент
-TR_CATEGORY_INSTRUMENT;Instrument;Инструмент
-TR_CATEGORY_WEAPON;Weapon;Оружие
-TR_CATEGORY_EQUIPMENT;Equipment;Снаряжение
-TR_CATEGORY_DECOR;Decor;Декор
-TR_CATEGORY_MISC;Misc;Прочее
+category.all;All;Все
+category.metal;Metal;Металл
+category.component;Component;Компонент
+category.tool;Tool;Инструмент
+category.weapon;Weapon;Оружие
+category.equipment;Equipment;Снаряжение
+category.decor;Decor;Декор
+category.misc;Misc;Прочее

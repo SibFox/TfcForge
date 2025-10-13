@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Text;
 
 public partial class InspectItem : Control
 {
