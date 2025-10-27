@@ -18,59 +18,6 @@ public partial class Global : Node
 		}
 	}
 
-	public static string CurrentLocale
-	{
-		get => (string)Config.GetValue("language", "locale", "en");
-		set
-		{
-			if (value != null || value.Length == 0)
-            {
-				Config.SetValue("language", "locale", value);
-				Config.Save(Paths.GlobalConfigPath);
-				LogInfo(nameof(MaterialSelection)).AddLine("Locale changed to:", value).Push();
-				DebugInfo(nameof(MaterialSelection)).AddLine("Control value:", Config.GetValue("language", "locale")).Push();
-			}
-			else
-				DebugErr(nameof(Global), nameof(IngotCost)).AddLine("Cannot set empty locale").Push();
-        }
-	}
-
-	private static ConfigFile _сonfig;
-    private static ConfigFile Config
-    {
-		get
-		{
-			if (_сonfig == null)
-			{
-				_сonfig = new();
-				if (_сonfig.Load(Paths.GlobalConfigPath) != Error.Ok)
-					_сonfig.Save(Paths.GlobalConfigPath);
-				DebugInfo(nameof(Global)).AddLine("Global config created").Push();
-			}
-
-			return _сonfig;
-		}
-	}
-
-	public static int IngotCost
-    {
-		get => (int)Config.GetValue("ingot", "cost", 100);
-		set
-		{
-			if (value > 0 && value < 1000)
-			{
-				Config.SetValue("ingot", "cost", value);
-				Config.Save(Paths.GlobalConfigPath);
-				LogInfo(nameof(MaterialSelection)).AddLine("Ingot cost changed to", value).Push();
-				DebugInfo(nameof(MaterialSelection)).AddLine("Control value:", Config.GetValue("ingot", "cost")).Push();
-			}
-			else
-				DebugErr(nameof(Global), nameof(IngotCost)).AddLine("Value should be between 0 and 1000").Push();
-        }
-    }
-
-
-
 	public override void _Ready()
 	{
 		if (!DirAccess.DirExistsAbsolute(Paths.LogsPath[..^1]))
@@ -152,6 +99,61 @@ public partial class Global : Node
 		Main.InspectItem.Visible = true;
 	}
 
+	public static class Config
+	{
+		private static ConfigFile _сonfig;
+		private static ConfigFile ConfFile
+		{
+			get
+			{
+				if (_сonfig == null)
+				{
+					_сonfig = new();
+					if (_сonfig.Load(Paths.GlobalConfigPath) != Error.Ok)
+						_сonfig.Save(Paths.GlobalConfigPath);
+					DebugInfo(nameof(Global)).AddLine("Global config created").Push();
+				}
+
+				return _сonfig;
+			}
+		}
+
+		public static string CurrentLocale
+		{
+			get => (string)ConfFile.GetValue("language", "locale", "en");
+			set
+			{
+				if (value != null || value.Length == 0)
+				{
+					ConfFile.SetValue("language", "locale", value);
+					ConfFile.Save(Paths.GlobalConfigPath);
+					LogInfo(nameof(MaterialSelection)).AddLine("Locale changed to:", value).Push();
+					DebugInfo(nameof(MaterialSelection)).AddLine("Control value:", ConfFile.GetValue("language", "locale")).Push();
+				}
+				else
+					DebugErr(nameof(Global), nameof(IngotCost)).AddLine("Cannot set empty locale").Push();
+			}
+		}
+		
+        public static int IngotCost
+		{
+			get => (int)ConfFile.GetValue("ingot", "cost", 100);
+			set
+			{
+				if (value > 0 && value < 1000)
+				{
+					ConfFile.SetValue("ingot", "cost", value);
+					ConfFile.Save(Paths.GlobalConfigPath);
+					LogInfo(nameof(MaterialSelection)).AddLine("Ingot cost changed to", value).Push();
+					DebugInfo(nameof(MaterialSelection)).AddLine("Control value:", ConfFile.GetValue("ingot", "cost")).Push();
+				}
+				else
+					DebugErr(nameof(Global), nameof(IngotCost)).AddLine("Value should be between 0 and 1000").Push();
+			}
+		}
+    }
+
+
 	public static class Paths
 	{
 		public const string LogsPath = "user://Logs/";
@@ -166,6 +168,6 @@ public partial class Global : Node
 		public const string MoltenMetals = Content + "MoltenMetals/";
 
 		public const string Scenes = "res://Scenes/";
-		public const string UI = Scenes + "UI/";		
+		public const string UI = Scenes + "UI/";
 	}
 }

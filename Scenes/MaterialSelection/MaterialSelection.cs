@@ -10,7 +10,7 @@ public partial class MaterialSelection : Control
 
 	public override void _Ready()
 	{
-		IngotCostEdit.Text = Global.IngotCost.ToString();
+		IngotCostEdit.Text = Global.Config.IngotCost.ToString();
 	}
 
 
@@ -32,6 +32,6 @@ public partial class MaterialSelection : Control
 
 	void OnIngotCostTextSubmitted(string str)
 	{
-		Global.IngotCost = str.ToInt();
+		Global.Config.IngotCost = str.ToInt();
 	}
 }

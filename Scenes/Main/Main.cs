@@ -15,14 +15,14 @@ public partial class Main : Node
     public override void _Ready()
     {
         Global.Main = this;
-        TranslationServer.SetLocale(Global.CurrentLocale);
+        TranslationServer.SetLocale(Global.Config.CurrentLocale);
     }
 
 
 
     void OnChangeLanguageButtonPressed()
     {
-        Global.CurrentLocale = Global.CurrentLocale == "en" ? "ru" : "en";
-        TranslationServer.SetLocale(Global.CurrentLocale);
+        Global.Config.CurrentLocale = Global.Config.CurrentLocale == "en" ? "ru" : "en";
+        TranslationServer.SetLocale(Global.Config.CurrentLocale);
     }
 }
