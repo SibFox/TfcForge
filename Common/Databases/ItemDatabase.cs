@@ -1,5 +1,5 @@
 using Godot;
-using System.Collections.Generic;
+using Godot.Collections;
 
 public partial class ItemDatabase : Node
 {

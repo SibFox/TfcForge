@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,7 @@ public partial class ItemSelection : Control
 		set
 		{
 			selectedMetal = value;
-			LogInfo(nameof(ItemSelection)).AddLine("Selected name for search:", value.MetalName).Push();
+			LogInfo(nameof(ItemSelection), nameof(SelectedMetal)).AddLine("Selected name for search:", value.MetalName).Push();
 
 			MetalIcon.Icon = value.Icon;
 			MetalName.Text = value.MetalName;
@@ -59,7 +60,7 @@ public partial class ItemSelection : Control
 		StringBuilder fileNames = new();
 		string metalNameTransltaionCode = SelectedMetal.MetalName.GetNameFromTransltaionCode();
 		string[] itemFiles = DirAccess.GetFilesAt(Global.Paths.Items + $"{metalNameTransltaionCode}");
-		LogInfo(nameof(ItemSelection)).AddLine("Metal:", SelectedMetal).Push();
+		LogInfo(nameof(ItemSelection), nameof(LoadCache)).AddLine("Metal:", SelectedMetal).Push();
 
 		foreach (string itemFile in itemFiles)
 		{
@@ -79,7 +80,7 @@ public partial class ItemSelection : Control
 		
 		CategorizedItems = ItemsCache.ToList();
 
-		LogInfo(nameof(ItemSelection)).AddLine($"Loaded files with names({itemFiles.Length - 1}):", fileNames).Push();
+		LogInfo(nameof(ItemSelection), nameof(LoadCache)).AddLine($"Loaded items({itemFiles.Length}):", fileNames).Push();
 	}
 
 	public void LoadItemsFromCache(int index = -1)
@@ -90,8 +91,7 @@ public partial class ItemSelection : Control
 		}
 
 		if (index > -1)
-			PageSelectorContainer.SelectedPage = 1;
-		byte selectedPage = PageSelectorContainer.SelectedPage;            
+			PageSelectorContainer.SelectedPage = 1;        
 
 		CategorizedItems = CategorySelectButton.GetSelectedId() switch
 		{
@@ -99,8 +99,9 @@ public partial class ItemSelection : Control
 			_ => ItemsCache.Where(i => (int)i.Category == CategorySelectButton.GetSelectedId()).ToList()
 		};
 
-		for (int i = MAX_ITEMS_ON_PAGE * (selectedPage - 1);
-			i < Mathf.Clamp(MAX_ITEMS_ON_PAGE * selectedPage, 0, CategorizedItems.Count); i++)
+		for (int i = MAX_ITEMS_ON_PAGE * (PageSelectorContainer.SelectedPage - 1);
+			i < Mathf.Clamp(MAX_ITEMS_ON_PAGE * PageSelectorContainer.SelectedPage, 0, CategorizedItems.Count); 
+			i++)
 		{
 			Item item = CategorizedItems.ElementAt(i);
 

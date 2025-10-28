@@ -1,4 +1,5 @@
 using Godot;
+using static Godot.TranslationServer;
 using static TfcForge.Common.Logger.Logger;
 
 [GlobalClass]
@@ -40,18 +41,15 @@ public partial class Global : Node
 		scene.Visible = false;
 	}
 
-	public static void OpenItemSelectionScene(string metalNameTransltaionCode)
+	public static void OpenItemSelectionScene(Item ingot)
 	{
-		string metalName = metalNameTransltaionCode.GetNameFromTransltaionCode();
-		Item metalItem = ResourceLoader.Load<Item>(Paths.Items + $"{metalName}/Ingot.tres");
-
-		DebugInfo(nameof(Global), "ItemSelection").AddLine("Metal TR code:", metalNameTransltaionCode)
-												  .AddLine("Metal name transformed:", metalName)
-												  .AddLine("Resource id:", metalItem)
+		DebugInfo(nameof(Global), "ItemSelection").AddLine("Metal TR code:", ingot.MetalName)
+												  .AddLine("Metal name translated:", Translate(ingot.MetalName))
+												  .AddLine("Resource id:", ingot)
 												  .Push();
 
 		Main.ItemSelection.ClearCache();
-		Main.ItemSelection.SelectedMetal = metalItem;
+		Main.ItemSelection.SelectedMetal = ingot;
 
 		float zoom = (float)ProjectSettings.GetSetting("display/window/size/viewport_height") / 360;
 		Main.Camera.Zoom = new(zoom, zoom);
@@ -64,7 +62,7 @@ public partial class Global : Node
 	{
 		DebugInfo(nameof(Global), "Forge").AddLine("Metal TR code:", item.MetalName)
 								  		  .AddLine("Item TR code:", item.Name)
-								  		  .AddLine("Item name transformed:", item.Name.GetNameFromTransltaionCode())
+								  		  .AddLine("Item name translated:", Translate(item.Name))
 										  .AddLine("Resource id:", item)
 										  .Push();
 
@@ -110,10 +108,11 @@ public partial class Global : Node
 				{
 					_сonfig = new();
 					if (_сonfig.Load(Paths.GlobalConfigPath) != Error.Ok)
+                    {
 						_сonfig.Save(Paths.GlobalConfigPath);
-					DebugInfo(nameof(Global)).AddLine("Global config created").Push();
+						DebugInfo(nameof(Global)).AddLine("Global config created").Push();
+                    }
 				}
-
 				return _сonfig;
 			}
 		}

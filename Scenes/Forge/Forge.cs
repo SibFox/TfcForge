@@ -129,16 +129,14 @@ public partial class Forge : Control
 
 	public override void _Ready()
 	{
-		StringBuilder fileNames = new();
-		string[] actionFiles = DirAccess.GetFilesAt($"res://Content/Last Shown Forge Actions");
+		string[] actionFiles = DirAccess.GetFilesAt(Global.Paths.LastForgeActions);
 
 		foreach (string actionFile in actionFiles)
 		{
-			fileNames.Append(actionFile + "; ");
 			VariantsMenu.AddItem(actionFile.Replace(".tres", ""));
 		}
 
-		LogInfo(nameof(Forge), nameof(_Ready)).AddLine("Loaded Last Actions:", fileNames).Push();
+		LogInfo(nameof(Forge), nameof(_Ready)).AddLine($"Loaded {actionFiles.Length} Last Actions").Push();
 	}
 
 

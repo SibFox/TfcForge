@@ -101,7 +101,7 @@ namespace TfcForge.Common.Logger
         {
             if (strings.IsEmpty())
             {
-                DebugErr(nameof(Logger), "AddLine", "String").AddLine("Parameters are empty").Push();
+                DebugErr(nameof(Logger), nameof(AddLine), "String").AddLine("Parameters are empty").Push();
                 return this;
             }
 
@@ -117,7 +117,7 @@ namespace TfcForge.Common.Logger
         {
             if (objs == null)
             {
-                DebugErr(nameof(Logger), "AddLine", "Object").AddLine("Parameters are empty").Push();
+                DebugErr(nameof(Logger), nameof(AddLine), "Object").AddLine("Parameters are empty").Push();
                 return this;
             }
 
@@ -148,14 +148,16 @@ namespace TfcForge.Common.Logger
             if (header != null)
                 finalString.Append($"[{header}] ");
 
+            logString.Replace(",", "", logString.Length - 5, 4);
+
             switch (notificationType)
             {
                 case NotificationType.Info:
-                    GD.Print(finalString + logString.ToString().TrimEnd().Replace("\n", ""));
+                    GD.Print(finalString + logString.ToString().TrimEnd());
                     LogToFile(finalString);
                     break;
                 case NotificationType.Warning:
-                    GD.Print(finalString + "[!] " + logString.ToString().TrimEnd());
+                    GD.Print(finalString.Append("[!] ") + logString.ToString().TrimEnd());
                     GD.PushWarning(finalString + logString.ToString().TrimEnd());
                     LogToFile(finalString);
                     break;
@@ -177,21 +179,21 @@ namespace TfcForge.Common.Logger
                 latest = FileAccess.Open(Global.Paths.LogsPath + "latest.log", FileAccess.ModeFlags.ReadWrite);
                 latest.SeekEnd();
             }
-            finalString.Replace("[D] ", "", 1, 20);
+            finalString.Replace("[D] ", "", 1, finalString.Length - 1);
 
             switch (notificationType)
             {
                 case NotificationType.Info:
-                    debug.StoreLine(finalString + "[INFO] " + logString.ToString().TrimEnd());
-                    latest?.StoreLine(finalString + "[INFO] " + logString.ToString().TrimEnd());
+                    debug.StoreLine(finalString.Append("[INFO] ") + logString.ToString().TrimEnd());
+                    latest?.StoreLine(finalString.Append("[INFO] ") + logString.ToString().TrimEnd());
                     break;
                 case NotificationType.Warning:
-                    debug.StoreLine(finalString + "[WARN] " + logString.ToString().TrimEnd());
-                    latest?.StoreLine(finalString + "[WARN] " + logString.ToString().TrimEnd());
+                    debug.StoreLine(finalString.Append("[WARN] ") + logString.ToString().TrimEnd());
+                    latest?.StoreLine(finalString.Append("[WARN] ") + logString.ToString().TrimEnd());
                     break;
                 case NotificationType.Error:
-                    debug.StoreLine(finalString + "[ERROR] " + logString.ToString().TrimEnd());
-                    latest?.StoreLine(finalString + "[ERROR] " + logString.ToString().TrimEnd());
+                    debug.StoreLine(finalString.Append("[ERROR] ") + logString.ToString().TrimEnd());
+                    latest?.StoreLine(finalString.Append("[ERROR] ") + logString.ToString().TrimEnd());
                     break;
             }
             debug.Close();

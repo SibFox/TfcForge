@@ -1,5 +1,5 @@
 using Godot;
-using System.Collections.Generic;
+using Godot.Collections;
 
 [GlobalClass]
 public partial class ForgeDatabase : Node

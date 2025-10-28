@@ -17,8 +17,6 @@ public partial class PageSelector : HBoxContainer
         {
             _selectedPage = (byte)Mathf.Clamp(value, 1, SelectionWindow.GetMaxItemPages());
 
-            SelectionWindow.LoadItemsFromCache();
-
             SetVisibilityForButtons();
         }
     }
