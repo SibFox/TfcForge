@@ -9,6 +9,7 @@ public partial class MaterialSelection : Control
 {
 	ItemList ItemList => GetNode<ItemList>("VBoxContainer/MaterialList");
 	LineEdit IngotCostEdit => GetNode<LineEdit>("IngotCostEdit");
+	Window NewIngotWindow => GetNode<Window>("NewIngotWindow");
 
 	LinkedList<Item> IngotsCache = [];
 
@@ -16,8 +17,9 @@ public partial class MaterialSelection : Control
 	{
 		IngotCostEdit.Text = Global.Config.IngotCost.ToString();
 
+		NewIngotWindow.Visible = false;
+
 		LoadCache();
-		LoadCacheToList();
 
 		LogInfo(nameof(MaterialSelection), nameof(_Ready))
 			.AddLine("MaterialSelection initilized").Push();
@@ -25,6 +27,7 @@ public partial class MaterialSelection : Control
 
 	void LoadCache()
 	{
+		IngotsCache.Clear();
 		List<string> ItemsDir = DirAccess.Open(Global.Paths.Items).GetDirectories().ToList();
 		StringBuilder stringBuilder = new();
 		foreach (string dir in ItemsDir)
@@ -42,21 +45,30 @@ public partial class MaterialSelection : Control
             }
 		}
 		LogInfo(nameof(MaterialSelection), nameof(LoadCache)).AddLine($"Loaded ingots:", stringBuilder).Push();
+		LoadListFromCache();
 	}
 	
-	void LoadCacheToList()
-    {
+	void LoadListFromCache()
+	{
 		ItemList.Clear();
 		foreach (Item ingot in IngotsCache)
 		{
 			ItemList.AddItem(ingot.MetalName, ingot.Icon);
 		}
-		LogInfo(nameof(MaterialSelection), nameof(LoadCacheToList))
+
+		ItemList.AddItem("ui.m_select.new_ingot", GD.Load<Texture2D>(Global.Paths.ForgeSprites + "Add New Forge Button.png"));
+
+		LogInfo(nameof(MaterialSelection), nameof(LoadListFromCache))
 			.AddLine("Cache successfully loaded").Push();
     }
 
 	void OnMaterialActivate(int index)
 	{
+		if (index == ItemList.ItemCount - 1)
+        {
+			NewIngotWindow.Visible = true;
+			return;
+        }
 		LogInfo(nameof(MaterialSelection), nameof(OnMaterialActivate)).AddLine("Chosen metal:", ItemList.GetItemText(index)).Push();
 		Global.OpenItemSelectionScene(IngotsCache.ElementAt(index));
 	}
@@ -74,4 +86,70 @@ public partial class MaterialSelection : Control
 	{
 		Global.Config.IngotCost = str.ToInt();
 	}
+
+	void OnNewIngotSave(NewIngotInterface.MetalInfo info)
+	{
+		string metalName = "metal." + info.Name;
+
+		AlloyIngredient[] alloyIngredients = [];
+
+		string savePath = Global.Paths.MoltenMetals + info.NameNoCode + ".tres";
+		MoltenMetal moltenMetal = new()
+		{
+			Name = metalName,
+			Icon = info.Icon,
+			AlloyIngredients = alloyIngredients,
+			ResourcePath = savePath
+		};
+
+		Error moltenMetalSave = ResourceSaver.Save(moltenMetal, savePath);
+		if (moltenMetalSave != Error.Ok)
+		{
+			LogErr(nameof(MaterialSelection), nameof(OnNewIngotSave))
+				.AddLine("Failed to save new Molten Metal")
+				.AddLine("Path:", savePath).Push();
+			return;
+		}
+		LogInfo(nameof(MaterialSelection), nameof(OnNewIngotSave))
+				.AddLine("New Molten Metal successfully saved").Push();
+		
+		string savePathIngot = Global.Paths.Items + info.NameNoCode + "/Ingot.tres";
+		Item newIngot = new()
+		{
+			Name = "item.ingot",
+			Category = ItemDatabase.ItemCategory.Metal,
+			Icon = info.Icon,
+			MetalName = metalName,
+			MeltsInto = new()
+			{
+				MeltsInto = ResourceLoader.Load<MoltenMetal>(savePath, "MoltenMetal"),
+				Ingots = 1.0f
+			},
+			ShowInSelection = false,
+			ResourcePath = savePathIngot
+		};
+
+		DirAccess.MakeDirAbsolute(Global.Paths.Items + info.NameNoCode);
+		Error newIngotsave = ResourceSaver.Save(newIngot, savePathIngot);
+		if (newIngotsave != Error.Ok)
+		{
+			LogErr(nameof(MaterialSelection), nameof(OnNewIngotSave))
+				.AddLine("Failed to save new Ingot Item")
+				.AddLine("Path:", savePathIngot).Push();
+			DirAccess.RemoveAbsolute(Global.Paths.MoltenMetals + info.NameNoCode + ".tres");
+			DirAccess.RemoveAbsolute(Global.Paths.Items + info.NameNoCode);
+			return;
+		}
+		LogInfo(nameof(MaterialSelection), nameof(OnNewIngotSave))
+				.AddLine("New Ingot Item successfully saved").Push();
+
+		NewIngotWindow.Visible = false;
+
+		LoadCache();
+	}
+	
+	void OnNewIngotCancel()
+    {
+		NewIngotWindow.Visible = false;
+    }
 }

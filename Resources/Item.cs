@@ -15,9 +15,11 @@ public partial class Item : Resource
     public string MetalName;
 
     [Export]
-    public bool ShowInSelection { get; private set; } = true;
+    public bool ShowInSelection { get; set; } = true;
 
-    // Is set, if has an ancestor (i.e. double ingot)
+    /// <summary>
+    /// Is set, if has an ancestor (i.e. double ingot)
+    /// </summary>
     [Export]
     public ItemMadeFrom MadeFrom;
 
@@ -27,18 +29,24 @@ public partial class Item : Resource
     [Export]
     public MeltingRecipe MeltsInto;
 
-    // Last required forge actions. Required to make full forge recipe
-    // If set, weld recipe doesn't count
+    /// <summary>
+    /// Last required forge actions. Required to make full forge recipe
+    /// If set, weld recipe doesn't count
+    /// </summary>    
     [Export]
     public LastShowForgeActions LastForgeActions;
 
-    // Actual forge recipe. Required to make full forge recipe
-    // If set, weld recipe doesn't count
+    /// <summary>
+    /// Actual forge recipe. Required to make full forge recipe
+    /// If set, weld recipe doesn't count
+    /// </summary>
     [Export]
     public ForgeRecipe ForgeRecipe;
 
-    // Items used in welding for a result
-    // If set, forge recipe doesn't count
+    /// <summary>
+    /// Items used in welding for a result
+    /// If set, forge recipe doesn't count
+    /// </summary>
     [Export]
     public WeldRecipe WeldRecipe;
 }

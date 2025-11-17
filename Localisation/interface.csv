@@ -20,6 +20,10 @@ ui.forge.goal;Goal;Цель
 ui.forge.broke;Broke!;Сломалось!
 ui.forge.set_goal;Set Goal;Укажите цель
 ui.forge.add_new_last_actions;Add new Last Actions;Добавить ''Последние действия''
+ui.m_select.new_ingot;Add new ingot;Добавить новый слиток
+ui.n_ingot.metal_name;Name of the metal;Название металла
+ui.n_ingot.name_hint;'metal.' will be added at the start;'metal.' будет добавлнено в начале
+ui.n_ingot.ingot_icon;Ingot icon;Иконка слитка
 ui.open;Open;Открыть
 ui.pick_sprite;Pick a Sprite;Выберите иконку
 ui.ingot_cost;An ingot melts into:;Слиток плавится в:

@@ -1,0 +1,176 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxw02e1vw1gdh"]
+
+[ext_resource type="Script" uid="uid://mfgev43an2d" path="res://Scenes/MaterialSelection/NewIngotInterface.cs" id="1_qlw6m"]
+[ext_resource type="Texture2D" uid="uid://byssh5l1c2gdd" path="res://Assets/Forge/Green Forge Button.png" id="1_xklei"]
+[ext_resource type="Texture2D" uid="uid://rr23tat7ru2g" path="res://Assets/Forge/Red Forge Button.png" id="2_0j46j"]
+[ext_resource type="PackedScene" uid="uid://bap1xbjcnw27t" path="res://Scenes/UI/BorderedIcon.tscn" id="2_t1h8o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxfl6"]
+bg_color = Color(0.533037, 0.533037, 0.533037, 0.156863)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kv27o"]
+
+[sub_resource type="GDScript" id="GDScript_t1h8o"]
+script/source = "extends FileDialog
+
+func _process(_delta: float) -> void:
+	ok_button_text = \"ui.open\"
+	cancel_button_text = \"ui.cancel\"
+	title = \"ui.pick_sprite\"
+"
+
+[node name="NewIngotInterface" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -780.0
+offset_bottom = -420.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qlw6m")
+
+[node name="BG" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pxfl6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContentHBoxContainer" type="HBoxContainer" parent="BG/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NameVBoxContainer" type="VBoxContainer" parent="BG/VBoxContainer/ContentHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="BG/VBoxContainer/ContentHBoxContainer/NameVBoxContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "ui.n_ingot.name_hint"
+label_settings = SubResource("LabelSettings_kv27o")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NameEdit" type="LineEdit" parent="BG/VBoxContainer/ContentHBoxContainer/NameVBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+placeholder_text = "ui.n_ingot.metal_name"
+max_length = 16
+
+[node name="IconVBoxContainer" type="VBoxContainer" parent="BG/VBoxContainer/ContentHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="BG/VBoxContainer/ContentHBoxContainer/IconVBoxContainer"]
+layout_mode = 2
+text = "ui.n_ingot.ingot_icon"
+label_settings = SubResource("LabelSettings_kv27o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MetalIcon" parent="BG/VBoxContainer/ContentHBoxContainer/IconVBoxContainer" instance=ExtResource("2_t1h8o")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="ButtonHBoxContainer" type="HBoxContainer" parent="BG/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="SaveButton" type="TextureButton" parent="BG/VBoxContainer/ButtonHBoxContainer"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+texture_normal = ExtResource("1_xklei")
+texture_pressed = ExtResource("1_xklei")
+texture_hover = ExtResource("1_xklei")
+texture_disabled = ExtResource("1_xklei")
+texture_focused = ExtResource("1_xklei")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BG/VBoxContainer/ButtonHBoxContainer/SaveButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -8.0
+offset_right = 34.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ui.save"
+label_settings = SubResource("LabelSettings_kv27o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CancelButton" type="TextureButton" parent="BG/VBoxContainer/ButtonHBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+texture_normal = ExtResource("2_0j46j")
+texture_pressed = ExtResource("2_0j46j")
+texture_hover = ExtResource("2_0j46j")
+texture_disabled = ExtResource("2_0j46j")
+texture_focused = ExtResource("2_0j46j")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BG/VBoxContainer/ButtonHBoxContainer/CancelButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -8.0
+offset_right = 34.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ui.cancel"
+label_settings = SubResource("LabelSettings_kv27o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconSelect" type="FileDialog" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+title = "Open a File"
+initial_position = 1
+ok_button_text = "Open"
+cancel_button_text = "ui.cancel"
+file_mode = 0
+root_subfolder = "res://Assets/Sprites/"
+filters = PackedStringArray("*.png")
+script = SubResource("GDScript_t1h8o")
+
+[connection signal="text_changed" from="BG/VBoxContainer/ContentHBoxContainer/NameVBoxContainer/NameEdit" to="." method="OnMetalNameTextChanged"]
+[connection signal="gui_input" from="BG/VBoxContainer/ContentHBoxContainer/IconVBoxContainer/MetalIcon" to="." method="OnItemIconClick"]
+[connection signal="pressed" from="BG/VBoxContainer/ButtonHBoxContainer/SaveButton" to="." method="OnSaveButtonPressed"]
+[connection signal="pressed" from="BG/VBoxContainer/ButtonHBoxContainer/CancelButton" to="." method="OnCancelButtonPressed"]
+[connection signal="file_selected" from="IconSelect" to="." method="OnIconSelected"]

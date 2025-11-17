@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmwcjg52dsr31"]
+[gd_scene load_steps=11 format=3 uid="uid://cmwcjg52dsr31"]
 
 [ext_resource type="Theme" uid="uid://brghljnyk4hhb" path="res://BaseTheme.tres" id="1_4pqdt"]
 [ext_resource type="Texture2D" uid="uid://dkkqegafwgu7j" path="res://Assets/Sprites/ingot/copper.png" id="2_4pqdt"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://t0gjyb606wq5" path="res://Assets/Sprites/ingot/bronze.png" id="3_hs1ow"]
 [ext_resource type="Texture2D" uid="uid://dj7w5q527f6av" path="res://Assets/Sprites/ingot/brass.png" id="6_vm0do"]
 [ext_resource type="Texture2D" uid="uid://m3bulvjgqvlw" path="res://Assets/Sprites/ingot/wrought_iron.png" id="7_breow"]
+[ext_resource type="PackedScene" uid="uid://dxw02e1vw1gdh" path="res://Scenes/MaterialSelection/NewIngotInterface.tscn" id="7_hs1ow"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fyyo6"]
 font_size = 24
@@ -121,6 +122,30 @@ theme_override_font_sizes/font_size = 24
 placeholder_text = "ui.mb_short"
 max_length = 4
 
+[node name="NewIngotWindow" type="Window" parent="."]
+canvas_item_default_texture_filter = 0
+title = "ui.m_select.new_ingot"
+initial_position = 3
+size = Vector2i(500, 300)
+current_screen = 0
+visible = false
+transient = true
+exclusive = true
+unresizable = true
+borderless = true
+popup_window = true
+
+[node name="NewIngotInterface" parent="NewIngotWindow" instance=ExtResource("7_hs1ow")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 500.0
+offset_bottom = 300.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [connection signal="item_activated" from="VBoxContainer/MaterialList" to="." method="OnMaterialActivate"]
 [connection signal="text_changed" from="IngotCostEdit" to="." method="OnIngotCostTextChanged"]
 [connection signal="text_submitted" from="IngotCostEdit" to="." method="OnIngotCostTextSubmitted"]
+[connection signal="Cancel" from="NewIngotWindow/NewIngotInterface" to="." method="OnNewIngotCancel"]
+[connection signal="Save" from="NewIngotWindow/NewIngotInterface" to="." method="OnNewIngotSave"]

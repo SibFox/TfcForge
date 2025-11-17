@@ -228,7 +228,7 @@ public partial class Forge : Control
 				LogInfo(nameof(Forge), "Save").AddLine("Old resource file successfully deleted").Push();
 
 		}
-
+		SelectedItem.ResourcePath = newPath;
 
 		Global.Main.ItemSelection.AddToCache(SelectedItem);
 		_selectedItem = null;

@@ -7,11 +7,6 @@ public partial class BorderedIcon : TextureRect
 
 	private Texture2D _icon;
 
-	// public override void _Ready()
-	// {
-	// 	SetSizing();
-	// }
-
 	[Export]
 	public Texture2D Icon
 	{
@@ -35,10 +30,11 @@ public partial class BorderedIcon : TextureRect
 
 	void SetSizing()
 	{
-		IconNode.SetAnchorsPreset(LayoutPreset.Center);
-		IconNode.CustomMinimumSize = Size * .5625f;
-		// IconNode.Size = IconNode.CustomMinimumSize;
-		// IconNode.Size = Size * .5625f;
+		if (Icon != null)
+        {
+			IconNode.SetAnchorsPreset(LayoutPreset.Center);
+			IconNode.CustomMinimumSize = Size * .5625f;
+        }
 	}
 
 	void OnVisibilityChanged()

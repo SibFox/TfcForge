@@ -53,7 +53,8 @@ public partial class ItemSelection : Control
 		ItemsCache.AddLast(newItem);
 	}
 
-	public byte GetMaxItemPages() => (byte)Mathf.Ceil((float)CategorizedItems.Count / MAX_ITEMS_ON_PAGE);
+	public byte GetMaxItemPages() => (byte)Mathf.Clamp(
+		Mathf.Ceil((float)CategorizedItems.Count / MAX_ITEMS_ON_PAGE), 1, byte.MaxValue);
 
 	void LoadCache()
 	{
@@ -99,20 +100,23 @@ public partial class ItemSelection : Control
 			_ => ItemsCache.Where(i => (int)i.Category == CategorySelectButton.GetSelectedId()).ToList()
 		};
 
-		for (int i = MAX_ITEMS_ON_PAGE * (PageSelectorContainer.SelectedPage - 1);
-			i < Mathf.Clamp(MAX_ITEMS_ON_PAGE * PageSelectorContainer.SelectedPage, 0, CategorizedItems.Count); 
-			i++)
-		{
-			Item item = CategorizedItems.ElementAt(i);
+		if (CategorizedItems.Count > 0)
+        {
+			for (int i = MAX_ITEMS_ON_PAGE * (PageSelectorContainer.SelectedPage - 1);
+				i < Mathf.Clamp(MAX_ITEMS_ON_PAGE * PageSelectorContainer.SelectedPage, 0, CategorizedItems.Count);
+				i++)
+			{
+				Item item = CategorizedItems.ElementAt(i);
 
-			ItemOptionsButton newOptionButton = GD.Load<PackedScene>(Global.Paths.UI + "ItemOptionsButton.tscn").Instantiate<ItemOptionsButton>();
-			newOptionButton.Item = item;
+				ItemOptionsButton newOptionButton = GD.Load<PackedScene>(Global.Paths.UI + "ItemOptionsButton.tscn").Instantiate<ItemOptionsButton>();
+				newOptionButton.Item = item;
 
-			newOptionButton.SizeFlagsHorizontal = (SizeFlags)6; //ShrinkCenter(4) + Expand(2)
-			newOptionButton.SizeFlagsVertical = SizeFlags.ShrinkCenter;
+				newOptionButton.SizeFlagsHorizontal = (SizeFlags)6; //ShrinkCenter(4) + Expand(2)
+				newOptionButton.SizeFlagsVertical = SizeFlags.ShrinkCenter;
 
-			ItemsContainer.AddChild(newOptionButton);
-		}
+				ItemsContainer.AddChild(newOptionButton);
+			}
+        }
 
 		Button newForgeButton = ResourceLoader.Load<PackedScene>(Global.Paths.UI + "AddNewForgeButton.tscn").Instantiate<Button>();
 		newForgeButton.Pressed += OnAddNewForgePressed;

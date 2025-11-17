@@ -14,4 +14,14 @@ public static class StringExstensions
 																				 .Replace("component", " ")
 																				 .Replace('_', ' ')
 																				 .ToPascalCase();
+
+	public static string ToResourceName(this string str) => string.Join(" ", str.Split([" "], System.StringSplitOptions.RemoveEmptyEntries))
+																  .StripEdges()
+															      .StripEscapes()
+															   	  .Replace('_', ' ')
+																  .Trim()
+															      .CEscape()
+															      .ToLower()
+															      .Replace(' ', '_');
+															   
 }
